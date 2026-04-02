@@ -28,6 +28,26 @@ const App = () => (
     alt="LogoNeu"
     width={144}
     height={32}
+    
+    /> 
+     <Image
+    src={LogoNeu}
+    alt="LogoNeu"
+    width={144}
+    height={32}
+    /> 
+    <Image
+    src={AstraLogo}
+    alt="LogoNeu"
+    width={144}
+    height={32}
+    /> 
+    <Image
+    src={FlensLogo}
+    alt="LogoNeu"
+    width={144}
+    height={32}
+    
     /> 
    
     </div>
