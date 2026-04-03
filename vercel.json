@@ -1,0 +1,9 @@
+{
+  "buildCommand": "bun run build",
+  "installCommand": "bun install",
+  "framework": "nextjs",
+  "regions": ["fra1"],
+  "env": {
+    "NODE_OPTIONS": "--no-deprecation --max-old-space-size=8000"
+  }
+}
