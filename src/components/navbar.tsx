@@ -256,7 +256,7 @@ const renderMobileMenuItem = (item: MenuItem, index: number) => {
   if (item.links) {
     return (
       <AccordionItem key={item.title} value={`nav-${index}`}>
-        <AccordionTrigger className="h-15 items-center p-0 text-base leading-[3.75] font-normal text-muted-foreground hover:no-underline">
+        <AccordionTrigger className="ml-3 h-15 items-center p-0 text-2xl leading-[3.75] font-mono text-muted-foreground hover:no-underline">
           {item.title}
         </AccordionTrigger>
         <AccordionContent>
@@ -272,7 +272,7 @@ const renderMobileMenuItem = (item: MenuItem, index: number) => {
     <a
       key={item.title}
       href={item.url}
-      className="flex h-15 items-center border-b p-0 text-left text-3xl leading-[3.75] font-sans text-muted-foreground ring-ring/10 outline-ring/50 transition-all focus-visible:ring-4 focus-visible:outline-1 nth-last-1:border-0"
+      className="flex ml-3 h-15 items-center border-b p-0 text-left text-2xl leading-[3.75] font-mono text-muted-foreground ring-ring/10 outline-ring/50 transition-all focus-visible:ring-4 focus-visible:outline-1 nth-last-1:border-0"
     >
       {item.title}
     </a>
