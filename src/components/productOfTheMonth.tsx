@@ -40,8 +40,8 @@ export default async function ProductOfTheMonth() {
                 className="object-contain transition-transform duration-500 group-hover:scale-150"
               />
               {productOfTheMonth.badge && (
-                <div className="absolute top-4 right-4">
-                  <Badge className="bg-red-600 text-white px-4 py-1.5 text-sm font-bold">
+                <div className="absolute top-0 lg:top-4">
+                  <Badge className="bg-red-600 text-white px-1 text-[0.5rem] lg:text-xl font-bold">
                     {productOfTheMonth.badge}
                   </Badge>
                 </div>
@@ -52,24 +52,24 @@ export default async function ProductOfTheMonth() {
             <div className="space-y-4 text-left">
               <div className="space-y-2">
                 {productOfTheMonth.subtitle && (
-                  <p className=" text-yellow-600 text-[5vw] leading-10 headingA md:text-[4vw] font-bold uppercase lg:text-[2vw] lg:leading-12  tracking-wider">
+                  <p className=" text-yellow-600 text-[5vw] leading-10 headingA md:text-[4vw] font-bold uppercase lg:text-[3.66rem] lg:leading-12  tracking-wider">
                     {productOfTheMonth.subtitle}
                   </p>
                 )}
-                <h3 className="font-sans uppercase text-[4vw] md:text-[2vw] lg:text-[1vw] font-black text-white">
+                <h3 className="font-sans uppercase text-[4vw] md:text-[2vw] lg:text-[2.5rem] font-black text-white">
                   {productOfTheMonth.title}
                 </h3>
               </div>
 
               {productOfTheMonth.description && (
-                <p className="font-sans text-amber-50 text-xl  lg:text-4xl ">
+                <p className="font-sans text-amber-50 text-xl  lg:text-3xl ">
                   {productOfTheMonth.description}
                 </p>
               )}
 
               {productOfTheMonth.price && (
                 <div className="flex items-baseline gap-2">
-                  <span className="text-xl font-sans text-amber-400 lg:text-6xl">
+                  <span className="text-xl font-sans text-amber-400 lg:text-3xl">
                     {productOfTheMonth.price}
                   </span>
                 </div>

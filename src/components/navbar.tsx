@@ -175,7 +175,7 @@ const DesktopMenuItem = ({ item, index }: DesktopMenuItemProps) => {
   if (item.links) {
     return (
       <NavigationMenuItem key={`desktop-menu-item-${index}`} value={`${index}`}>
-        <NavigationMenuTrigger className="h-fit w-fit !px-2 !py-2 !bg-stone-800 font-sans text-foreground hover:!bg-yellow-600 focus:!bg-yellow-600 data-[active]:!bg-yellow-600 data-[state=open]:!bg-yellow-600">
+        <NavigationMenuTrigger className="h-fit w-fit !px-2 !py-2 !bg-stone-800 font-mono text-foreground hover:!bg-yellow-600 focus:!bg-yellow-600 data-[active]:!bg-yellow-600 data-[state=open]:!bg-yellow-600">
           {item.title}
         </NavigationMenuTrigger>
         <NavigationMenuContent className="bg-stone-800 rounded-xl! p-0! font-sans">
