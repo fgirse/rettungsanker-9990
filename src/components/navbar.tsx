@@ -175,7 +175,7 @@ const DesktopMenuItem = ({ item, index }: DesktopMenuItemProps) => {
   if (item.links) {
     return (
       <NavigationMenuItem key={`desktop-menu-item-${index}`} value={`${index}`}>
-        <NavigationMenuTrigger className="h-fit w-fit !px-2 !py-2 !bg-stone-800 font-mono text-foreground hover:!bg-yellow-600 focus:!bg-yellow-600 data-[active]:!bg-yellow-600 data-[state=open]:!bg-yellow-600">
+        <NavigationMenuTrigger className="h-fit w-fit px-2! py-2! bg-stone-800! font-mono text-foreground hover:bg-yellow-600! focus:bg-yellow-600! data-active:bg-yellow-600! data-[state=open]:bg-yellow-600!">
           {item.title}
         </NavigationMenuTrigger>
         <NavigationMenuContent className="bg-stone-800 rounded-xl! p-0! font-sans">
@@ -228,7 +228,7 @@ const MobileNavigationMenu = ({ open, setOpen, navigation }: MobileNavigationMen
       <SheetContent
         aria-describedby={undefined}
         side="top"
-        className="dark inset-0 z-[100] h-dvh w-full bg-slate-800 pt-16"
+        className="dark inset-0 z-100 h-dvh w-full bg-slate-800 pt-16"
       >
         <div className="flex-1 overflow-y-auto">
           <div className="container pb-12">
