@@ -83,7 +83,7 @@ const Footer12 = ({ className }: Footer12Props) => {
           className="text-center text-sm leading-loose text-muted-foreground"
           suppressHydrationWarning
         >
-          &copy; {new Date().getFullYear()} MEDICUSDESIGN Basel 🇨🇭 All rights reserved.
+          &copy; {new Date().getFullYear()} <span className='uppercase font-black text-lime-400'>medicusdesing</span> Basel 🇨🇭 All rights reserved.
         </p>
       </div>
     </section>
