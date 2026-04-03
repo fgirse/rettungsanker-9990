@@ -1,4 +1,4 @@
-import HeroSection from '@/components/Hero'
+import HeroSection from '@/components/Hero01'
 //import Marquee from '@/components/Marquee';
 import About from '@/components/About'
 import Photogallery from '@/components/PhotoGallery'
