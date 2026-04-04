@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@devnomic/marquee": "^1.0.3",
+    "@gsap/react": "^2.1.2",
     "@payloadcms/db-mongodb": "3.75.0",
     "@payloadcms/email-nodemailer": "^3.75.0",
     "@payloadcms/next": "3.75.0",
