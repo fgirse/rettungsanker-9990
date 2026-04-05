@@ -56,7 +56,7 @@ export default function AboutClient({ about }) {
               float="left"
               alt="Portrait"
               className=" mt-5 rounded-full portraitMick" />
-            <p className=" font-sans text-gray-300 text-[1.2rem] md:text-[1.66rem] lg:text-[3.00rem] lg:leading-12">
+            <p className=" font-sans text-gray-300 text-[1.0rem] md:text-[1.66rem] lg:text-[3.0rem] lg:leading-12">
 
               Michael Schreck <br />und<br /> das Team des Rettungsankers
             </p>

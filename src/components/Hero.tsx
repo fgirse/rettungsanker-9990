@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import LogoNeu from '../../public/Assets/Img/LogoAlt.png'
 //import Marquee from '@/components/MarqueeCooperateComp';
-import ProductOfTheMonth from '@/components/productOfTheMonth'
+import Angebot from '@/components/AngebotDesMonats'
 import HeroAnimatedText from '@/components/HeroAnimatedText'
 
 function Hero() {
@@ -15,7 +15,7 @@ function Hero() {
         <HeroAnimatedText />
       </div>
       <div className=" flex flex-col items-center justify-center">
-        <ProductOfTheMonth />
+        <Angebot/>
       </div>
     </section>
   )
