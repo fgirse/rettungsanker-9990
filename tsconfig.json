@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/(frontend)/impressum/impressum."
+    "src/app/(frontend)/(impressum)/impressum."
   ],
   "exclude": ["node_modules"]
 }

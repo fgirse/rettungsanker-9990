@@ -74,7 +74,6 @@ const LOGO = {
   title: '',
 }
 
-
 const PRIMARY_BUTTON = {
   label: 'Sign up',
   url: '#',
@@ -150,6 +149,11 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
             </NavigationMenu>
             <div className="flex items-center gap-4" suppressHydrationWarning>
               {mounted && <GithubStars repoUrl="https://github.com/shadcn/ui" />}
+              <Button asChild variant="secondary" className="hidden md:flex bg-slate-600 border-2 hover:bg-orange-400">
+                <a href="/admin" target="_blank" rel="noopener noreferrer">
+                  ADMIN
+                </a>
+              </Button>
               <Button asChild>
                 <a href={PRIMARY_BUTTON.url}>{PRIMARY_BUTTON.label}</a>
               </Button>
@@ -239,7 +243,12 @@ const MobileNavigationMenu = ({ open, setOpen, navigation }: MobileNavigationMen
               <Accordion type="multiple" className="w-full">
                 {navigation.map((item, index) => renderMobileMenuItem(item, index))}
               </Accordion>
-              <div className="pb-20">
+              <div className="pb-20 flex flex-col gap-3">
+                <Button asChild variant="outline" className="w-full">
+                  <a href="/admin" target="_blank" rel="noopener noreferrer">
+                    Admin
+                  </a>
+                </Button>
                 <Button asChild className="w-full">
                   <a href={PRIMARY_BUTTON.url}>{PRIMARY_BUTTON.label}</a>
                 </Button>

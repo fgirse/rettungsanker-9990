@@ -8,7 +8,7 @@ import {
   Transition,
   TransitionChild,
 } from '@headlessui/react'
-import { Fragment, useState, useRef } from 'react'
+import { Fragment, useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 import type { Media } from '@/payload-types'
@@ -30,11 +30,17 @@ interface AngebotModalProps {
 
 export default function AngebotModal({ productOfTheMonth, productImage }: AngebotModalProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
-  // Blend in/out animation with GSAP
+  // Ensure component is mounted on client before running GSAP
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  // Blend in/out animation with GSAP - only run after mount
   useGSAP(() => {
-    if (buttonRef.current) {
+    if (buttonRef.current && isMounted) {
       const tl = gsap.timeline({ repeat: -1, yoyo: true })
 
       tl.to(buttonRef.current, {
@@ -53,11 +59,11 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
         tl.kill()
       }
     }
-  }, [])
+  }, [isMounted])
 
   // Hover animation
   const handleMouseEnter = () => {
-    if (buttonRef.current) {
+    if (buttonRef.current && isMounted) {
       gsap.to(buttonRef.current, {
         scale: 1.05,
         borderColor: 'rgba(132, 204, 22, 0.8)',
@@ -69,7 +75,7 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
   }
 
   const handleMouseLeave = () => {
-    if (buttonRef.current) {
+    if (buttonRef.current && isMounted) {
       gsap.to(buttonRef.current, {
         scale: 1,
         borderColor: 'rgba(132, 204, 22, 0.3)',
