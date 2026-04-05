@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  max-width: 1024px;
+  padding: 0 2em;
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .container {
+    padding: 0 1em;
+  }
+}
+
+.container h2:first-child,
+.container h3:first-child,
+.container h4:first-child,
+.container p:first-child,
+.container ul:first-child {
+  margin-top: 5;
+}
+
+.container h2:last-child,
+.container h3:last-child,
+.container h4:last-child,
+.container p:last-child,
+.container ul:last-child {
+  margin-bottom: 5;
+}
+/*# sourceMappingURL=Container.module.css.map */

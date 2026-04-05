@@ -20,6 +20,7 @@
   "dependencies": {
     "@devnomic/marquee": "^1.0.3",
     "@gsap/react": "^2.1.2",
+    "@headlessui/react": "^2.2.9",
     "@payloadcms/db-mongodb": "3.75.0",
     "@payloadcms/email-nodemailer": "^3.75.0",
     "@payloadcms/next": "3.75.0",
@@ -47,6 +48,7 @@
     "framer-motion": "^12.34.0",
     "graphql": "^16.8.1",
     "gsap": "^3.14.2",
+    "leaflet": "^1.9.4",
     "lucide-react": "^0.563.0",
     "motion": "^12.34.0",
     "next": "15.4.11",
@@ -59,6 +61,7 @@
     "react-fast-marquee": "^1.6.5",
     "react-hook-form": "^7.71.1",
     "react-icons": "^5.5.0",
+    "react-leaflet": "^5.0.0",
     "react-photo-album": "^3.4.0",
     "resend": "^6.9.1",
     "sharp": "0.34.2",

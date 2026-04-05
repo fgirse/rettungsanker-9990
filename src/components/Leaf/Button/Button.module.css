@@ -1,0 +1,35 @@
+.button {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+  font-family: inherit;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  background-color: #5fbb9d;
+  padding: 1em 1.4em;
+  border: 0;
+  border-radius: .2em;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #83cab3;
+}
+
+.button:disabled {
+  color: rgba(255, 255, 255, 0.5);
+  background-color: #83cab3;
+  cursor: default;
+  opacity: .6;
+}
+/*# sourceMappingURL=Button.module.css.map */

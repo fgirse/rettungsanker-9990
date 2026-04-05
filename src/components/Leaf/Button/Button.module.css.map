@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,OAAO,CAAC;EACN,OAAO,EAAE,WAAW;EACpB,eAAe,EAAE,MAAM;EACvB,WAAW,EAAE,MAAM;EACnB,KAAK,EAAE,KAAK;EACZ,SAAS,EAAE,GAAG;EACd,WAAW,EAAE,IAAI;EACjB,WAAW,EAAE,OAAO;EACpB,cAAc,EAAE,SAAS;EACzB,UAAU,EAAE,MAAM;EAClB,eAAe,EAAE,IAAI;EACrB,gBAAgB,EEbJ,OAAO;EFcnB,OAAO,EAAE,SAAS;EAClB,MAAM,EAAE,CAAC;EACT,aAAa,EAAE,IAAI;EACnB,MAAM,EAAE,OAAO;CAYhB;;AA3BD,AAiBE,OAjBK,AAiBJ,MAAM,CAAC;EACN,gBAAgB,EAAE,OAAyB;CAC5C;;AAnBH,AAqBE,OArBK,AAqBJ,SAAS,CAAC;EACT,KAAK,EAAO,wBAAK;EACjB,gBAAgB,EAAE,OAAyB;EAC3C,MAAM,EAAE,OAAO;EACf,OAAO,EAAE,EAAE;CACZ",
+    "sources": [
+        "Button.module.scss",
+        "../../../styles/settings/_settings.scss",
+        "../../../styles/settings/__colors.scss"
+    ],
+    "names": [],
+    "file": "Button.module.css"
+}

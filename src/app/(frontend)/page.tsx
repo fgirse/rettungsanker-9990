@@ -4,7 +4,7 @@ import About from '@/components/About'
 import Photogallery from '@/components/PhotoGallery'
 import Bento from "@/components/GridLayout3";
 import Marquee from '@/components/Marquee';
-
+import Wohin from '@/components/wohin';
 import Team from "@/components/Team";
 
 export default function Home() {
@@ -16,6 +16,7 @@ export default function Home() {
         <Bento/>
         <Photogallery />
         <Team />
+        <Wohin />
     </>
   )
 }
