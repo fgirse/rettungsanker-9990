@@ -1,27 +1,10 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 import './css/styles.css'
 
-// Extend Window interface for jQuery and audiojs
-declare global {
-  interface Window {
-    jQuery?: {
-      myTimeline?: () => void
-      [key: string]: unknown
-    }
-    audiojs?: unknown
-  }
-}
-
 const History = () => {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
   useEffect(() => {
     // Load scripts only on client side, sequentially
     const scripts = [
@@ -78,7 +61,11 @@ const History = () => {
     }
 
     const loadTimelineScript = () => {
-      const $ = window.jQuery
+      interface JQueryWithTimeline {
+        myTimeline: () => void
+      }
+
+      const $ = (window as unknown as { jQuery: JQueryWithTimeline }).jQuery
       if (!$) {
         console.error('jQuery not found')
         hidePreloader()
@@ -98,7 +85,10 @@ const History = () => {
         setTimeout(() => {
           console.log('Checking for $.myTimeline...')
           console.log('Type of $.myTimeline:', typeof $.myTimeline)
-          console.log('audiojs available:', typeof window.audiojs !== 'undefined')
+          console.log(
+            'audiojs available:',
+            typeof (window as unknown as { audiojs?: unknown }).audiojs !== 'undefined',
+          )
 
           // The timeline plugin defines $.myTimeline function
           // We commented out the document.ready() in the plugin, so call it manually
@@ -144,13 +134,9 @@ const History = () => {
     }
   }, [])
 
-  if (!mounted) {
-    return null
-  }
-
   return (
     <>
-      <section className="width-[95vw] lg:width-[100vw] h-screen overflow-x-hidden">
+      <section className="mt-60  width-[95vw] lg:width-[100vw] h-screen overflow-x-hidden">
         <div className=" flex flex-col items-center justify-center">
           {/* DEMO CONTAINER (THIS SHOULD BE YOUR DESTINATION DIV) */}
           <div className="lg:mt-12">
@@ -177,12 +163,12 @@ const History = () => {
                 {/* VIEWPORT - IMAGES */}
                 <div className="viewport">
                   <div className="images">
-                    <Image src="/Assets/Svg/2017.svg" alt="2017" width={200} height={100} />
-                    <Image src="/Assets/Img/Hero.png" alt="Hero" width={300} height={200} />
-                    <Image src="/Assets/content_img_2.png" alt="" width={300} height={200} />
-                    <Image src="/Assets/content_img_4.png" alt="" width={300} height={200} />
-                    <Image src="/Assets/content_img_5.png" alt="" width={300} height={200} />
-                    <Image src="/Assets/content_img_6.jpg" alt="" width={300} height={200} />
+                    <Image src="/images/2017.svg" alt="2017" width={200} height={100} />
+                    <Image src="/images/Hero.png" alt="Hero" width={300} height={200} />
+                    <Image src="/images/content_img_2.png" alt="" width={300} height={200} />
+                    <Image src="/images/content_img_4.png" alt="" width={300} height={200} />
+                    <Image src="/images/content_img_5.png" alt="" width={300} height={200} />
+                    <Image src="/images/content_img_6.jpg" alt="" width={300} height={200} />
                   </div>
                 </div>
                 {/* SCROLLBAR (EDIT CSS FOR STYLING) */}
@@ -522,17 +508,6 @@ const History = () => {
             {/* end timeline container */}
           </div>{' '}
           {/* end container */}
-        </div>
-        <h1 className="mt-[8vh] text-center text-6xl font-bold">Timeline</h1>
-        <h1 className="text-center mt-[2vh] text-3xl lg:text-6xl font-bold">
-          Rettungsanker Freiburg
-        </h1>
-        <div className="flex justify-center">
-          <h1 className="border w-2/3 text-base lg:w-1/3 text-center mt-[2vh] lg:text-xl font-bold">
-            Oben rechts zeigt sich ein Lautsprechersymbol- Drücken Sie es und hören Sie &quot;...
-            auf der Reeperbahn Nachts um halb Eins !&quot; <br />
-            Bewege in der Zeitleiste mit der Maus ◀️▶️
-          </h1>
         </div>
       </section>
     </>
