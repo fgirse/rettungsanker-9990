@@ -2,6 +2,7 @@
 'use client'
 
 import Image from 'next/image'
+import Bulleye from '../../public/Assets/Svg/Bulleye.svg'
 import {
   Bell,
   Book,
@@ -88,11 +89,6 @@ interface Navbar9Props {
 
 const Navbar9 = ({ className, navigation }: Navbar9Props) => {
   const [open, setOpen] = useState<boolean>(false)
-  const [mounted, setMounted] = useState<boolean>(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   useEffect(() => {
     const handleResize = () => {
@@ -147,9 +143,13 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
                 ))}
               </NavigationMenuList>
             </NavigationMenu>
-            <div className="flex items-center gap-4" suppressHydrationWarning>
-              {mounted && <GithubStars repoUrl="https://github.com/shadcn/ui" />}
-              <Button asChild variant="secondary" className="hidden md:flex bg-slate-600 border-2 hover:bg-orange-400">
+            <div className="flex items-center gap-4">
+              <GithubStars repoUrl="https://github.com/shadcn/ui" />
+              <Button
+                asChild
+                variant="secondary"
+                className="hidden md:flex bg-slate-600 border-2 hover:bg-orange-400"
+              >
                 <a href="/admin" target="_blank" rel="noopener noreferrer">
                   ADMIN
                 </a>
@@ -179,7 +179,7 @@ const DesktopMenuItem = ({ item, index }: DesktopMenuItemProps) => {
   if (item.links) {
     return (
       <NavigationMenuItem key={`desktop-menu-item-${index}`} value={`${index}`}>
-        <NavigationMenuTrigger className="h-fit w-fit px-2! py-2! bg-stone-800! font-mono text-foreground hover:bg-yellow-600! focus:bg-yellow-600! data-active:bg-yellow-600! data-[state=open]:bg-yellow-600!">
+        <NavigationMenuTrigger className=" h-fit w-fit px-2! py-2! bg-stone-800! font-mono text-foreground hover:bg-yellow-600! focus:bg-yellow-600! data-active:bg-yellow-600! data-[state=open]:bg-yellow-600!">
           {item.title}
         </NavigationMenuTrigger>
         <NavigationMenuContent className="bg-stone-800 rounded-xl! p-0! font-sans">
@@ -215,9 +215,14 @@ const MenuSubLink = ({ link }: MenuSubLinkProps) => {
           {link.icon && (
             <link.icon.component className="size-5" style={{ stroke: link.icon.color }} />
           )}
-          <div className="flex flex-col gap-1.5">
-            <h3 className="text-sm leading-none text-foreground">{link.label}</h3>
-            <p className="text-sm leading-[1.2] text-muted-foreground/80">{link.description}</p>
+          <div className="hover:bg-yellow-600 flex flex-col gap-1.5">
+            <div className="flex flex-row items-center gap-x-3">
+              <Image src={Bulleye} alt="Bullauge" width={20} height={20} />
+              <h3 className="text-xl font-sans leading-none text-foreground ">{link.label}</h3>
+            </div>
+            <p className="text-sm font-sans leading-[1.2] text-muted-foreground/80">
+              {link.description}
+            </p>
           </div>
         </div>
         <ChevronRight className="size-3.5 stroke-muted-foreground opacity-100" />
@@ -243,10 +248,14 @@ const MobileNavigationMenu = ({ open, setOpen, navigation }: MobileNavigationMen
               <Accordion type="multiple" className="w-full">
                 {navigation.map((item, index) => renderMobileMenuItem(item, index))}
               </Accordion>
-              <div className="pb-20 flex flex-col gap-3">
-                <Button asChild variant="outline" className="w-full">
+              <div className="pb-20 flex flex-col items-center gap-3">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-1/2 bg-slate-600 hover:bg-orange-400"
+                >
                   <a href="/admin" target="_blank" rel="noopener noreferrer">
-                    Admin
+                    ADMIN
                   </a>
                 </Button>
                 <Button asChild className="w-full">
@@ -294,6 +303,7 @@ interface GithubStarsProps {
 
 const GithubStars = ({ repoUrl }: GithubStarsProps) => {
   const [stargazersCount, setStargazersCount] = useState<string>('')
+  const [mounted, setMounted] = useState<boolean>(false)
 
   const [owner, repo] = repoUrl.split('github.com/')[1].split('/')
   const githubApiEndpoint = `https://api.github.com/repos/${owner}/${repo}`
@@ -305,6 +315,7 @@ const GithubStars = ({ repoUrl }: GithubStarsProps) => {
   }
 
   useEffect(() => {
+    setMounted(true)
     const getStars = async () => {
       try {
         const response = await fetch(githubApiEndpoint)
@@ -327,9 +338,13 @@ const GithubStars = ({ repoUrl }: GithubStarsProps) => {
     getStars()
   }, [githubApiEndpoint])
 
+  if (!mounted) {
+    return null
+  }
+
   return (
     <Button variant="ghost" asChild className="flex items-center gap-1.5 bg-muted text-foreground">
-      <a href={repoUrl} suppressHydrationWarning>
+      <a href={repoUrl}>
         <svg width="800px" height="800px" viewBox="0 0 20 20">
           <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g transform="translate(-140.000000, -7559.000000)" fill="currentColor">
@@ -342,7 +357,7 @@ const GithubStars = ({ repoUrl }: GithubStarsProps) => {
             </g>
           </g>
         </svg>
-        <span>{stargazersCount}</span>
+        <span suppressHydrationWarning>{stargazersCount}</span>
       </a>
     </Button>
   )
