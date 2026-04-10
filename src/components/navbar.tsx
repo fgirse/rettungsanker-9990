@@ -320,7 +320,9 @@ const GithubStars = ({ repoUrl }: GithubStarsProps) => {
       try {
         const response = await fetch(githubApiEndpoint)
         if (!response.ok) {
-          throw new Error(`GitHub API error: ${response.status}`)
+          // Silently fail for rate limiting (403) or other API errors
+          // Don't log to console to avoid spamming during development
+          return
         }
         const text = await response.text()
         if (text) {
@@ -329,9 +331,8 @@ const GithubStars = ({ repoUrl }: GithubStarsProps) => {
           setStargazersCount(formattedCount)
         }
       } catch (error: unknown) {
-        if (error instanceof Error) {
-          console.error(error.message)
-        }
+        // Silently fail - API errors shouldn't break the UI
+        return
       }
     }
 

@@ -1,18 +1,18 @@
-import React from 'react';
-import type { Metadata } from 'next';
-import './styles.css';
-import { Navbar9 } from '@/components/navbar';
-import { getCachedNavigation } from '@/globals/navigation/queries';
-import type { Navigation as NavigationType } from '@/payload-types';
-import { Footer12 } from '@/components/footer';
-import ScrollToTop from "@/components/BackToTop/ScrollToTop";
+import React from 'react'
+import type { Metadata } from 'next'
+import './styles.css'
+import { Navbar9 } from '@/components/navbar'
+import { getCachedNavigation } from '@/globals/navigation/queries'
+import type { Navigation as NavigationType } from '@/payload-types'
+import { Footer12 } from '@/components/footer'
+import ScrollToTop from '@/components/BackToTop/ScrollToTop'
 
 export const metadata: Metadata = {
   description: 'Die Kiezkneipe',
   title: 'Rettungsanker-Freiburg',
   icons: {
     icon: '/Assets/Svg/faviconLogoNeu.svg',
-  }
+  },
 }
 
 function mapGlobalToMenuItems(navigation: NavigationType) {
@@ -46,8 +46,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const menuItems = mapGlobalToMenuItems(navigation)
 
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <Navbar9 navigation={menuItems} />
         <main>{children}</main>
         <ScrollToTop />

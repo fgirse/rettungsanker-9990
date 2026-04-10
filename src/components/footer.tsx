@@ -1,5 +1,8 @@
+'use client'
+
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 import LogoNeu from '../../public/Assets/Img/LogoNeu.png'
 import Lighthouse from '../../public/Assets/Img/lighthouse3.png'
@@ -10,6 +13,12 @@ interface Footer12Props {
 }
 
 const Footer12 = ({ className }: Footer12Props) => {
+  const [year, setYear] = useState<number | null>(null)
+
+  useEffect(() => {
+    setYear(new Date().getFullYear())
+  }, [])
+
   const navigation = [
     { name: 'Product', href: '#' },
     { name: 'About Us', href: '#' },
@@ -79,11 +88,10 @@ const Footer12 = ({ className }: Footer12Props) => {
         </div>
       </div>
       <div className="container flex flex-col items-center justify-center gap-4 md:h-24 md:flex-row">
-        <p
-          className="text-center text-sm leading-loose text-muted-foreground"
-          suppressHydrationWarning
-        >
-          &copy; {new Date().getFullYear()} <span className='uppercase font-black text-lime-400'>medicusdesing</span> Basel 🇨🇭 All rights reserved.
+        <p className="text-center text-sm leading-loose text-muted-foreground">
+          &copy; {year || '2024'}{' '}
+          <span className="uppercase font-black text-lime-400">medicusdesing</span> Basel 🇨🇭 All
+          rights reserved.
         </p>
       </div>
     </section>
