@@ -3,7 +3,7 @@ import React from 'react'
 const Datenschutz = () => {
   return (
     <div className="min-h-screen bg-linear-to-b from-slate-900 to-slate-800 text-white">
-      <div className="container mx-auto px-4 py-16 max-w-4xl">
+      <div className="container font-sans mx-auto px-4 py-16 max-w-4xl">
         <h1 className="text-4xl md:text-6xl font-bold text-center mb-12 text-yellow-500">
           Datenschutzerklärung
         </h1>
