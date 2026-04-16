@@ -3,7 +3,10 @@ import Image from 'next/image'
 import LogoNeu from '../../public/Assets/Img/LogoAlt.png'
 //import Marquee from '@/components/MarqueeCooperateComp';
 import Angebot from '@/components/AngebotDesMonats'
-import HeroAnimatedText from '@/components/HeroAnimatedText'
+//import HeroAnimatedText from '@/components/HeroAnimatedText'
+import Kiezkneipetitel from '@/components/Kiezkneipetitel'
+
+
 
 function Hero() {
   return (
@@ -12,7 +15,7 @@ function Hero() {
         <div className="relative top-[-30vh] w-[74vw] md:w-[70vw] lg:hidden">
           <Image src={LogoNeu} alt="LogoAlt" className="mt-3 " />
         </div>
-        <HeroAnimatedText />
+        <Kiezkneipetitel />
       </div>
       <div className=" flex flex-col items-center justify-center">
         <Angebot/>
