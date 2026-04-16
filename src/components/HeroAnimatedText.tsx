@@ -33,7 +33,7 @@ export default function HeroAnimatedText() {
       <p
         ref={dieRef}
         id="1"
-        className="mb-5 relative text-[45vw] headingE text-white text-center top-[-35vw] md:text-[43vw] md:top-[-27vw] lg:top-[1vw] lg:text-[22vw]"
+        className="mb-5 relative text-[45vw] headingE text-amber-50 text-center top-[-35vw] md:text-[43vw] md:top-[-27vw] lg:top-[1vw] lg:text-[22vw]"
       >
         die
       </p>
