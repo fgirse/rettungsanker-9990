@@ -73,6 +73,7 @@ export interface Config {
     marquee: Marquee;
     about: About;
     bentogrid: Bentogrid;
+    getraenkekarte: Getraenkekarte;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     marquee: MarqueeSelect<false> | MarqueeSelect<true>;
     about: AboutSelect<false> | AboutSelect<true>;
     bentogrid: BentogridSelect<false> | BentogridSelect<true>;
+    getraenkekarte: GetraenkekarteSelect<false> | GetraenkekarteSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -374,6 +376,24 @@ export interface Bentogrid {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "getraenkekarte".
+ */
+export interface Getraenkekarte {
+  id: string;
+  kategorie: 'biere' | 'weine' | 'cocktails-longdrinks' | 'softdrinks' | 'kaffee-tee' | 'snacks';
+  artikel: string;
+  beschreibung?: string | null;
+  volumen?: string | null;
+  preis: string;
+  /**
+   * Niedrigere Zahl = weiter oben in der Liste
+   */
+  sortierung?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -419,6 +439,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'bentogrid';
         value: string | Bentogrid;
+      } | null)
+    | ({
+        relationTo: 'getraenkekarte';
+        value: string | Getraenkekarte;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -577,6 +601,20 @@ export interface BentogridSelect<T extends boolean = true> {
   image_logoNeu?: T;
   title_logoNeu?: T;
   content_logoNeu?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "getraenkekarte_select".
+ */
+export interface GetraenkekarteSelect<T extends boolean = true> {
+  kategorie?: T;
+  artikel?: T;
+  beschreibung?: T;
+  volumen?: T;
+  preis?: T;
+  sortierung?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -12,6 +12,7 @@ import { Pages } from './collections/Pages'
 import { Marquee } from './collections/Marquee'
 import { About } from './collections/About'
 import { BentoGrid } from './collections/BentoGrid'
+import { Getraenkekarte } from './collections/Getraenkekarte'
 
 import { GeneralSettings } from '@/globals/general-settings/config'
 import { Navigation } from '@/globals/navigation/config'
@@ -29,7 +30,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pages, Marquee, About, BentoGrid],
+  collections: [Users, Media, Pages, Marquee, About, BentoGrid, Getraenkekarte],
   globals: [GeneralSettings, Navigation, ProductOfTheMonth, Partners],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

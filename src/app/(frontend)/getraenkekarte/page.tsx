@@ -1,17 +1,16 @@
-import HeroSection from '@/components/Hero'
-//import Marquee from '@/components/Marquee';
-import About from '@/components/About'
-import Photogallery from '@/components/PhotoGallery'
-import Bento from '@/components/GridLayout3'
-import Marquee from '@/components/Marquee'
-import Wohin from '@/components/wohin'
-import Team from '@/components/Team'
-import Getraenkekarte, { type Kategorie, type MenuItem } from '@/components/Getraenkekarte'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import GetraenkekarteComponent, { type MenuItem, type Kategorie } from '@/components/Getraenkekarte'
 
 export const dynamic = 'force-dynamic'
 
+export const metadata = {
+  title: 'Getränkekarte – Rettungsanker Freiburg',
+  description: 'Unsere Biere, Weine, Cocktails, Softdrinks, Kaffee & Snacks.',
+}
+
+// Raw document shape — matches the Getraenkekarte collection fields.
+// Replace with the generated Payload type once `payload generate:types` is run.
 type GetraenkekarteDoc = {
   id: string | number
   kategorie: Kategorie
@@ -22,7 +21,7 @@ type GetraenkekarteDoc = {
   sortierung?: number | null
 }
 
-export default async function Home() {
+export default async function GetraenkekartePage() {
   const payload = await getPayload({ config })
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,16 +42,5 @@ export default async function Home() {
     sortierung: doc.sortierung ?? null,
   }))
 
-  return (
-    <>
-      <HeroSection />
-      <Marquee />
-      <About />
-      <Bento />
-      <Photogallery />
-      <Getraenkekarte items={items} />
-      <Team />
-      <Wohin />
-    </>
-  )
+  return <GetraenkekarteComponent items={items} />
 }
