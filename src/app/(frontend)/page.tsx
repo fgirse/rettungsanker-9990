@@ -9,6 +9,7 @@ import Team from '@/components/Team'
 import Getraenkekarte, { type Kategorie, type MenuItem } from '@/components/Getraenkekarte'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import LiveTV from "@/components/LiveTV";
 
 export const dynamic = 'force-dynamic'
 
@@ -49,6 +50,7 @@ export default async function Home() {
       <Marquee />
       <About />
       <Bento />
+      <LiveTV />
       <Getraenkekarte items={items} />
       <Photogallery />
       <Team />
