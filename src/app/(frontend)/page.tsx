@@ -49,8 +49,8 @@ export default async function Home() {
       <Marquee />
       <About />
       <Bento />
-      <Photogallery />
       <Getraenkekarte items={items} />
+      <Photogallery />
       <Team />
       <Wohin />
     </>

@@ -380,7 +380,14 @@ export interface Bentogrid {
  */
 export interface Getraenkekarte {
   id: string;
-  kategorie: 'biere' | 'weine' | 'cocktails-longdrinks' | 'softdrinks' | 'kaffee-tee' | 'snacks';
+  kategorie:
+    | 'biere_vom_fass'
+    | 'biere_in_flaschen'
+    | 'weine'
+    | 'cocktails-longdrinks'
+    | 'softdrinks'
+    | 'kaffee-tee'
+    | 'snacks';
   artikel: string;
   beschreibung?: string | null;
   volumen?: string | null;

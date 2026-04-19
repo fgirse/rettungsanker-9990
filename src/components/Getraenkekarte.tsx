@@ -5,7 +5,8 @@ import React, { useRef } from 'react'
 // ── Types ──────────────────────────────────────────────────────────────────────
 
 export type Kategorie =
-  | 'biere'
+  | 'biere_vom_fass'
+  | 'biere_in_flaschen'
   | 'weine'
   | 'cocktails-longdrinks'
   | 'softdrinks'
@@ -220,17 +221,33 @@ const SnacksSVG = ({ className }: { className?: string }) => (
 
 const CATEGORIES = [
   {
-    id: 'biere' as Kategorie,
-    label: 'Biere',
+    id: 'biere_vom_fass' as Kategorie,
+    label: 'Biere vom Fass ',
     emoji: '🍺',
-    tagline: 'Frisch gezapft & eiskalt',
-    colorClass: 'text-amber-400',
-    sectionBg: 'bg-gradient-to-br from-amber-950/70 via-amber-900/40 to-slate-900/80',
-    borderColor: 'border-amber-500/30',
+    tagline: 'Frisch gezapft & nordisch herb',
+    colorClass: 'text-yellow-600',
+    sectionBg: 'bg-gradient-to-br from-yellow-950/70 via-yellow-900/40 to-slate-900/80',
+    borderColor: 'border-yellow-500/30',
     badgeClass: 'bg-amber-500/15 text-amber-300 border border-amber-500/25',
-    priceColor: 'text-amber-400',
+    priceColor: 'text-yellow-600',
     dotColor: 'bg-amber-500',
-    illustrationColor: 'text-amber-400',
+    illustrationColor: 'text-yellow-600',
+    Illustration: BeerMugSVG,
+    rotation: '-rotate-1',
+    headerPattern: 'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(245,158,11,0.04) 8px, rgba(245,158,11,0.04) 9px)',
+  },
+   {
+    id: 'biere_in_flaschen' as Kategorie,
+    label: 'Flaschenbier ',
+    emoji: '🍻',
+    tagline: 'vielfältig & für jeden Geschmack',
+    colorClass: 'text-yellow-500',
+    sectionBg: 'bg-gradient-to-br from-yellow-500/70 via-yellow-500/40 to-slate-900/80',
+    borderColor: 'border-yellow-500/30',
+    badgeClass: 'bg-amber-500/15 text-yellow-500 border border-yellow-500/25',
+    priceColor: 'text-yellow-500',
+    dotColor: 'bg-yellow-500',
+    illustrationColor: 'text-yellow-500',
     Illustration: BeerMugSVG,
     rotation: '-rotate-1',
     headerPattern: 'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(245,158,11,0.04) 8px, rgba(245,158,11,0.04) 9px)',
@@ -360,13 +377,13 @@ export default function GetraenkekarteComponent({ items }: { items: MenuItem[] }
         />
         <div className="relative container mx-auto px-4 py-20 text-center">
           {/* Wobbly title badge */}
-          <div className="inline-block mb-6 px-6 py-2 rounded-full border border-white/10 bg-white/5 text-sm tracking-widest text-gray-400 uppercase">
+          <div className="inline-block mb-6 px-6 py-2 rounded-full border border-white/30 bg-white/5 text-sm tracking-widest text-gray-400 uppercase">
             Rettungsanker Freiburg
           </div>
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold leading-none mb-6 bg-linear-to-br from-white via-gray-200 to-gray-500 bg-clip-text text-transparent">
+          <h1 className="headingA text-6xl md:text-8xl lg:text-9xl leading-none mb-6 bg-linear-to-br from-white via-yellow-400 to-yellow-600 bg-clip-text text-transparent">
             Getränke&shy;karte
           </h1>
-          <p className="text-xl md:text-2xl text-gray-400 max-w-xl mx-auto mb-10">
+          <p className="text-xl md:text-2xl text-gray-300 max-w-xl mx-auto mb-10 text-center">
             Was darf&apos;s sein? Wir haben für jeden Durst das Richtige.
           </p>
 
