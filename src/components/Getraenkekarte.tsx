@@ -380,7 +380,7 @@ export default function GetraenkekarteComponent({ items }: { items: MenuItem[] }
           <div className="inline-block mb-6 px-6 py-2 rounded-full border border-white/30 bg-white/5 text-sm tracking-widest text-gray-400 uppercase">
             Rettungsanker Freiburg
           </div>
-          <h1 className="headingA text-6xl md:text-8xl lg:text-9xl leading-none mb-6 bg-linear-to-br from-white via-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+          <h1 className="headingA text-6xl md:text-8xl lg:text-9xl leading-none mb-6 bg-linear-to-br from-white via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
             Getränke&shy;karte
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-xl mx-auto mb-10 text-center">

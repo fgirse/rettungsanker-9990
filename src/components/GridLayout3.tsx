@@ -114,7 +114,7 @@ const bentoItems: (BentoItem & BentoFieldKeys)[] = [
   {
     id: "logoNeu",
     title: "neues logo",
-    content: " Unser neues Logo symbolisiert die Verbindung von Tradition und Moderne. Das alte Rettungsanker Logo ist im oberen Drittel erhalten geblieben. Das mittlere Drittel beschreibt den Rettunganker als trffpunkt für Jung und Alt. Das untere Drittel. zeigt eine Shiluette der Stadt Freiburg Wir freuen uns, Sie unter unserem neuen Zeichen willkommen zu heißen!",
+    content: " Unser neues Logo symbolisiert die Verbindung von Tradition und Moderne. Das alte Rettungsanker Logo ist im oberen Drittel erhalten geblieben. Das mittlere Drittel beschreibt den Rettunganker als Treffpunkt für Jung und Alt. Das untere Drittel. zeigt eine Shiluette der Stadt Freiburg Wir freuen uns, Sie unter unserem neuen Zeichen willkommen zu heißen!",
     imageSrc: "/Assets/Img/LogoNeu.png",
     imageAlt: "Neues Logo Illustration",
     titleKey: "title_logoNeu",
