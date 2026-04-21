@@ -4,7 +4,7 @@ export default function ContactSection() {
   return (
     <section
       id="section-contact"
-      className="relative overflow-hidden bg-[radial-gradient(circle_at_top,rgba(234,179,8,0.2),transparent_35%),linear-gradient(180deg,#050505_0%,#111111_100%)] px-6 py-20 md:px-10 lg:px-16 lg:py-28"
+      className="relative overflow-hidden bg-[radial-gradient(circle_at_top,rgba(234,179,8,0.2),transparent_35%),linear-gradient(180deg,#1b252d_0%,#1c252c_100%)] px-6 py-20 md:px-10 lg:px-16 lg:py-28"
     >
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">

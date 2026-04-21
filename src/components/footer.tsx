@@ -39,7 +39,7 @@ const Footer12 = ({ className }: Footer12Props) => {
   ]
 
   return (
-    <section className={cn('bg-stone-900 flex flex-col items-center gap-14 py-32', className)}>
+    <section className={cn('bg-[#1a252d] flex flex-col items-center gap-14 py-32', className)}>
       <nav className="container flex flex-col items-center gap-8">
         <div className="text-center">
           <p className="font-sans text-xs uppercase tracking-[0.35em] text-yellow-500/80">
