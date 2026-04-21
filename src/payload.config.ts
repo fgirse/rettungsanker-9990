@@ -18,6 +18,7 @@ import { GeneralSettings } from '@/globals/general-settings/config'
 import { Navigation } from '@/globals/navigation/config'
 import { ProductOfTheMonth } from '@/globals/product-of-the-month/config'
 import { Partners } from '@/globals/partners/config'
+import { contactMailEndpoint } from '@/endpoints/contact-mail'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -55,6 +56,7 @@ export default buildConfig({
         },
       })
     : undefined,
+  endpoints: [contactMailEndpoint],
   sharp,
   plugins: [],
 })

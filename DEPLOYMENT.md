@@ -70,6 +70,10 @@ NEXT_PUBLIC_BETTER_AUTH_URL=https://rettungsanker-freiburg.de
 RESEND_API_KEY=<your-resend-api-key>
 TRUSTED_ORIGINS=https://rettungsanker-freiburg.de,https://www.rettungsanker-freiburg.de
 RESEND_FROM_EMAIL=noreply@rettungsanker-freiburg.de
+NEXT_PUBLIC_TURNSTILE_SITE_KEY=<your-cloudflare-turnstile-site-key>
+TURNSTILE_SECRET_KEY=<your-cloudflare-turnstile-secret-key>
+UPSTASH_REDIS_REST_URL=<your-upstash-redis-rest-url>
+UPSTASH_REDIS_REST_TOKEN=<your-upstash-redis-rest-token>
 SHADCNBLOCKS_API_KEY=<your-shadcn-blocks-api-key>
 ```
 
@@ -135,6 +139,22 @@ If using Resend for transactional emails:
 2. Add and verify your domain `rettungsanker-freiburg.de`
 3. Add the required DNS records (SPF, DKIM, DMARC)
 4. Wait for verification
+
+## Step 5b: Configure Cloudflare Turnstile
+
+1. Go to https://dash.cloudflare.com and open Turnstile
+2. Create a widget for your production domain `rettungsanker-freiburg.de`
+3. Add `rettungsanker-freiburg.de` and `www.rettungsanker-freiburg.de` as allowed hostnames
+4. Copy the site key into `NEXT_PUBLIC_TURNSTILE_SITE_KEY`
+5. Copy the secret key into `TURNSTILE_SECRET_KEY`
+
+## Step 5c: Configure Upstash Redis
+
+1. Create a Redis database at https://console.upstash.com
+2. Open the REST API section of that database
+3. Copy the REST URL into `UPSTASH_REDIS_REST_URL`
+4. Copy the REST token into `UPSTASH_REDIS_REST_TOKEN`
+5. Redeploy after saving the variables in Vercel
 
 ## Step 6: Test Deployment
 

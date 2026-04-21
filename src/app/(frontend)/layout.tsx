@@ -17,10 +17,10 @@ export const metadata: Metadata = {
 
 function mapGlobalToMenuItems(navigation: NavigationType) {
   if (!navigation?.menuItems || navigation.menuItems.length === 0) {
-    return []
+    return [{ title: 'Kontakt', url: '/#section-contact' }]
   }
 
-  return navigation.menuItems.map((item) => {
+  const mappedItems = navigation.menuItems.map((item) => {
     // If item has subItems, it's a dropdown menu
     if (item.subItems && item.subItems.length > 0) {
       return {
@@ -38,6 +38,16 @@ function mapGlobalToMenuItems(navigation: NavigationType) {
       url: item.URL,
     }
   })
+
+  const hasContactLink = mappedItems.some(
+    (item) => item.url === '/#section-contact' || item.title.toLowerCase() === 'kontakt',
+  )
+
+  if (!hasContactLink) {
+    mappedItems.push({ title: 'Kontakt', url: '/#section-contact' })
+  }
+
+  return mappedItems
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {

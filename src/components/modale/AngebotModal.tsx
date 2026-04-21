@@ -103,7 +103,7 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
           onClick={openModal}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="rounded-lg border-2 border-lime-500/30 bg-lime-500/10 px-6 py-3 text-lg font-medium font-sans text-lime-700 rotate-30 translate-x-[25vw] backdrop-blur-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/50 focus-visible:ring-offset-2"
+          className="rounded-lg border-2 border-lime-500/30 bg-lime-500/10 px-6 py-3 text-lg font-medium font-sans text-lime-100 rotate-30 translate-x-[25vw] backdrop-blur-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/50 focus-visible:ring-offset-2"
         >
           Angebot des Monats
         </button>

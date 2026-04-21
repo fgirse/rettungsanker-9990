@@ -141,6 +141,28 @@ const Datenschutz = () => {
                 </p>
               </div>
             </div>
+
+            <div className="mb-6">
+              <h3 className="text-xl font-semibold mb-3 text-yellow-300">
+                2.4 Spam-Schutz (Cloudflare Turnstile und Upstash)
+              </h3>
+              <div className="text-gray-300 space-y-3 text-sm">
+                <p>
+                  Zum Schutz unseres Kontaktformulars vor automatisierten Eingaben setzen wir
+                  Cloudflare Turnstile ein. Hierbei kann es zur Verarbeitung technischer Daten wie
+                  IP-Adresse, Browser-Informationen und Interaktionsmerkmalen kommen.
+                </p>
+                <p>
+                  Zur Begrenzung missbräuchlicher Mehrfachanfragen nutzen wir zusätzlich ein
+                  serverseitiges Rate-Limiting mit Upstash Redis. Dabei werden Anfragen pro
+                  IP-Adresse innerhalb eines kurzen Zeitfensters gezählt.
+                </p>
+                <p>
+                  Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO
+                  (berechtigtes Interesse an der Sicherheit und Stabilität unserer Website).
+                </p>
+              </div>
+            </div>
           </section>
 
           {/* 3. Ihre Rechte */}

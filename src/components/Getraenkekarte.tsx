@@ -30,24 +30,39 @@ const BeerMugSVG = ({ className }: { className?: string }) => (
     {/* Foam top */}
     <path
       d="M20 44 C24 22 36 27 46 19 C56 12 66 26 76 18 C84 12 92 30 88 44"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-      fill="currentColor" fillOpacity="0.25"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="currentColor"
+      fillOpacity="0.25"
     />
     {/* Mug body */}
     <path
       d="M20 46 L17 118 L88 120 L85 44"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-      fill="currentColor" fillOpacity="0.08"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="currentColor"
+      fillOpacity="0.08"
     />
     {/* Handle */}
     <path
       d="M85 60 C108 56 111 95 86 97"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      fill="none"
     />
     {/* Handle inner */}
     <path
       d="M85 70 C98 68 100 88 86 88"
-      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" strokeOpacity="0.4"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      fill="none"
+      strokeOpacity="0.4"
     />
     {/* Bubbles */}
     <circle cx="44" cy="76" r="4.5" stroke="currentColor" strokeWidth="1.5" fillOpacity="0" />
@@ -63,31 +78,53 @@ const WineGlassSVG = ({ className }: { className?: string }) => (
     {/* Bowl */}
     <path
       d="M18 14 C16 48 20 76 50 80 C80 76 84 48 82 14 Z"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-      fill="currentColor" fillOpacity="0.08"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="currentColor"
+      fillOpacity="0.08"
     />
     {/* Wine level */}
     <path
       d="M22 52 C30 72 70 72 78 52"
-      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
-      fill="currentColor" fillOpacity="0.3"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      fill="currentColor"
+      fillOpacity="0.3"
     />
     {/* Filled wine */}
     <path
       d="M22 54 C24 76 40 80 50 80 C60 80 76 76 78 54 C70 72 30 72 22 54 Z"
-      fill="currentColor" fillOpacity="0.22" stroke="none"
+      fill="currentColor"
+      fillOpacity="0.22"
+      stroke="none"
     />
     {/* Stem */}
-    <line x1="50" y1="80" x2="50" y2="116" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+    <line
+      x1="50"
+      y1="80"
+      x2="50"
+      y2="116"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+    />
     {/* Base */}
     <path
       d="M28 116 C30 122 70 122 72 116"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
     />
     {/* Shine */}
     <path
       d="M28 30 C30 22 36 18 40 20"
-      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.5"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeOpacity="0.5"
     />
   </svg>
 )
@@ -97,37 +134,81 @@ const CocktailSVG = ({ className }: { className?: string }) => (
     {/* Glass */}
     <path
       d="M14 16 L36 90 L74 90 L96 16 Z"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-      fill="currentColor" fillOpacity="0.08"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="currentColor"
+      fillOpacity="0.08"
     />
     {/* Liquid */}
-    <path
-      d="M26 56 L37 90 L73 90 L84 56 Z"
-      fill="currentColor" fillOpacity="0.28" stroke="none"
-    />
+    <path d="M26 56 L37 90 L73 90 L84 56 Z" fill="currentColor" fillOpacity="0.28" stroke="none" />
     {/* Liquid top edge */}
-    <line x1="26" y1="56" x2="84" y2="56" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.5" />
+    <line
+      x1="26"
+      y1="56"
+      x2="84"
+      y2="56"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeOpacity="0.5"
+    />
     {/* Stem */}
-    <line x1="55" y1="90" x2="55" y2="122" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+    <line
+      x1="55"
+      y1="90"
+      x2="55"
+      y2="122"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+    />
     {/* Base */}
     <path
       d="M36 122 C38 128 72 128 74 122"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
     />
     {/* Straw */}
-    <line x1="68" y1="14" x2="80" y2="92" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <line
+      x1="68"
+      y1="14"
+      x2="80"
+      y2="92"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
     {/* Umbrella top */}
     <path
       d="M54 18 C57 6 74 6 78 18 Z"
-      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-      fill="currentColor" fillOpacity="0.4"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="currentColor"
+      fillOpacity="0.4"
     />
     {/* Umbrella handle */}
-    <path d="M66 18 L66 26 C66 28 68 28 68 26" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    <path
+      d="M66 18 L66 26 C66 28 68 28 68 26"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
     {/* Ice cube */}
     <rect
-      x="34" y="64" width="14" height="12" rx="2"
-      stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.18"
+      x="34"
+      y="64"
+      width="14"
+      height="12"
+      rx="2"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      fill="currentColor"
+      fillOpacity="0.18"
       transform="rotate(-8 41 70)"
     />
   </svg>
@@ -138,22 +219,65 @@ const SodaSVG = ({ className }: { className?: string }) => (
     {/* Cup body */}
     <path
       d="M14 36 L20 122 L70 122 L76 36 Z"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-      fill="currentColor" fillOpacity="0.08"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="currentColor"
+      fillOpacity="0.08"
     />
     {/* Lid */}
     <path
       d="M11 34 C13 26 77 26 79 34 L76 38 L14 38 Z"
-      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-      fill="currentColor" fillOpacity="0.2"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="currentColor"
+      fillOpacity="0.2"
     />
     {/* Straw hole bump */}
-    <ellipse cx="60" cy="30" rx="5" ry="3" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.15" />
+    <ellipse
+      cx="60"
+      cy="30"
+      rx="5"
+      ry="3"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      fill="currentColor"
+      fillOpacity="0.15"
+    />
     {/* Straw */}
-    <line x1="60" y1="6" x2="62" y2="32" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+    <line
+      x1="60"
+      y1="6"
+      x2="62"
+      y2="32"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+    />
     {/* Straw stripe */}
-    <line x1="60" y1="10" x2="62" y2="18" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.4" />
-    <line x1="60" y1="20" x2="62" y2="28" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.4" />
+    <line
+      x1="60"
+      y1="10"
+      x2="62"
+      y2="18"
+      stroke="currentColor"
+      strokeWidth="1"
+      strokeLinecap="round"
+      strokeOpacity="0.4"
+    />
+    <line
+      x1="60"
+      y1="20"
+      x2="62"
+      y2="28"
+      stroke="currentColor"
+      strokeWidth="1"
+      strokeLinecap="round"
+      strokeOpacity="0.4"
+    />
     {/* Bubbles */}
     <circle cx="34" cy="68" r="4" stroke="currentColor" strokeWidth="1.5" />
     <circle cx="52" cy="84" r="3" stroke="currentColor" strokeWidth="1.5" />
@@ -163,7 +287,10 @@ const SodaSVG = ({ className }: { className?: string }) => (
     {/* Brand swoosh */}
     <path
       d="M26 80 C38 76 52 82 64 77"
-      stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeOpacity="0.35"
+      stroke="currentColor"
+      strokeWidth="1.2"
+      strokeLinecap="round"
+      strokeOpacity="0.35"
     />
   </svg>
 )
@@ -171,25 +298,68 @@ const SodaSVG = ({ className }: { className?: string }) => (
 const CoffeeCupSVG = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 120 132" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
     {/* Steam 1 */}
-    <path d="M34 56 C32 46 38 40 36 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+    <path
+      d="M34 56 C32 46 38 40 36 30"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      fill="none"
+    />
     {/* Steam 2 */}
-    <path d="M54 52 C52 42 58 36 56 26" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+    <path
+      d="M54 52 C52 42 58 36 56 26"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      fill="none"
+    />
     {/* Steam 3 */}
-    <path d="M74 56 C72 46 78 40 76 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+    <path
+      d="M74 56 C72 46 78 40 76 30"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      fill="none"
+    />
     {/* Saucer */}
-    <ellipse cx="55" cy="116" rx="44" ry="9" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.1" />
+    <ellipse
+      cx="55"
+      cy="116"
+      rx="44"
+      ry="9"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="currentColor"
+      fillOpacity="0.1"
+    />
     {/* Cup */}
     <path
       d="M18 70 L24 106 L86 106 L92 70 Z"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-      fill="currentColor" fillOpacity="0.08"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="currentColor"
+      fillOpacity="0.08"
     />
     {/* Top rim ellipse */}
-    <ellipse cx="55" cy="70" rx="37" ry="6" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.18" />
+    <ellipse
+      cx="55"
+      cy="70"
+      rx="37"
+      ry="6"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="currentColor"
+      fillOpacity="0.18"
+    />
     {/* Handle */}
     <path
       d="M86 78 C108 74 110 100 87 100"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      fill="none"
     />
   </svg>
 )
@@ -197,23 +367,80 @@ const CoffeeCupSVG = ({ className }: { className?: string }) => (
 const SnacksSVG = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 130 120" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
     {/* Plate */}
-    <ellipse cx="65" cy="98" rx="52" ry="12" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.1" />
-    <path d="M13 96 C13 72 117 72 117 96" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+    <ellipse
+      cx="65"
+      cy="98"
+      rx="52"
+      ry="12"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="currentColor"
+      fillOpacity="0.1"
+    />
+    <path
+      d="M13 96 C13 72 117 72 117 96"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      fill="none"
+    />
     {/* Pretzel left loop */}
     <path
       d="M48 82 C40 68 44 54 54 58 C60 61 60 72 56 76 C50 82 38 78 38 68 C38 58 48 50 58 54 C68 58 70 72 66 80 C62 88 52 90 46 84"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="none"
     />
     {/* Salt dots on pretzel */}
     <circle cx="50" cy="64" r="1.5" fill="currentColor" fillOpacity="0.6" />
     <circle cx="58" cy="60" r="1.5" fill="currentColor" fillOpacity="0.6" />
     <circle cx="46" cy="74" r="1.5" fill="currentColor" fillOpacity="0.6" />
     {/* Small snack bowl */}
-    <path d="M80 78 C80 68 106 68 106 78 L104 90 L82 90 Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" fillOpacity="0.12" />
+    <path
+      d="M80 78 C80 68 106 68 106 78 L104 90 L82 90 Z"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="currentColor"
+      fillOpacity="0.12"
+    />
     {/* Chips / snack bits */}
-    <ellipse cx="88" cy="72" rx="5" ry="3" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.2" transform="rotate(-15 88 72)" />
-    <ellipse cx="98" cy="70" rx="5" ry="3" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.2" transform="rotate(10 98 70)" />
-    <ellipse cx="93" cy="66" rx="4" ry="3" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.2" transform="rotate(-5 93 66)" />
+    <ellipse
+      cx="88"
+      cy="72"
+      rx="5"
+      ry="3"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      fill="currentColor"
+      fillOpacity="0.2"
+      transform="rotate(-15 88 72)"
+    />
+    <ellipse
+      cx="98"
+      cy="70"
+      rx="5"
+      ry="3"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      fill="currentColor"
+      fillOpacity="0.2"
+      transform="rotate(10 98 70)"
+    />
+    <ellipse
+      cx="93"
+      cy="66"
+      rx="4"
+      ry="3"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      fill="currentColor"
+      fillOpacity="0.2"
+      transform="rotate(-5 93 66)"
+    />
   </svg>
 )
 
@@ -234,9 +461,10 @@ const CATEGORIES = [
     illustrationColor: 'text-yellow-600',
     Illustration: BeerMugSVG,
     rotation: '-rotate-1',
-    headerPattern: 'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(245,158,11,0.04) 8px, rgba(245,158,11,0.04) 9px)',
+    headerPattern:
+      'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(245,158,11,0.04) 8px, rgba(245,158,11,0.04) 9px)',
   },
-   {
+  {
     id: 'biere_in_flaschen' as Kategorie,
     label: 'Flaschenbier ',
     emoji: '🍻',
@@ -250,7 +478,8 @@ const CATEGORIES = [
     illustrationColor: 'text-yellow-500',
     Illustration: BeerMugSVG,
     rotation: '-rotate-1',
-    headerPattern: 'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(245,158,11,0.04) 8px, rgba(245,158,11,0.04) 9px)',
+    headerPattern:
+      'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(245,158,11,0.04) 8px, rgba(245,158,11,0.04) 9px)',
   },
   {
     id: 'weine' as Kategorie,
@@ -266,7 +495,8 @@ const CATEGORIES = [
     illustrationColor: 'text-rose-400',
     Illustration: WineGlassSVG,
     rotation: 'rotate-1',
-    headerPattern: 'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(244,63,94,0.04) 8px, rgba(244,63,94,0.04) 9px)',
+    headerPattern:
+      'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(244,63,94,0.04) 8px, rgba(244,63,94,0.04) 9px)',
   },
   {
     id: 'cocktails-longdrinks' as Kategorie,
@@ -282,7 +512,8 @@ const CATEGORIES = [
     illustrationColor: 'text-fuchsia-400',
     Illustration: CocktailSVG,
     rotation: '-rotate-1',
-    headerPattern: 'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(217,70,239,0.04) 8px, rgba(217,70,239,0.04) 9px)',
+    headerPattern:
+      'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(217,70,239,0.04) 8px, rgba(217,70,239,0.04) 9px)',
   },
   {
     id: 'softdrinks' as Kategorie,
@@ -298,7 +529,8 @@ const CATEGORIES = [
     illustrationColor: 'text-cyan-400',
     Illustration: SodaSVG,
     rotation: 'rotate-1',
-    headerPattern: 'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(34,211,238,0.04) 8px, rgba(34,211,238,0.04) 9px)',
+    headerPattern:
+      'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(34,211,238,0.04) 8px, rgba(34,211,238,0.04) 9px)',
   },
   {
     id: 'kaffee-tee' as Kategorie,
@@ -314,7 +546,8 @@ const CATEGORIES = [
     illustrationColor: 'text-orange-400',
     Illustration: CoffeeCupSVG,
     rotation: '-rotate-1',
-    headerPattern: 'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(251,146,60,0.04) 8px, rgba(251,146,60,0.04) 9px)',
+    headerPattern:
+      'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(251,146,60,0.04) 8px, rgba(251,146,60,0.04) 9px)',
   },
   {
     id: 'snacks' as Kategorie,
@@ -330,7 +563,8 @@ const CATEGORIES = [
     illustrationColor: 'text-lime-400',
     Illustration: SnacksSVG,
     rotation: 'rotate-1',
-    headerPattern: 'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(163,230,53,0.04) 8px, rgba(163,230,53,0.04) 9px)',
+    headerPattern:
+      'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(163,230,53,0.04) 8px, rgba(163,230,53,0.04) 9px)',
   },
 ] as const
 
@@ -360,10 +594,7 @@ export default function GetraenkekarteComponent({ items }: { items: MenuItem[] }
   }
 
   return (
-    <div
-      className="min-h-screen text-white"
-      style={FONT_STYLE}
-    >
+    <div id="section-getraenkekarte" className="min-h-screen text-white" style={FONT_STYLE}>
       {/* ── Hero ──────────────────────────────────────────────────────────────── */}
       <div className="relative overflow-hidden bg-slate-950">
         {/* Chalk-grid background */}
@@ -488,7 +719,9 @@ export default function GetraenkekarteComponent({ items }: { items: MenuItem[] }
                         style={{ animationDelay: `${i * 50}ms` }}
                       >
                         {/* Left dot / index */}
-                        <div className={`shrink-0 w-2 h-2 rounded-full mt-2 ${cat.dotColor} opacity-70`} />
+                        <div
+                          className={`shrink-0 w-2 h-2 rounded-full mt-2 ${cat.dotColor} opacity-70`}
+                        />
 
                         {/* Content */}
                         <div className="flex-1 min-w-0">
@@ -513,7 +746,9 @@ export default function GetraenkekarteComponent({ items }: { items: MenuItem[] }
 
                         {/* Price */}
                         <div className="shrink-0 text-right">
-                          <div className={`text-2xl md:text-3xl font-bold ${cat.priceColor} leading-none`}>
+                          <div
+                            className={`text-2xl md:text-3xl font-bold ${cat.priceColor} leading-none`}
+                          >
                             {item.preis}
                           </div>
                           <div className="text-gray-500 text-xs mt-0.5">€</div>
@@ -538,9 +773,7 @@ export default function GetraenkekarteComponent({ items }: { items: MenuItem[] }
         <p className="text-gray-500 text-sm">
           Alle Preise inkl. MwSt. · Weitere Specials auf Anfrage!
         </p>
-        <p className="text-gray-700 text-xs mt-2 italic">
-          Prost 🍻 — Der Rettungsanker, Freiburg
-        </p>
+        <p className="text-gray-700 text-xs mt-2 italic">Prost 🍻 — Der Rettungsanker, Freiburg</p>
       </div>
     </div>
   )

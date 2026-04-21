@@ -62,25 +62,6 @@ export default function AboutClient({ about }) {
             </p>
           </div>
         </motion.div>
-        <div className="flex flex-col items-center justify-center">
-          <button
-            className="lg-justify-between relative mx-auto mb-5 mt-6 flex w-52 flex-row items-center justify-center gap-x-3 rounded-lg border border-white bg-yellow-500 px-4 py-2 font-sans text-2xl font-medium  text-gray-200 transition delay-150 duration-300 ease-in-out hover:-translate-y-1  hover:scale-110 hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 md:text-3xl lg:mb-20 lg:flex lg:w-80 lg:flex-row lg:items-center lg:text-2xl xl:mt-2"
-            type="button"
-          >
-            <svg
-              className="w-20 lg:w-24 "
-              fill="#ffdd50"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-            </svg>
-            <a className="ui btn" href="mailto:rettungsanker-freiburg@gmx.de?">
-              email
-            </a>{" "}
-          </button>
-        </div>
         <p className="text-yellow-500 text-center">scrolling down</p>
         <motion.img
           variants={fadeIn("up", "tween", 0.3, 1)}

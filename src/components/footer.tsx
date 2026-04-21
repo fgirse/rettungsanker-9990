@@ -20,48 +20,66 @@ const Footer12 = ({ className }: Footer12Props) => {
   }, [])
 
   const navigation = [
-    { name: 'Product', href: '#' },
-    { name: 'About Us', href: '#' },
-    { name: 'Pricing', href: '#' },
-    { name: 'FAQ', href: '#' },
-    { name: 'Contact', href: '#' },
+    { name: 'Ueber uns', href: '/#section-about' },
+    { name: 'Getraenkekarte', href: '/#section-getraenkekarte' },
+    { name: 'Galerie', href: '/#section-gallery' },
+    { name: 'Team', href: '/#section-team' },
+    { name: 'Kontakt', href: '/#section-contact' },
+    { name: 'Anfahrt', href: '/#section-wohin' },
   ]
 
   const social = [
-    { name: 'Twitter', href: '#' },
-    { name: 'LinkedIn', href: '#' },
+    { name: 'Website', href: 'https://www.rettungsanker-freiburg.de' },
+    { name: 'E-Mail', href: 'mailto:info@rettungsanker-freiburg.de' },
   ]
 
-  const legal = [{ name: 'Privacy Policy', href: '#' }]
+  const legal = [
+    { name: 'Impressum', href: '/impressum' },
+    { name: 'Datenschutz', href: '/datenschutz' },
+  ]
 
   return (
     <section className={cn('bg-stone-900 flex flex-col items-center gap-14 py-32', className)}>
-      <nav className="container flex flex-col items-center gap-4">
-        <ul className="flex flex-wrap items-center justify-center gap-6">
+      <nav className="container flex flex-col items-center gap-8">
+        <div className="text-center">
+          <p className="font-sans text-xs uppercase tracking-[0.35em] text-yellow-500/80">
+            Sitemap
+          </p>
+          <p className="mt-2 font-sans text-zinc-300">Alles Wichtige auf einen Blick</p>
+        </div>
+
+        <ul className="flex flex-wrap items-center justify-center gap-3">
           {navigation.map((item) => (
             <li key={item.name}>
-              <a href={item.href} className="font-medium transition-opacity hover:opacity-75">
+              <a
+                href={item.href}
+                className="inline-flex items-center rounded-full border border-yellow-500/30 bg-zinc-800/70 px-4 py-2 font-sans text-sm text-zinc-100 transition-all hover:-translate-y-0.5 hover:border-yellow-400/60 hover:bg-zinc-700/90 hover:text-yellow-300"
+              >
                 {item.name}
               </a>
             </li>
           ))}
+        </ul>
+
+        <ul className="flex flex-wrap items-center justify-center gap-4">
           {social.map((item) => (
             <li key={item.name}>
               <a
                 href={item.href}
-                className="flex items-center gap-0.5 font-medium transition-opacity hover:opacity-75"
+                className="flex items-center gap-1 rounded-full bg-zinc-800/70 px-4 py-2 font-sans text-sm text-zinc-200 transition-all hover:bg-yellow-500/20 hover:text-yellow-300"
               >
                 {item.name} <ArrowUpRight className="size-4" />
               </a>
             </li>
           ))}
         </ul>
+
         <ul className="flex flex-wrap items-center justify-center gap-6">
           {legal.map((item) => (
             <li key={item.name}>
               <a
                 href={item.href}
-                className="text-sm text-muted-foreground transition-opacity hover:opacity-75"
+                className="font-sans text-sm text-zinc-400 underline-offset-4 transition-colors hover:text-yellow-300 hover:underline"
               >
                 {item.name}
               </a>

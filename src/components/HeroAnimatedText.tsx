@@ -33,14 +33,14 @@ export default function HeroAnimatedText() {
       <p
         ref={dieRef}
         id="1"
-        className="mb-5 relative text-[45vw] headingE text-amber-50 text-center top-[-16vh] md:text-[43vw] md:top-[-14vh] lg:top-[1vh] lg:text-[22vw]"
+        className="mb-12 relative text-[45vw] headingE text-amber-50 text-center top-[-16vh] md:text-[43vw] md:top-[-14vh] lg:top-[1vh] lg:text-[22vw]"
       >
         die
       </p>
       <p
         ref={kiezkneipeRef}
         id="2"
-        className="relative text-[12vw] top-[-18vw] headingA text-red-800 text-center md:top-[-4vh] lg:text-[6vw] lg:top-[8vw]"
+        className="relative text-[12vw] top-[-18vw] headingA text-red-800 text-center md:top-[2vh] lg:text-[6vw] lg:top-[8vw]"
       >
         kiezkneipe
       </p>

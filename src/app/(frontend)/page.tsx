@@ -6,10 +6,11 @@ import Bento from '@/components/GridLayout3'
 import Marquee from '@/components/Marquee'
 import Wohin from '@/components/wohin'
 import Team from '@/components/Team'
+import ContactSection from '@/components/ContactSection'
 import Getraenkekarte, { type Kategorie, type MenuItem } from '@/components/Getraenkekarte'
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import LiveTV from "@/components/LiveTV";
+import LiveTV from '@/components/LiveTV'
 
 export const dynamic = 'force-dynamic'
 
@@ -54,6 +55,7 @@ export default async function Home() {
       <Getraenkekarte items={items} />
       <Photogallery />
       <Team />
+      <ContactSection />
       <Wohin />
     </>
   )
