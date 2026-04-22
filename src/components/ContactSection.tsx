@@ -9,10 +9,10 @@ export default function ContactSection() {
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div className="max-w-xl">
-            <p className="font-sans headingA lg:text-7xl uppercase tracking-[0.4em] text-yellow-500/80">
+            <p className="font-sans headingA text-4xl lg:text-7xl uppercase tracking-[0.4em] text-yellow-500/80">
               Kontakt
             </p>
-            <h2 className="mt-4 font-sans text-4xl font-black text-white md:text-5xl">
+            <h2 className="mt-4 font-sans text-3xl font-black text-white md:text-5xl">
               Anfragen für Reservierungen, Events und geschlossene Gesellschaften
             </h2>
             <p className="mt-5 font-sans text-lg leading-8 text-zinc-300">
