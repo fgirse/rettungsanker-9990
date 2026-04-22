@@ -16,7 +16,7 @@ export default function ContactSection() {
               Anfragen für Reservierungen, Events und geschlossene Gesellschaften
             </h2>
             <p className="mt-5 font-sans text-lg leading-8 text-zinc-300">
-              Schreib uns direkt ueber die Website. Deine Nachricht geht an rettungsanker.freiburg@gmx.de und
+              Schreib uns direkt ueber die Website. Deine Nachricht geht an rettungsanker-freiburg@gmx.de und
               enthaelt auf Wunsch direkt Telefonnummer und Veranstaltungsdatum fuer schnellere
               Rueckfragen.
             </p>
@@ -24,7 +24,7 @@ export default function ContactSection() {
               <p className="font-sans text-sm uppercase tracking-[0.25em] text-yellow-500">
                 Direktkontakt
               </p>
-              <p className="font-sans text-xl font-bold text-white">rettungsanker.freiburg@gmx.de</p>
+              <p className="font-sans text-xl font-bold text-white">rettungsanker-freiburg@gmx.de</p>
               <p className="font-sans text-sm leading-6 text-zinc-400">
                 Fuer Spam-Schutz nutzt das Formular Cloudflare Turnstile, ein Honeypot-Feld, eine
                 Mindest-Ausfuellzeit und Redis-basiertes Rate-Limiting ueber Upstash.

@@ -30,7 +30,7 @@ const Footer12 = ({ className }: Footer12Props) => {
 
   const social = [
     { name: 'Website', href: 'https://www.rettungsanker-freiburg.de' },
-    { name: 'E-Mail', href: 'mailto:info@rettungsanker-freiburg.de' },
+    { name: 'E-Mail', href: 'mailto:rettungsanker-freiburg@gmx.de' },
   ]
 
   const legal = [

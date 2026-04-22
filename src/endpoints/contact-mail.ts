@@ -149,7 +149,7 @@ export const contactMailEndpoint: Endpoint = {
       : ''
 
     await req.payload.sendEmail({
-      to: 'rettungsanker.freiburg@gmx.de',
+      to: 'rettungsanker-freiburg@gmx.de',
       replyTo: email,
       subject: `[Website] ${subject}`,
       text: `Name: ${name}\nE-Mail: ${email}\n${phoneLine}${eventDateLine}Betreff: ${subject}\n\n${message}`,
