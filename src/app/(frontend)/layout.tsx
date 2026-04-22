@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
 }
 
-function mapGlobalToMenuItems(navigation: NavigationType) {
+function mapGlobalToMenuItems(navigation: NavigationType | null) {
   if (!navigation?.menuItems || navigation.menuItems.length === 0) {
     return [{ title: 'Kontakt', url: '/#section-contact' }]
   }
