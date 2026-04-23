@@ -23,8 +23,12 @@ import { contactMailEndpoint } from '@/endpoints/contact-mail'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+
 export default buildConfig({
-  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
+  serverURL,
+  cors: [serverURL, 'http://localhost:3000'],
+  csrf: [serverURL, 'http://localhost:3000'],
   admin: {
     user: Users.slug,
     importMap: {
