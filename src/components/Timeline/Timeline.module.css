@@ -1,0 +1,132 @@
+/*
+ * Timeline.module.css
+ * -------------------------------------------------------------
+ * Only the bits of the original styles.css that depend on raster
+ * background images live here. Everything else is handled with
+ * Tailwind utility classes inside Timeline.tsx.
+ *
+ * Asset paths assume the images have been copied to
+ *   /public/timeline/images/...
+ */
+
+/* The viewport background (subtle horizontal pattern) */
+.viewport {
+  background: url("/timeline/images/background.jpg") no-repeat 0 0;
+}
+
+/* The horizontal scroll-bar track */
+.scrollbar {
+  background: transparent url("/timeline/images/scrollbar_background.png")
+    repeat-x 0 0;
+}
+
+/* The dragger thumb that the user grabs */
+.dragger {
+  background: transparent url("/timeline/images/scrollbar_dragger.png")
+    no-repeat 0 0;
+  cursor: pointer;
+}
+
+/* Milestone marks on the scroll-bar */
+.mark {
+  background: transparent url("/timeline/images/scrollbar_mark.png") no-repeat
+    0 0;
+  cursor: pointer;
+  height: 21px;
+  width: 13px;
+  position: absolute;
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 600ms ease-out, left 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.markVisible {
+  opacity: 1;
+}
+
+/* Custom drag cursor on the image strip while dragging */
+.dragCursor {
+  cursor: url("/timeline/images/drag_icon.png") 14 14, grab;
+}
+
+.dragCursorActive {
+  cursor: url("/timeline/images/drag_icon.png") 14 14, grabbing;
+}
+
+/* Video / image rollover overlays (113×67 sprites) */
+.videoRollover,
+.imageRollover {
+  position: relative;
+  display: inline-block;
+}
+
+.videoRollover::after,
+.imageRollover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 113px;
+  height: 67px;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  pointer-events: none;
+}
+
+.videoRollover::after {
+  background: url("/timeline/images/thumb_video_hover.png") no-repeat;
+}
+
+.imageRollover::after {
+  background: url("/timeline/images/thumb_image_hover.png") no-repeat;
+}
+
+.videoRollover:hover::after,
+.imageRollover:hover::after {
+  opacity: 1;
+}
+
+/* Read-more button image */
+.readMore {
+  background: url("/timeline/images/read_more.png") no-repeat;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+/* Soft shadow under the entire timeline container */
+.shadow {
+  background: url("/timeline/images/shadow.png") no-repeat;
+  width: 962px;
+  height: 70px;
+  pointer-events: none;
+}
+
+/* Pre-loader spinner */
+.preloader {
+  background: url("/timeline/images/preloader.gif") no-repeat center;
+  width: 32px;
+  height: 32px;
+}
+
+/* Title sprite (optional decorative use) */
+.titleImg {
+  background: url("/timeline/images/title.png") no-repeat;
+}
+
+/* Fade-in helpers driven by JS */
+.fadeIn {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+.fadeInReady {
+  opacity: 1;
+}
+
+/* The cross-hatch border between viewport and milestones */
+.viewportBorder {
+  border-top: 4px solid #ffffff;
+}

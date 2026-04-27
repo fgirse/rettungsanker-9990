@@ -40,7 +40,7 @@ export default function HeroAnimatedText() {
       <p
         ref={kiezkneipeRef}
         id="2"
-        className="relative text-[12vw] top-[-8vh] headingA text-red-800 text-center md:top-[2vh] lg:text-[6vw] lg:top-[8vw]"
+        className="relative text-[12vw] top-[-8+vh] headingA text-red-800 text-center md:top-[2vh] lg:text-[6vw] lg:top-[8vw]"
       >
         kiezkneipe
       </p>
