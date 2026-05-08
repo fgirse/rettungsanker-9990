@@ -1,4 +1,5 @@
 import { APIError, type Endpoint, type PayloadRequest } from 'payload'
+import { Resend } from 'resend'
 
 import { getContactRateLimit } from '@/lib/contact-rate-limit'
 
@@ -148,8 +149,15 @@ export const contactMailEndpoint: Endpoint = {
       ? `<p><strong>Veranstaltungsdatum:</strong> ${safeEventDate}</p>`
       : ''
 
-    await req.payload.sendEmail({
-      to: 'rettungsanker-freiburg@gmx.de',
+    const resendApiKey = process.env.RESEND_API_KEY
+    if (!resendApiKey) {
+      throw new APIError('Email service is not configured.', 503)
+    }
+
+    const resend = new Resend(resendApiKey)
+    await resend.emails.send({
+      from: `Rettungsanker <${process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'}>`,
+      to: 'fgirse@icloud.com',
       replyTo: email,
       subject: `[Website] ${subject}`,
       text: `Name: ${name}\nE-Mail: ${email}\n${phoneLine}${eventDateLine}Betreff: ${subject}\n\n${message}`,

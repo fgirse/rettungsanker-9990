@@ -43,7 +43,7 @@ export const codeExample4 = `
 export const codeExample5 = `
 // Use css vars for gap and duration
 // Default is 1 rem and 40s
-<Marquee className="gap-[3rem] [--duration:5s]" innerClassName="gap-[3rem] [--gap:3rem]" fade={true}>
+<Marquee className="gap-12 [--duration:5s]" innerClassName="gap-[3rem] [--gap:3rem]" fade={true}>
   <div>Content 1</div>
   <div>Content 2</div>
   <div>Content 3</div>
