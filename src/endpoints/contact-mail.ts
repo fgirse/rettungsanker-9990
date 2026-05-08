@@ -157,7 +157,7 @@ export const contactMailEndpoint: Endpoint = {
     const resend = new Resend(resendApiKey)
     await resend.emails.send({
       from: `Rettungsanker <${process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'}>`,
-      to: 'fgirse@icloud.com',
+      to: 'rettungsanker-freiburg@gmx.de',
       replyTo: email,
       subject: `[Website] ${subject}`,
       text: `Name: ${name}\nE-Mail: ${email}\n${phoneLine}${eventDateLine}Betreff: ${subject}\n\n${message}`,
