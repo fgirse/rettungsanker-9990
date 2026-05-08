@@ -9,8 +9,18 @@ declare global {
 const redisUrl = process.env.UPSTASH_REDIS_REST_URL
 const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN
 
+function isValidRedisUrl(url: string | undefined): boolean {
+  if (!url) return false
+  try {
+    const parsed = new URL(url)
+    return parsed.protocol === 'https:'
+  } catch {
+    return false
+  }
+}
+
 export function getContactRateLimit(): Ratelimit | null {
-  if (!redisUrl || !redisToken) {
+  if (!isValidRedisUrl(redisUrl) || !redisToken) {
     return null
   }
 
