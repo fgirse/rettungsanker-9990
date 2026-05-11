@@ -22,7 +22,7 @@ export const Getraenkekarte: CollectionConfig = {
       label: 'Kategorie',
       options: [
         { label: 'Biere vom Fass ', value: 'biere_vom_fass' },
-        { label: 'Flaschenbier', value: 'biere_in_flaschen' },
+        { label: 'Flaschenpost', value: 'biere_in_flaschen' },
         { label: 'Weine', value: 'weine' },
         { label: 'Cocktails & Longdrinks', value: 'cocktails-longdrinks' },
         { label: 'Softdrinks', value: 'softdrinks' },

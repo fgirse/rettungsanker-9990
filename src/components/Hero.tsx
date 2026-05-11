@@ -20,7 +20,7 @@ function Hero() {
       </video>
       {/* Background video for desktop only */}
       <video
-        className="absolute inset-0 w-full h-full object-cover hidden lg:block -z-10"
+        className="absolute inset-0 w-full h-full object-contain hidden lg:block -z-10"
         autoPlay
         muted
         loop

@@ -466,7 +466,7 @@ const CATEGORIES = [
   },
   {
     id: 'biere_in_flaschen' as Kategorie,
-    label: 'Flaschenbier ',
+    label: 'Flaschenpost',
     emoji: '🍻',
     tagline: 'vielfältig & für jeden Geschmack',
     colorClass: 'text-yellow-500',
