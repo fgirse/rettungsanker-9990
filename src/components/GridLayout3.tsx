@@ -1,20 +1,18 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import Image from "next/image"
-import { cn } from "@/lib/utils"
-import { RichText } from "@payloadcms/richtext-lexical/react"
-import { SerializedEditorState, SerializedLexicalNode } from "lexical"
-import { getPayload, type CollectionSlug } from "payload"
-import config from "@payload-config"
-
-
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import Image from 'next/image'
+import { cn } from '@/lib/utils'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import { SerializedEditorState, SerializedLexicalNode } from 'lexical'
+import { getPayload, type CollectionSlug } from 'payload'
+import config from '@payload-config'
 
 type BentoRichText = {
   root: {
     type: string
     children: { [k: string]: unknown }[]
-    direction: "ltr" | "rtl" | null
-    format: "left" | "start" | "center" | "right" | "end" | "justify" | ""
+    direction: 'ltr' | 'rtl' | null
+    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
     indent: number
     version: number
   }
@@ -28,6 +26,8 @@ interface BentoItem {
   imageSrc: string
   imageAlt: string
   isMain?: boolean
+  buttonLabel?: string
+  buttonHref?: string
 }
 
 type BentoFieldKeys = {
@@ -55,70 +55,78 @@ type BentoGridDoc = {
 
 const bentoItems: (BentoItem & BentoFieldKeys)[] = [
   {
-    id: "bier",
-    title: "bier vom fass",
-    content: "Flensburger Pils - das kühle Blonde von der Waterkant. Astra-Pils - das Kultbier natürlich direkt vom Kiez !",
-    imageSrc: "/Assets/Img/image.png",
-    imageAlt: "Frisch gezapftes Flensburger Bier",
-    isMain: true,
-    titleKey: "title_biere",
-    contentKey: "content_biere",
-  },
-  {
-    id: "weine",
-    title: "regionale weine",
-    content: "Qualitativ hochwertige Weine aus der Region Kaiserstuhl und dem Markgräflerland. Hauslieferant Weingut Heinemann Scherzingen.",
-    imageSrc: "/Assets/Img/bottles04.png",
-    imageAlt: "Bunte Weinflaschen in Aquarell-Stil",
-    titleKey: "title_weine",
-    contentKey: "content_weine",
-  },
-  {
-    id: "cocktails",
-    title: "cocktails & longdrinks",
+    id: 'bier',
+    title: 'bier vom fass',
     content:
-      "Zahlreiche internationale Longdrinks und Cocktails - alles was das Herz begehrt. Zahlreiche \"Kurze\" für jeden Geschmack.",
-    imageSrc: "/Assets/Img/cocktails.png",
-    imageAlt: "Cocktailglas Illustration",
-    titleKey: "title_cocktails",
-    contentKey: "content_cocktails",
-  },
-  {
-    id: "fussball",
-    title: "fussball live-tv",
-    content: "Jeden Samstag-Spieltag der laufenden Bundesliga-Saison Live TV Event in unserer Sportarena natürlich mit Schwerpunkt unseres SC Freiburgs. Wann immer möglich auch Spiele der Champions League und natürlich der grossen Turniere von EM und WM. Bei Topspielen des SC Freiburg mit grosser Publikumsnachfrage sind Reservierungen über unser Booking-Tool zu empfehlen - Unten folgender Button und Du bist direkt dabei !",
-    imageSrc: "/Assets/Img/Fussball2.png",
-    imageAlt: "Fußball Illustration",
+      'Flensburger Pils - das kühle Blonde von der Waterkant. Astra-Pils - das Kultbier natürlich direkt vom Kiez !',
+    imageSrc: '/Assets/Img/image.png',
+    imageAlt: 'Frisch gezapftes Flensburger Bier',
     isMain: true,
-    titleKey: "title_fussball",
-    contentKey: "content_fussball",
+    titleKey: 'title_biere',
+    contentKey: 'content_biere',
   },
   {
-    id: "party",
-    title: "party & events",
-    content: "Der Rettungsanker ist die ideale Location für Ihren privaten oder Business Event. Im Rahmen einer \"gesckossenen Gesellschaft\" stehen Ihnen die Räumlichkeiten des Rettungsankers zur Verfügung. Auf Wunsch Catering durch unseren Kooperationspartner möglich ! Sprechen Sie uns an oder kontaktieren Sie uns per e.mail.",
-    imageSrc: "/Assets/Img/Crowdparty2.png",
-    imageAlt: "Party Crowd in Aquarell-Stil",
-    titleKey: "title_events",
-    contentKey: "content_events",
+    id: 'weine',
+    title: 'regionale weine',
+    content:
+      'Qualitativ hochwertige Weine aus der Region Kaiserstuhl und dem Markgräflerland. Hauslieferant Weingut Heinemann Scherzingen.',
+    imageSrc: '/Assets/Img/bottles04.png',
+    imageAlt: 'Bunte Weinflaschen in Aquarell-Stil',
+    titleKey: 'title_weine',
+    contentKey: 'content_weine',
   },
   {
-    id: "albers",
-    title: "hans albers",
-    content: " Hans Phillip August Albers (* 22.September 1891 in Hamburg , 24. Juli 1960 in Berg, Bayern) war ein deutscher Schauspieler und Sänger, der als 'blonder Hans' Volkssidol wurde. Zu den bekanntesten Spielfilmen in denen er mitwirkte gehören 'der Mann, der Sherlock Holmes war' (1937), 'Münchhausen' (1943), 'die grosse Freiheit Nr.7' (1943) sowie 'Auf fer Reeperbahn Nachts um halb eins'",
-    imageSrc: "/Assets/Img/Albers_Illu_white.png",
-    imageAlt: "Hans Albers Illustration als Seemann",
-    titleKey: "title_albers",
-    contentKey: "content_albers",
+    id: 'cocktails',
+    title: 'cocktails & longdrinks',
+    content:
+      'Zahlreiche internationale Longdrinks und Cocktails - alles was das Herz begehrt. Zahlreiche "Kurze" für jeden Geschmack.',
+    imageSrc: '/Assets/Img/cocktails.png',
+    imageAlt: 'Cocktailglas Illustration',
+    titleKey: 'title_cocktails',
+    contentKey: 'content_cocktails',
   },
   {
-    id: "logoNeu",
-    title: "neues logo",
-    content: " Unser neues Logo symbolisiert die Verbindung von Tradition und Moderne. Das alte Rettungsanker Logo ist im oberen Drittel erhalten geblieben. Das mittlere Drittel beschreibt den Rettunganker als Treffpunkt für Jung und Alt. Das untere Drittel. zeigt eine Shiluette der Stadt Freiburg Wir freuen uns, Sie unter unserem neuen Zeichen willkommen zu heißen!",
-    imageSrc: "/Assets/Img/LogoNeu.png",
-    imageAlt: "Neues Logo Illustration",
-    titleKey: "title_logoNeu",
-    contentKey: "content_logoNeu",
+    id: 'fussball',
+    title: 'fussball live-tv',
+    content:
+      'Jeden Samstag-Spieltag der laufenden Bundesliga-Saison Live TV Event in unserer Sportarena natürlich mit Schwerpunkt unseres SC Freiburgs. Wann immer möglich auch Spiele der Champions League und natürlich der grossen Turniere von EM und WM. Bei Topspielen des SC Freiburg mit grosser Publikumsnachfrage sind Reservierungen über unser Booking-Tool zu empfehlen - Unten folgender Button und Du bist direkt dabei !',
+    imageSrc: '/Assets/Img/Fussball2.png',
+    imageAlt: 'Fußball Illustration',
+    isMain: true,
+    buttonLabel: 'Reservierung',
+    buttonHref: '#section-contact',
+    titleKey: 'title_fussball',
+    contentKey: 'content_fussball',
+  },
+  {
+    id: 'party',
+    title: 'party & events',
+    content:
+      'Der Rettungsanker ist die ideale Location für Ihren privaten oder Business Event. Im Rahmen einer "gesckossenen Gesellschaft" stehen Ihnen die Räumlichkeiten des Rettungsankers zur Verfügung. Auf Wunsch Catering durch unseren Kooperationspartner möglich ! Sprechen Sie uns an oder kontaktieren Sie uns per e.mail.',
+    imageSrc: '/Assets/Img/Crowdparty2.png',
+    imageAlt: 'Party Crowd in Aquarell-Stil',
+    titleKey: 'title_events',
+    contentKey: 'content_events',
+  },
+  {
+    id: 'albers',
+    title: 'hans albers',
+    content:
+      " Hans Phillip August Albers (* 22.September 1891 in Hamburg , 24. Juli 1960 in Berg, Bayern) war ein deutscher Schauspieler und Sänger, der als 'blonder Hans' Volkssidol wurde. Zu den bekanntesten Spielfilmen in denen er mitwirkte gehören 'der Mann, der Sherlock Holmes war' (1937), 'Münchhausen' (1943), 'die grosse Freiheit Nr.7' (1943) sowie 'Auf fer Reeperbahn Nachts um halb eins'",
+    imageSrc: '/Assets/Img/Albers_Illu_white.png',
+    imageAlt: 'Hans Albers Illustration als Seemann',
+    titleKey: 'title_albers',
+    contentKey: 'content_albers',
+  },
+  {
+    id: 'logoNeu',
+    title: 'neues logo',
+    content:
+      ' Unser neues Logo symbolisiert die Verbindung von Tradition und Moderne. Das alte Rettungsanker Logo ist im oberen Drittel erhalten geblieben. Das mittlere Drittel beschreibt den Rettunganker als Treffpunkt für Jung und Alt. Das untere Drittel. zeigt eine Shiluette der Stadt Freiburg Wir freuen uns, Sie unter unserem neuen Zeichen willkommen zu heißen!',
+    imageSrc: '/Assets/Img/LogoNeu.png',
+    imageAlt: 'Neues Logo Illustration',
+    titleKey: 'title_logoNeu',
+    contentKey: 'content_logoNeu',
   },
 ]
 
@@ -126,36 +134,59 @@ function BentoCard({ item, className }: { item: BentoItem; className?: string })
   return (
     <Card
       className={cn(
-        "group relative overflow-hidden transition-all duration-300 hover:shadow-xl",
-        item.isMain ? "bg-amber-400 border-amber-400 border-2 ring-2 ring-amber-200" : "bg-stone-900 ",
+        'group relative overflow-hidden transition-all duration-300 hover:shadow-xl',
+        item.isMain
+          ? 'bg-amber-400 border-amber-400 border-2 ring-2 ring-amber-200'
+          : 'bg-stone-900 ',
         className,
       )}
     >
       {item.isMain && (
-        <Badge className="absolute top-3 right-3 z-10 bg-red-700 text-white hover:bg-amber-700">Highlight</Badge>
+        <Badge className="absolute top-3 right-3 z-10 bg-red-700 text-white hover:bg-amber-700">
+          Highlight
+        </Badge>
       )}
       <div className="relative  w-full h-40 md:h-48 lg:h-52 overflow-hidden">
         <Image
-          src={item.imageSrc || "/placeholder.svg"}
+          src={item.imageSrc || '/placeholder.svg'}
           alt={item.imageAlt}
           fill
           className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
         />
       </div>
-      <CardHeader className={cn("pb-2", item.isMain ? "bg-amber-400" : "")}>
-        <CardTitle className={cn("text-center text-2xl md:text-2xl headingA ", item.isMain ? "text-slate-600" : " text-yellow-600")}>
+      <CardHeader className={cn('pb-2', item.isMain ? 'bg-amber-400' : '')}>
+        <CardTitle
+          className={cn(
+            'text-center text-2xl md:text-2xl headingA ',
+            item.isMain ? 'text-slate-600' : ' text-yellow-600',
+          )}
+        >
           {item.title}
         </CardTitle>
       </CardHeader>
-      <CardContent className={cn(item.isMain ? "bg-amber-400" : "")}>
+      <CardContent className={cn(item.isMain ? 'bg-amber-400' : '')}>
         <CardDescription
           className={cn(
-            "font-sans text-lg md:text-base lg:text-[1.33rem] leading-relaxed",
-            item.isMain ? "text-amber-50" : "text-white",
+            'font-sans text-lg md:text-base lg:text-[1.33rem] leading-relaxed',
+            item.isMain ? 'text-amber-50' : 'text-white',
           )}
         >
-          {typeof item.content === "string" ? <p>{item.content}</p> : <RichText data={item.content as unknown as SerializedEditorState<SerializedLexicalNode>} />}
+          {typeof item.content === 'string' ? (
+            <p>{item.content}</p>
+          ) : (
+            <RichText
+              data={item.content as unknown as SerializedEditorState<SerializedLexicalNode>}
+            />
+          )}
         </CardDescription>
+        {item.buttonLabel && item.buttonHref && (
+          <a
+            href={item.buttonHref}
+            className="mt-4 inline-block rounded-md bg-red-700 px-6 py-2 text-white font-semibold hover:bg-red-800 transition-colors"
+          >
+            {item.buttonLabel}
+          </a>
+        )}
       </CardContent>
     </Card>
   )
@@ -164,7 +195,7 @@ function BentoCard({ item, className }: { item: BentoItem; className?: string })
 export default async function BenroGrid() {
   const payload = await getPayload({ config })
   const { docs } = await payload.find({
-    collection: "bentogrid" as CollectionSlug,
+    collection: 'bentogrid' as CollectionSlug,
     limit: 1,
   })
 
@@ -183,10 +214,11 @@ export default async function BenroGrid() {
             gastlichkeit ist unsere philosophie
           </p>
           <p className="mt-20 mb-24 text-4xl headingA md:text-4xl lg:text-[5rem] font-bold text-slate-700 text-balance">
-           unser angebot
+            unser angebot
           </p>
           <p className=" text-center font-sans text-muted-foreground text-lg md:text-2xl lg:text-[2rem] max-w-2xl mx-auto text-pretty">
-            Erleben Sie norddeutsche Gastfreundschaft mit netten Gästen und unvergesslichen Momenten.
+            Erleben Sie norddeutsche Gastfreundschaft mit netten Gästen und unvergesslichen
+            Momenten.
           </p>
         </div>
 
