@@ -93,7 +93,7 @@ const bentoItems: (BentoItem & BentoFieldKeys)[] = [
     imageSrc: '/Assets/Img/Fussball2.png',
     imageAlt: 'Fußball Illustration',
     isMain: true,
-    buttonLabel: 'Reservierung',
+    buttonLabel: 'Reservierung Live-TV',
     buttonHref: '#section-contact',
     titleKey: 'title_fussball',
     contentKey: 'content_fussball',
@@ -182,7 +182,7 @@ function BentoCard({ item, className }: { item: BentoItem; className?: string })
         {item.buttonLabel && item.buttonHref && (
           <a
             href={item.buttonHref}
-            className="mt-4 inline-block rounded-md bg-red-700 px-6 py-2 text-white font-semibold hover:bg-red-800 transition-colors"
+            className="mt-4 inline-block rounded-md bg-red-700 px-6 py-2 text-white font-semibold hover:bg-green-600 transition-colors"
           >
             {item.buttonLabel}
           </a>

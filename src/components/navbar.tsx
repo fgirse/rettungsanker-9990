@@ -139,7 +139,8 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
             <NavigationMenu className="hidden lg:flex">
               <NavigationMenuList className="font-mono">
                 {navigation.map((item, index) => (
-                  <DesktopMenuItem key={`desktop-link-${index}`} item={item} index={index} />
+                <><Image src={Bulleye} alt="Bulleye" width={80} height={80} />
+                <DesktopMenuItem key={`desktop-link-${index}`} item={item} index={index} /></>
                 ))}
               </NavigationMenuList>
             </NavigationMenu>
@@ -217,7 +218,7 @@ const MenuSubLink = ({ link }: MenuSubLinkProps) => {
           )}
           <div className="hover:bg-yellow-600 flex flex-col gap-1.5">
             <div className="flex flex-row items-center gap-x-3">
-              <Image src={Bulleye} alt="Bullauge" width={20} height={20} />
+              <Image src={Bulleye} alt="Bullauge" width={60} height={60} />
               <h3 className="text-xl font-sans leading-none text-foreground ">{link.label}</h3>
             </div>
             <p className="text-sm font-sans leading-[1.2] text-muted-foreground/80">
