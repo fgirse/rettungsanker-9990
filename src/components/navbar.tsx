@@ -139,8 +139,10 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
             <NavigationMenu className="hidden lg:flex">
               <NavigationMenuList className="font-mono">
                 {navigation.map((item, index) => (
-                <><Image src={Bulleye} alt="Bulleye" width={80} height={80} />
-                <DesktopMenuItem key={`desktop-link-${index}`} item={item} index={index} /></>
+                  <Fragment key={`desktop-link-${index}`}>
+                    <Image src={Bulleye} alt="Bulleye" width={80} height={80} />
+                    <DesktopMenuItem item={item} index={index} />
+                  </Fragment>
                 ))}
               </NavigationMenuList>
             </NavigationMenu>
