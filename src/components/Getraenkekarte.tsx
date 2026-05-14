@@ -654,118 +654,121 @@ export default function GetraenkekarteComponent({ items }: { items: MenuItem[] }
 
       {/* ── Category Sections ─────────────────────────────────────────────────── */}
       <div className="bg-slate-950">
-        {CATEGORIES.map((cat, catIndex) => {
-          const catItems = byCategory[cat.id] ?? []
-          const { Illustration } = cat
-          const isEven = catIndex % 2 === 0
+        {Array.from({ length: Math.ceil(CATEGORIES.length / 2) }, (_, i) =>
+          CATEGORIES.slice(i * 2, i * 2 + 2),
+        ).map((pair, pairIndex) => (
+          <div
+            key={pairIndex}
+            className="md:grid md:grid-cols-2 md:divide-x md:divide-white/5 border-b border-white/5"
+          >
+            {pair.map((cat, catIndexInPair) => {
+              const catItems = byCategory[cat.id] ?? []
+              const { Illustration } = cat
 
-          return (
-            <section
-              key={cat.id}
-              id={`cat-${cat.id}`}
-              ref={(el) => {
-                sectionRefs.current[cat.id] = el
-              }}
-              className={`relative overflow-hidden ${cat.sectionBg} border-b border-white/5`}
-            >
-              {/* Subtle diagonal pattern overlay */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{ background: cat.headerPattern }}
-              />
-
-              <div className="relative container mx-auto px-4 py-14 lg:py-20">
-                {/* Section header */}
-                <div
-                  className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 mb-12`}
+              return (
+                <section
+                  key={cat.id}
+                  id={`cat-${cat.id}`}
+                  ref={(el) => {
+                    sectionRefs.current[cat.id] = el
+                  }}
+                  className={`relative overflow-hidden ${cat.sectionBg}`}
                 >
-                  {/* Illustration circle */}
+                  {/* Subtle diagonal pattern overlay */}
                   <div
-                    className={`shrink-0 w-36 h-36 lg:w-44 lg:h-44 rounded-full flex items-center justify-center ${cat.illustrationColor} border-2 ${cat.borderColor} bg-black/20 shadow-2xl ${cat.rotation}`}
-                    style={{ filter: 'drop-shadow(0 0 24px currentColor)' }}
-                  >
-                    <Illustration className="w-20 h-20 lg:w-28 lg:h-28" />
-                  </div>
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ background: cat.headerPattern }}
+                  />
 
-                  {/* Title block */}
-                  <div className={`text-center ${isEven ? 'md:text-left' : 'md:text-right'}`}>
-                    <div
-                      className={`inline-block text-xs tracking-widest uppercase mb-2 ${cat.badgeClass} px-3 py-1 rounded-full`}
-                    >
-                      {cat.emoji} Unsere Auswahl
-                    </div>
-                    <h2
-                      className={`text-4xl md:text-5xl lg:text-6xl font-bold ${cat.colorClass} leading-tight`}
-                    >
-                      {cat.label}
-                    </h2>
-                    <p className="text-gray-400 mt-2 text-lg italic">{cat.tagline}</p>
-                  </div>
-                </div>
-
-                {/* Items */}
-                {catItems.length === 0 ? (
-                  <div className="text-center py-16">
-                    <p className="text-gray-600 text-xl italic">
-                      Demnächst verfügbar — schau bald wieder vorbei! {cat.emoji}
-                    </p>
-                  </div>
-                ) : (
-                  <div className="max-w-3xl mx-auto space-y-3">
-                    {catItems.map((item, i) => (
+                  <div className="relative px-4 py-14 md:py-6">
+                    {/* Section header */}
+                    <div className="flex flex-col md:flex-row items-center gap-4 mb-6 md:mb-4">
+                      {/* Illustration circle */}
                       <div
-                        key={item.id}
-                        className={`group relative flex items-start gap-4 p-4 md:p-5 rounded-xl border ${cat.borderColor} bg-black/20 hover:bg-black/35 transition-all duration-200 hover:-translate-y-0.5`}
-                        style={{ animationDelay: `${i * 50}ms` }}
+                        className={`shrink-0 w-36 h-36 md:w-20 md:h-20 rounded-full flex items-center justify-center ${cat.illustrationColor} border-2 ${cat.borderColor} bg-black/20 shadow-2xl ${cat.rotation}`}
+                        style={{ filter: 'drop-shadow(0 0 24px currentColor)' }}
                       >
-                        {/* Left dot / index */}
-                        <div
-                          className={`shrink-0 w-2 h-2 rounded-full mt-2 ${cat.dotColor} opacity-70`}
-                        />
-
-                        {/* Content */}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                            <h3 className="text-lg md:text-xl font-bold text-white leading-tight">
-                              {item.artikel}
-                            </h3>
-                            {item.volumen && (
-                              <span
-                                className={`text-xs px-2 py-0.5 rounded-full font-medium ${cat.badgeClass}`}
-                              >
-                                {item.volumen}
-                              </span>
-                            )}
-                          </div>
-                          {item.beschreibung && (
-                            <p className="text-gray-400 text-sm mt-1 leading-relaxed italic">
-                              {item.beschreibung}
-                            </p>
-                          )}
-                        </div>
-
-                        {/* Price */}
-                        <div className="shrink-0 text-right">
-                          <div
-                            className={`text-2xl md:text-3xl font-bold ${cat.priceColor} leading-none`}
-                          >
-                            {item.preis}
-                          </div>
-                          <div className="text-gray-500 text-xs mt-0.5">€</div>
-                        </div>
-
-                        {/* Hover accent line */}
-                        <div
-                          className={`absolute inset-y-0 left-0 w-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${cat.dotColor}`}
-                        />
+                        <Illustration className="w-20 h-20 md:w-12 md:h-12" />
                       </div>
-                    ))}
+
+                      {/* Title block */}
+                      <div className="text-center md:text-left">
+                        <h2
+                          className={`text-4xl md:text-2xl lg:text-3xl font-bold ${cat.colorClass} leading-tight`}
+                        >
+                          {cat.label}
+                        </h2>
+                        <p className="text-gray-400 mt-1 text-lg md:text-xs italic">
+                          {cat.tagline}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Items */}
+                    {catItems.length === 0 ? (
+                      <div className="text-center py-10">
+                        <p className="text-gray-600 text-lg italic">
+                          Demnächst verfügbar — schau bald wieder vorbei! {cat.emoji}
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="space-y-3 md:space-y-1">
+                        {catItems.map((item, i) => (
+                          <div
+                            key={item.id}
+                            className={`group relative flex items-start gap-3 p-4 md:p-2.5 rounded-xl border ${cat.borderColor} bg-black/20 hover:bg-black/35 transition-all duration-200 hover:-translate-y-0.5`}
+                            style={{ animationDelay: `${i * 50}ms` }}
+                          >
+                            {/* Left dot */}
+                            <div
+                              className={`shrink-0 w-2 h-2 rounded-full mt-2 ${cat.dotColor} opacity-70`}
+                            />
+
+                            {/* Content */}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                                <h3 className="text-lg md:text-sm font-bold text-white leading-tight">
+                                  {item.artikel}
+                                </h3>
+                                {item.volumen && (
+                                  <span
+                                    className={`text-xs px-2 py-0.5 rounded-full font-medium ${cat.badgeClass}`}
+                                  >
+                                    {item.volumen}
+                                  </span>
+                                )}
+                              </div>
+                              {item.beschreibung && (
+                                <p className="text-gray-400 text-sm md:text-xs mt-1 md:mt-0 leading-relaxed italic">
+                                  {item.beschreibung}
+                                </p>
+                              )}
+                            </div>
+
+                            {/* Price */}
+                            <div className="shrink-0 text-right">
+                              <div
+                                className={`text-2xl md:text-base font-bold ${cat.priceColor} leading-none`}
+                              >
+                                {item.preis}
+                              </div>
+                              <div className="text-gray-500 text-xs mt-0.5">€</div>
+                            </div>
+
+                            {/* Hover accent line */}
+                            <div
+                              className={`absolute inset-y-0 left-0 w-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${cat.dotColor}`}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            </section>
-          )
-        })}
+                </section>
+              )
+            })}
+          </div>
+        ))}
       </div>
 
       {/* ── Footer Note ───────────────────────────────────────────────────────── */}
