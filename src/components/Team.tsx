@@ -47,7 +47,7 @@ const people = [
 
 export default function Team() {
   return (
-    <div id="section-team" className="bg-gradient to b from[#1b252d] py-24 sm:py-32">
+    <div id="section-team" className="bg-gradient to b from-gray-900  to #383928 py-24 sm:py-32">
       <div className="flex flex-col justify-between mx-auto max-w-9xl lg:px-8">
         <div className="flex flex-col items-center justify-center">
           <p className="text-[12vw] md:text-[10vw] headingA tracking-tight lg:text-[7.0rem] text-yellow-500 sm:text-4xl">
