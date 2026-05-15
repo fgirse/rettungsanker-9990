@@ -25,6 +25,7 @@ export const Getraenkekarte: CollectionConfig = {
         { label: 'Flaschenpost', value: 'biere_in_flaschen' },
         { label: 'Weine', value: 'weine' },
         { label: 'Cocktails & Longdrinks', value: 'cocktails-longdrinks' },
+        { label: 'Kurze & Brände', value: 'kurze-brände' },
         { label: 'Softdrinks', value: 'softdrinks' },
         { label: 'Kaffee & Tee', value: 'kaffee-tee' },
         { label: 'Snacks', value: 'snacks' },

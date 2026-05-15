@@ -385,6 +385,7 @@ export interface Getraenkekarte {
     | 'biere_in_flaschen'
     | 'weine'
     | 'cocktails-longdrinks'
+    | 'kurze-brände'
     | 'softdrinks'
     | 'kaffee-tee'
     | 'snacks';
