@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Image, { StaticImageData } from 'next/image'
 
 import img01 from '../../public/Assets/Img/01_fassbier.png'
@@ -11,6 +11,8 @@ import img05 from '../../public/Assets/Img/05_kurze_braende.png'
 import img06 from '../../public/Assets/Img/06_softdrinks.png'
 import img07 from '../../public/Assets/Img/07_kaffee_tee.png'
 import img08 from '../../public/Assets/Img/08_snacks.png'
+
+import LogoNeu from '../../public/Assets/Img/LogoNeu.png'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -159,11 +161,7 @@ const CATEGORIES: CategoryDef[] = [
 
 // ── Sticky nav with active highlight ─────────────────────────────────────────
 
-function StickyNav({ activeId }: { activeId: string }) {
-  const scrollTo = (id: string) => {
-    document.getElementById(`cat-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
+function StickyNav({ activeId, onSelect }: { activeId: string; onSelect: (id: string) => void }) {
   return (
     <nav className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-white/8 shadow-2xl">
       <div className="max-w-7xl mx-auto px-3">
@@ -173,7 +171,7 @@ function StickyNav({ activeId }: { activeId: string }) {
             return (
               <button
                 key={cat.id}
-                onClick={() => scrollTo(cat.id)}
+                onClick={() => onSelect(cat.id)}
                 className={`
                   flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs whitespace-nowrap
                   transition-all duration-200 shrink-0 cursor-pointer font-medium
@@ -323,17 +321,13 @@ function CategorySection({
 
 // ── Nav grid (hero) ───────────────────────────────────────────────────────────
 
-function CategoryNavGrid() {
-  const scrollTo = (id: string) => {
-    document.getElementById(`cat-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
+function CategoryNavGrid({ onSelect }: { onSelect: (id: string) => void }) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 max-w-7xl mx-auto px-4 pb-10">
       {CATEGORIES.map((cat) => (
         <button
           key={cat.id}
-          onClick={() => scrollTo(cat.id)}
+          onClick={() => onSelect(cat.id)}
           className={`
             group flex flex-col items-center gap-2 p-3 rounded-2xl cursor-pointer
             border ${cat.border} bg-white/4 hover:bg-white/8
@@ -368,7 +362,8 @@ function CategoryNavGrid() {
 
 export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
   const [activeId, setActiveId] = useState<string>(CATEGORIES[0].id)
-  const sectionRefs = useRef<Record<string, HTMLElement | null>>({})
+
+  const activeCat = CATEGORIES.find((c) => c.id === activeId)!
 
   // Group items by category, sorted by sortierung
   const byCategory = React.useMemo(
@@ -382,29 +377,18 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
     [items],
   )
 
-  // IntersectionObserver to update active nav item while scrolling
-  useEffect(() => {
-    const observers: IntersectionObserver[] = []
-
-    CATEGORIES.forEach((cat) => {
-      const el = sectionRefs.current[cat.id]
-      if (!el) return
-
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveId(cat.id)
-        },
-        { rootMargin: '-40% 0px -55% 0px', threshold: 0 },
-      )
-      obs.observe(el)
-      observers.push(obs)
-    })
-
-    return () => observers.forEach((o) => o.disconnect())
-  }, [])
+  const handleSelect = (id: string) => {
+    setActiveId(id)
+    // scroll to the section top after render
+    setTimeout(() => {
+      document
+        .getElementById('getraenkekarte-section')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 0)
+  }
 
   return (
-    <div id="section-getraenkekarte" className="bg-slate-950 text-white">
+    <div id="section-getraenkekarte" className="bg-slate-950 text-white font-sans">
       {/* ── Hero header ──────────────────────────────────────────────────────── */}
       <div className="relative overflow-hidden bg-slate-950 pt-16 pb-10">
         {/* subtle grid */}
@@ -416,8 +400,8 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
             backgroundSize: '40px 40px',
           }}
         />
-        <div className="relative max-w-7xl mx-auto px-4 text-center mb-10">
-          <p className="text-sanstext-xs tracking-widest uppercase text-slate-500 mb-3">
+        {/* <div className="relative max-w-7xl mx-auto px-4 text-center mb-10">
+          <p className="text-xs tracking-widest uppercase text-slate-500 mb-3">
             Rettungsanker Freiburg
           </p>
           <h1 className="headingA text-5xl sm:text-7xl lg:text-8xl font-black leading-none mb-4 bg-linear-to-br from-white via-yellow-400 to-amber-500 bg-clip-text text-transparent">
@@ -426,26 +410,78 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
           <p className="text-slate-400 text-base md:text-lg max-w-md mx-auto">
             Was darf&apos;s sein? Wir haben für jeden Durst das Richtige.
           </p>
-        </div>
+        </div>*/}
+        <header className="relative overflow-hidden pt-10 pb-8 px-4">
+          {/* Background glow */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(ellipse 80% 60% at 50% -10%, oklch(0.78 0.18 75 / 0.12) 0%, transparent 70%)',
+            }}
+          />
+          <div className="max-w-4xl mx-auto text-center relative z-10">
+            {/* Anchor + Logo row */}
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <Image
+                src={LogoNeu}
+                alt="Logo Neu"
+                className="w-7 h-7"
+                style={{ color: 'oklch(0.78 0.18 75)' }}
+              />
+              <span
+                className="font-oswald text-sm tracking-[0.25em] uppercase font-sans"
+                style={{ color: 'oklch(0.6 0.02 80)' }}
+              >
+                Rettungsanker Freiburg
+              </span>
+              <Image
+                src={LogoNeu}
+                alt="Logo Neu"
+                className="w-7 h-7"
+                style={{ color: 'oklch(0.78 0.18 75)' }}
+              />
+            </div>
+
+            {/* Main title */}
+            <h1
+              className="font-bangers text-gold-shimmer headingA text-yellow-600"
+              style={{ fontSize: 'clamp(3rem, 10vw, 6rem)', lineHeight: 1.05 }}
+            >
+              getränkekarte
+            </h1>
+
+            {/* Subtitle */}
+            <p
+              className="font-body mt-2 text-base md:text-lg font-sans"
+              style={{ color: 'oklch(0.6 0.02 80)' }}
+            >
+              Was darf es sein? Wir haben für jeden Durst das Richtige.
+            </p>
+
+            {/* Gold divider */}
+            <div className="gold-divider mt-5 max-w-xs mx-auto">
+              <Image src="/Assets/Svg/ankerIcon.svg" alt="anchor" width={16} height={16} className="shrink-0" />
+            </div>
+          </div>
+        </header>
 
         {/* Category navigation grid */}
-        <CategoryNavGrid />
+        <CategoryNavGrid onSelect={handleSelect} />
       </div>
 
       {/* ── Sticky nav bar ───────────────────────────────────────────────────── */}
-      <StickyNav activeId={activeId} />
+      <StickyNav activeId={activeId} onSelect={handleSelect} />
 
-      {/* ── Sections ─────────────────────────────────────────────────────────── */}
-      {CATEGORIES.map((cat) => (
+      {/* ── Active section only ───────────────────────────────────────────────── */}
+      <div id="getraenkekarte-section">
         <CategorySection
-          key={cat.id}
-          cat={cat}
-          items={byCategory[cat.id] ?? []}
-          sectionRef={(el) => {
-            sectionRefs.current[cat.id] = el
-          }}
+          key={activeId}
+          cat={activeCat}
+          items={byCategory[activeId] ?? []}
+          sectionRef={() => {}}
         />
-      ))}
+      </div>
 
       {/* ── Footer ───────────────────────────────────────────────────────────── */}
       <div className="bg-slate-950 py-10 text-center border-t border-white/5">

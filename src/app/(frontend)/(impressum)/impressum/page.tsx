@@ -170,10 +170,10 @@ const Impressum = () => {
                     E-Mail
                   </span>
                   <a
-                    href="mailto:info@rettungsanker-freiburg.de"
+                    href="mailto: rettungsanker-freiburg@gmx.de"
                     className="hover:text-yellow-400 transition-colors duration-200 break-all"
                   >
-                    info@rettungsanker-freiburg.de
+                    rettungsanker-freiburg@gmx.de
                   </a>
                 </div>
                 <Separator.Root

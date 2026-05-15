@@ -345,6 +345,21 @@ body {
   font-weight: 800;
 }
 
+/* ── Gold divider ── */
+  .gold-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--gold);
+  }
+  .gold-divider::before,
+  .gold-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, oklch(0.78 0.18 75 / 0.6), transparent);
+  }
+
 .shape-lighthouse {
   shape-margin: 80px;
   float: left;
