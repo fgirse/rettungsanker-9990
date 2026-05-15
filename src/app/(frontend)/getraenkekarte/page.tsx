@@ -1,6 +1,6 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import GetraenkekarteComponent, { type MenuItem, type Kategorie } from '@/components/Getraenkekarte'
+import GetraenkekarteComponent, { type MenuItem, type Kategorie } from '@/components/GetraenkekarteNew'
 
 export const dynamic = 'force-dynamic'
 
