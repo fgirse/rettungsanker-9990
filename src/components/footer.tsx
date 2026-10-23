@@ -93,13 +93,14 @@ const Footer12 = ({ className }: Footer12Props) => {
         <div className="text-center text-[clamp(1.5rem,10vw,10rem)] headingA select-none pointer-events-none leading-none bg-linear-to-br from-yellow-700 to-yellow-500 bg-clip-text text-transparent opacity-70 tracking-tighter">
           RETTUNGSANKER
         </div>
+        {/* Links ausgerichtet mit Abstand in vw – die frühere Verschiebung per right-* schob den Leuchtturm auf schmalen Handys über den Rand */}
         <Image
           src={Lighthouse}
           alt="Lighthouse"
           width={50}
           height={50}
           priority
-          className="mt-16 relative right-36 z-10 -mb-8 w-20 md:w-32 md:-mb-12 md:right-60 lg:w-40 lg:-mb-32 lg:right-[40vw]"
+          className="mt-16 self-start ml-[4vw] relative z-10 -mb-8 w-20 md:w-32 md:-mb-12 lg:w-40 lg:-mb-32"
         />
         <div className="w-full">
           <Waves />
@@ -108,7 +109,7 @@ const Footer12 = ({ className }: Footer12Props) => {
       <div className="container flex flex-col items-center justify-center gap-4 md:h-24 md:flex-row">
         <p className="text-center text-sm leading-loose text-muted-foreground">
           &copy; {year || '2024'}{' '}
-          <span className="uppercase font-black text-lime-400">medicusdesing</span> Basel 🇨🇭 All
+          <span className="uppercase font-black text-lime-400">medicusdesign</span> Basel 🇨🇭 All
           rights reserved.
         </p>
       </div>
