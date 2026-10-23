@@ -102,7 +102,7 @@ const bentoItems: (BentoItem & BentoFieldKeys)[] = [
     id: 'party',
     title: 'party & events',
     content:
-      'Der Rettungsanker ist die ideale Location für Ihren privaten oder Business Event. Im Rahmen einer "gesckossenen Gesellschaft" stehen Ihnen die Räumlichkeiten des Rettungsankers zur Verfügung. Auf Wunsch Catering durch unseren Kooperationspartner möglich ! Sprechen Sie uns an oder kontaktieren Sie uns per e.mail.',
+      'Der Rettungsanker ist die ideale Location für Ihren privaten oder Business Event. Im Rahmen einer "geschlossenen Gesellschaft" stehen Ihnen die Räumlichkeiten des Rettungsankers zur Verfügung. Auf Wunsch Catering durch unseren Kooperationspartner möglich ! Sprechen Sie uns an oder kontaktieren Sie uns per E-Mail.',
     imageSrc: '/Assets/Img/Crowdparty2.png',
     imageAlt: 'Party Crowd in Aquarell-Stil',
     titleKey: 'title_events',
@@ -112,7 +112,7 @@ const bentoItems: (BentoItem & BentoFieldKeys)[] = [
     id: 'albers',
     title: 'hans albers',
     content:
-      " Hans Phillip August Albers (* 22.September 1891 in Hamburg , 24. Juli 1960 in Berg, Bayern) war ein deutscher Schauspieler und Sänger, der als 'blonder Hans' Volkssidol wurde. Zu den bekanntesten Spielfilmen in denen er mitwirkte gehören 'der Mann, der Sherlock Holmes war' (1937), 'Münchhausen' (1943), 'die grosse Freiheit Nr.7' (1943) sowie 'Auf fer Reeperbahn Nachts um halb eins'",
+      " Hans Phillip August Albers (* 22.September 1891 in Hamburg , 24. Juli 1960 in Berg, Bayern) war ein deutscher Schauspieler und Sänger, der als 'blonder Hans' Volksidol wurde. Zu den bekanntesten Spielfilmen in denen er mitwirkte gehören 'der Mann, der Sherlock Holmes war' (1937), 'Münchhausen' (1943), 'die grosse Freiheit Nr.7' (1943) sowie 'Auf der Reeperbahn Nachts um halb eins'",
     imageSrc: '/Assets/Img/Albers_Illu_white.png',
     imageAlt: 'Hans Albers Illustration als Seemann',
     titleKey: 'title_albers',
@@ -122,7 +122,7 @@ const bentoItems: (BentoItem & BentoFieldKeys)[] = [
     id: 'logoNeu',
     title: 'neues logo',
     content:
-      ' Unser neues Logo symbolisiert die Verbindung von Tradition und Moderne. Das alte Rettungsanker Logo ist im oberen Drittel erhalten geblieben. Das mittlere Drittel beschreibt den Rettunganker als Treffpunkt für Jung und Alt. Das untere Drittel. zeigt eine Shiluette der Stadt Freiburg Wir freuen uns, Sie unter unserem neuen Zeichen willkommen zu heißen!',
+      ' Unser neues Logo symbolisiert die Verbindung von Tradition und Moderne. Das alte Rettungsanker Logo ist im oberen Drittel erhalten geblieben. Das mittlere Drittel beschreibt den Rettungsanker als Treffpunkt für Jung und Alt. Das untere Drittel zeigt eine Silhouette der Stadt Freiburg. Wir freuen uns, Sie unter unserem neuen Zeichen willkommen zu heißen!',
     imageSrc: '/Assets/Img/LogoNeu.png',
     imageAlt: 'Neues Logo Illustration',
     titleKey: 'title_logoNeu',

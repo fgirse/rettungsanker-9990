@@ -73,14 +73,14 @@ function resolveErrorMessage(status: number, payload: unknown): string {
   }
 
   if (status === 503) {
-    return 'Das Kontaktformular ist im Moment nicht verfuegbar. Bitte versuche es spaeter erneut.'
+    return 'Das Kontaktformular ist im Moment nicht verfügbar. Bitte versuche es später erneut.'
   }
 
   if (serverMessage) {
     const normalizedMessage = serverMessage.toLowerCase()
 
     if (normalizedMessage.includes('captcha') || normalizedMessage.includes('turnstile')) {
-      return 'Die Captcha-Pruefung ist fehlgeschlagen oder abgelaufen. Bitte bestaetige sie erneut.'
+      return 'Die Captcha-Prüfung ist fehlgeschlagen oder abgelaufen. Bitte bestätige sie erneut.'
     }
   }
 
@@ -99,8 +99,8 @@ function getErrorVariant(message: string): 'captcha' | 'rate-limit' | 'unavailab
   }
 
   if (
-    normalizedMessage.includes('nicht verfuegbar') ||
-    normalizedMessage.includes('spaeter erneut')
+    normalizedMessage.includes('nicht verfügbar') ||
+    normalizedMessage.includes('später erneut')
   ) {
     return 'unavailable'
   }
@@ -136,16 +136,16 @@ export default function ContactForm() {
           : AlertTriangle
   const statusTitle =
     errorVariant === 'captcha'
-      ? 'Captcha erneut bestaetigen'
+      ? 'Captcha erneut bestätigen'
       : errorVariant === 'rate-limit'
         ? 'Kurz warten und erneut senden'
         : errorVariant === 'unavailable'
-          ? 'Formular temporaer nicht verfuegbar'
+          ? 'Formular temporär nicht verfügbar'
           : 'Senden fehlgeschlagen'
 
   useEffect(() => {
     if (!turnstileSiteKey) {
-      setErrorMessage('Captcha ist nicht konfiguriert. Bitte spaeter erneut versuchen.')
+      setErrorMessage('Captcha ist nicht konfiguriert. Bitte später erneut versuchen.')
     }
   }, [turnstileSiteKey])
 
@@ -267,7 +267,7 @@ export default function ContactForm() {
     event.preventDefault()
 
     if (!formData.turnstileToken) {
-      setErrorMessage('Bitte bestaetige zuerst das Captcha.')
+      setErrorMessage('Bitte bestätige zuerst das Captcha.')
       return
     }
 
@@ -298,7 +298,7 @@ export default function ContactForm() {
       })
       setSubmitProgress(100)
       resetTurnstile()
-      setSuccessMessage('Nachricht gesendet. Wir melden uns so schnell wie moeglich bei dir.')
+      setSuccessMessage('Nachricht gesendet. Wir melden uns so schnell wie möglich bei dir.')
     } catch (error) {
       const message =
         error instanceof Error ? error.message : 'Ein unerwarteter Fehler ist aufgetreten.'
@@ -328,7 +328,7 @@ export default function ContactForm() {
               />
             </div>
             <p className="font-sans text-xs tracking-wide text-yellow-300/90">
-              Nachricht wird sicher uebermittelt ... {Math.round(submitProgress)}%
+              Nachricht wird sicher übermittelt ... {Math.round(submitProgress)}%
             </p>
           </div>
         ) : null}
@@ -376,7 +376,7 @@ export default function ContactForm() {
               type="tel"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="Optional fuer Rueckfragen"
+              placeholder="Optional für Rückfragen"
               className="h-11 border-zinc-700 bg-zinc-900/80 font-sans text-white placeholder:text-zinc-500"
             />
           </div>
@@ -506,8 +506,8 @@ export default function ContactForm() {
 
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <p className="font-sans text-sm leading-6 text-zinc-400">
-            Mit dem Absenden bestaetigst du, dass wir deine Anfrage zur Bearbeitung per E-Mail
-            verarbeiten duerfen. Turnstile und serverseitiges Rate-Limiting blockieren Missbrauch.
+            Mit dem Absenden bestätigst du, dass wir deine Anfrage zur Bearbeitung per E-Mail
+            verarbeiten dürfen. Turnstile und serverseitiges Rate-Limiting blockieren Missbrauch.
           </p>
           <Button
             type="submit"

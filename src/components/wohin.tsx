@@ -14,7 +14,7 @@ const Wohin = () => (
       {/* Absatz statt h1: die globale h1-Regel blies den Text sonst auf 42–64px in einer schmalen Spalte auf */}
       <p className="mt-0 mb-[3vh] w-[90vw] max-w-3xl font-sans text-lg leading-snug text-white md:w-[70vw] md:text-2xl lg:w-[50vw] lg:text-3xl">
         Sie finden die genaue Lage unseres Rettungsankers in der Kartenillustration der Altstadt
-        Freiburg oder ganz profesionelle in Open-Street-Map
+        Freiburg oder ganz professionell in Open-Street-Map
       </p>
       <Modale01 />
 
@@ -24,7 +24,7 @@ const Wohin = () => (
         <h1 className="text-orange text-[1.0rem] font-sans">&nbsp; &nbsp; Haltestelle: </h1>
 
         <h1 className="text-[1rem] font-sans"> &nbsp;Holzmarkt&nbsp;</h1>
-        <h1 className=" text-[.0rem] font-sans ">Linie 1, 3 und 5</h1>
+        <h1 className=" text-[1rem] font-sans">Linie 1, 3 und 5</h1>
       </div>
     </div>
   </section>

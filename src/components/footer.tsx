@@ -21,7 +21,7 @@ const Footer12 = ({ className }: Footer12Props) => {
 
   const navigation = [
     { name: 'Ueber uns', href: '/#section-about' },
-    { name: 'Getraenkekarte', href: '/#section-getraenkekarte' },
+    { name: 'Getränkekarte', href: '/#section-getraenkekarte' },
     { name: 'Galerie', href: '/#section-gallery' },
     { name: 'Team', href: '/#section-team' },
     { name: 'Kontakt', href: '/#section-contact' },
