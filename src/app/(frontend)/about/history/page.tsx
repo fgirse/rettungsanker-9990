@@ -25,6 +25,10 @@ const page = () => {
             Video herunterladen
           </a>
         </video>
+        {/* Schriftgröße wächst mit der Fensterbreite, bleibt aber zwischen 1.5rem und 3rem */}
+        <h1 className="mt-8 text-center text-[clamp(1.5rem,5vw,3rem)] font-bold leading-tight text-white">
+          Geschichte des Rettungsankers
+        </h1>
       </div>
     </section>
   )
