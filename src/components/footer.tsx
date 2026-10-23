@@ -90,7 +90,7 @@ const Footer12 = ({ className }: Footer12Props) => {
 
       <div className="mt-5 flex flex-col items-center justify-center">
         <Image src={LogoNeu} alt="Logo" width={128} height={128} priority className="mt-5 mb-12" />
-        <div className="text-center text-[2rem] md:text-[4rem] lg:text-[10rem] headingA select-none pointer-events-none leading-none bg-linear-to-br from-yellow-700 to-yellow-500 bg-clip-text text-transparent opacity-70 tracking-tighter">
+        <div className="text-center text-[clamp(1.5rem,10vw,10rem)] headingA select-none pointer-events-none leading-none bg-linear-to-br from-yellow-700 to-yellow-500 bg-clip-text text-transparent opacity-70 tracking-tighter">
           RETTUNGSANKER
         </div>
         <Image
@@ -101,7 +101,7 @@ const Footer12 = ({ className }: Footer12Props) => {
           priority
           className="mt-16 relative right-36 z-10 -mb-8 w-20 md:w-32 md:-mb-12 md:right-60 lg:w-40 lg:-mb-32 lg:right-[40vw]"
         />
-        <div className="w-screen">
+        <div className="w-full">
           <Waves />
         </div>
       </div>

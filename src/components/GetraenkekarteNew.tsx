@@ -424,10 +424,10 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
               <Image src={LogoNeu} alt="" className="w-7 h-7" />
             </div>
 
-            {/* Main title */}
+            {/* Main title – Mindestgröße so klein, dass die breite Schrift auch auf schmalen Handys ganz sichtbar bleibt */}
             <h1
               className="headingA text-yellow-600"
-              style={{ fontSize: 'clamp(3rem, 10vw, 6rem)', lineHeight: 1.05 }}
+              style={{ fontSize: 'clamp(1.5rem, 9vw, 6rem)', lineHeight: 1.05 }}
             >
               getränkekarte
             </h1>
