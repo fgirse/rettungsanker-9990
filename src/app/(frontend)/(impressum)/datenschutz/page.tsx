@@ -410,8 +410,8 @@ const Datenschutz = () => {
                     key={right.article}
                     className="bg-zinc-800/50 border border-zinc-700/30 rounded-lg p-4 space-y-1.5"
                   >
-                    <div className="flex items-start justify-between gap-2">
-                      <h4 className="text-sm font-semibold text-white leading-tight">
+                    <div className="flex flex-wrap items-start justify-between gap-x-2 gap-y-1">
+                      <h4 className="min-w-0 text-sm font-semibold text-white leading-tight hyphens-auto break-words">
                         {right.title}
                       </h4>
                       <span className="text-xs font-mono text-yellow-500/60 shrink-0 mt-0.5">

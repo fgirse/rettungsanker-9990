@@ -56,7 +56,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const menuItems = mapGlobalToMenuItems(navigation)
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="de" suppressHydrationWarning>
       <body suppressHydrationWarning>
         <Navbar9 navigation={menuItems} />
         <main>{children}</main>

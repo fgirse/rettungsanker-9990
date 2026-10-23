@@ -21,7 +21,7 @@ const sections = [
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="headingB text-xl md:text-2xl text-yellow-400 mb-4 tracking-wide">
+    <h2 className="headingB text-xl md:text-2xl text-yellow-400 mb-4 tracking-wide hyphens-auto break-words">
       {children}
     </h2>
   )
