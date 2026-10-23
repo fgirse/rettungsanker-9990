@@ -140,14 +140,18 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
               <NavigationMenuList className="font-mono">
                 {navigation.map((item, index) => (
                   <Fragment key={`desktop-link-${index}`}>
-                    <Image src={Bulleye} alt="Bulleye" width={80} height={80} className="w-6 md:w-6 lg:w-6 xl:w-20" />
+                    {/* Bullaugen wachsen stufenweise mit, damit die Leiste zwischen Logo und Buttons passt */}
+                    <Image src={Bulleye} alt="" width={80} height={80} className="w-4 xl:w-12 2xl:w-20" />
                     <DesktopMenuItem item={item} index={index} />
                   </Fragment>
                 ))}
               </NavigationMenuList>
             </NavigationMenu>
             <div className="flex items-center gap-4">
-              <GithubStars repoUrl="https://github.com/shadcn/ui" />
+              {/* Zwischen 1024 und 1279 px fehlt der Platz neben dem Desktop-Menü */}
+              <div className="lg:hidden xl:block">
+                <GithubStars repoUrl="https://github.com/shadcn/ui" />
+              </div>
               <Button
                 asChild
                 variant="secondary"
@@ -202,7 +206,7 @@ const DesktopMenuItem = ({ item, index }: DesktopMenuItemProps) => {
     <NavigationMenuItem key={`desktop-menu-item-${index}`} value={`${index}`}>
       <NavigationMenuLink
         href={item.url}
-        className={`${navigationMenuTriggerStyle()} h-fit uppercase bg-stone-800 hover:bg-yellow-600 font-mono text-foreground md:text-[0.55rem] lg:text-[0.75rem]`}
+        className={`${navigationMenuTriggerStyle()} h-fit px-2! uppercase bg-stone-800 hover:bg-yellow-600 font-mono text-foreground md:text-[0.55rem] lg:text-[0.75rem]`}
       >
         {item.title}
       </NavigationMenuLink>
