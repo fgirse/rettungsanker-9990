@@ -26,8 +26,9 @@ const page = () => {
           </a>
         </video>
         {/* Schriftgröße wächst mit der Fensterbreite, bleibt aber zwischen 1.5rem und 2.25rem.
-            #ecc016 ist das Hauptgelb aus dem Logo; Bowlby One SC hat nur einen Schnitt, daher kein font-bold. */}
-        <h1 className="mt-8 text-center font-['Bowlby_One_SC'] text-[clamp(1.5rem,5vw,2.25rem)] leading-tight text-[#ecc016]">
+            #ecc016 ist das Hauptgelb aus dem Logo; Bowlby One SC hat nur einen Schnitt, daher font-normal.
+            Das "!" ist nötig, weil die globale h1-Regel in styles.css sonst Größe, Stärke und Abstände überschreibt. */}
+        <h1 className="mt-8! mb-0! text-center font-['Bowlby_One_SC'] text-[clamp(1.5rem,5vw,2.25rem)]! leading-tight! font-normal! text-[#ecc016]">
           Geschichte des Rettungsankers
         </h1>
       </div>
