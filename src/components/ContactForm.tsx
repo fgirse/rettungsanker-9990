@@ -463,7 +463,7 @@ export default function ContactForm() {
             )}
           />
           <p className="font-sans text-sm text-zinc-400">
-            Cloudflare Turnstile schuetzt dieses Formular vor automatisierten Anfragen.
+            Cloudflare Turnstile schützt dieses Formular vor automatisierten Anfragen.
           </p>
         </div>
 

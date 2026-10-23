@@ -7,7 +7,7 @@ import VAGLogo from '../../public/Assets/Img/VAGLogo.png'
 const Wohin = () => (
   <section
     id="section-wohin"
-    className="mb-[4vh] bg-wohin bg-no-repeat w-full h-[130%] text-center text-yellow-500 flex flex-col items-center justify-between"
+    className="bg-wohin bg-no-repeat w-full h-[130%] text-center text-yellow-500 flex flex-col items-center justify-between"
   >
     <h1 className="mt-[12vh] text-yellow-500 headingA text-[3rem] md:text-[6rem] ">Wohin ?</h1>
     <div className="flex flex-col justify-center items-center">

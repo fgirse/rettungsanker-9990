@@ -20,7 +20,7 @@ const Footer12 = ({ className }: Footer12Props) => {
   }, [])
 
   const navigation = [
-    { name: 'Ueber uns', href: '/#section-about' },
+    { name: 'Über uns', href: '/#section-about' },
     { name: 'Getränkekarte', href: '/#section-getraenkekarte' },
     { name: 'Galerie', href: '/#section-gallery' },
     { name: 'Team', href: '/#section-team' },

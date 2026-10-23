@@ -377,7 +377,8 @@ body {
 
 .bg-wohin {
   background-image:
-    linear-gradient(to bottom, rgba(25, 36, 45, 1), rgba(0, 0, 255, 0), rgba(25, 36, 45, 1)),
+    /* Oben und unten deckend in der Footer-Farbe #1a252d, damit das Bild ohne Kante in den Footer übergeht */
+    linear-gradient(to bottom, #1a252d 0%, rgba(26, 37, 45, 0) 20%, rgba(26, 37, 45, 0) 55%, #1a252d 100%),
     url('/Assets/Img/west-side-story.png');
   background-size: cover;
   background-repeat: no-repeat;
