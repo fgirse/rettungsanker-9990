@@ -136,7 +136,7 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
                 {navigation.map((item, index) => (
                   <Fragment key={`desktop-link-${index}`}>
                     {/* Bullaugen wachsen stufenweise mit, damit die Leiste zwischen Logo und Buttons passt */}
-                    <Image src={Bulleye} alt="" width={80} height={80} className="w-3.5 xl:w-10 2xl:w-20" />
+                    <Image src={Bulleye} alt="" width={80} height={80} className="w-6 xl:w-14 2xl:w-20" />
                     <DesktopMenuItem item={item} index={index} />
                   </Fragment>
                 ))}
