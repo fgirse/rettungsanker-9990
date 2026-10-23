@@ -242,8 +242,8 @@ export default async function BenroGrid() {
           {/* Party & Events */}
           <BentoCard item={items[4]} className="md:col-span-1 lg:col-span-1" />
 
-          {/* Hans Albers */}
-          <BentoCard item={items[5]} className="md:col-span-2 lg:col-span-1" />
+          {/* Hans Albers – im 2-Spalten-Raster neben „Party & Events“, sonst bliebe dort eine Lücke */}
+          <BentoCard item={items[5]} className="md:col-span-1 lg:col-span-1" />
 
           {/* Logo Neu */}
           <BentoCard item={items[6]} className="md:col-span-2 lg:col-span-3" />

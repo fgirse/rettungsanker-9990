@@ -34,7 +34,9 @@ function Hero() {
         </div>
         <HeroAnimatedText />
       </div>
-      <div className="relative z-10 flex flex-col items-center justify-center">
+      {/* Ab Tablet als Sticker abseits des Schriftzugs, damit das gedrehte Band ihn nicht überdeckt:
+          Tablet unten rechts, Desktop rechts neben dem Schriftzug. Auf dem Handy bleibt es darunter. */}
+      <div className="relative z-10 flex flex-col items-center justify-center md:absolute md:right-[4vw] md:bottom-[12vh] lg:right-[2vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2">
         <Angebot />
       </div>
     </section>
