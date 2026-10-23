@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Image, { StaticImageData } from 'next/image'
 
 import img01 from '../../public/Assets/Img/01_fassbier.png'
@@ -13,6 +13,7 @@ import img07 from '../../public/Assets/Img/07_kaffee_tee.png'
 import img08 from '../../public/Assets/Img/08_snacks.png'
 
 import LogoNeu from '../../public/Assets/Img/LogoNeu.png'
+import AnkerIcon from './AnkerIcon'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -60,7 +61,7 @@ const CATEGORIES: CategoryDef[] = [
     tagline: 'Frisch gezapft & nordisch herb',
     image: img01,
     accent: 'text-amber-400',
-    bg: 'bg-gradient-to-br from-amber-950/60 via-yellow-900/30 to-slate-950',
+    bg: 'bg-linear-to-br from-amber-950/60 via-yellow-900/30 to-slate-950',
     border: 'border-amber-500/30',
     dot: 'bg-amber-400',
     badge: 'bg-amber-500/15 text-amber-300 border border-amber-500/25',
@@ -73,7 +74,7 @@ const CATEGORIES: CategoryDef[] = [
     tagline: 'Vielfältig & für jeden Geschmack',
     image: img02,
     accent: 'text-yellow-400',
-    bg: 'bg-gradient-to-br from-yellow-900/60 via-yellow-800/30 to-slate-950',
+    bg: 'bg-linear-to-br from-yellow-900/60 via-yellow-800/30 to-slate-950',
     border: 'border-yellow-500/30',
     dot: 'bg-yellow-400',
     badge: 'bg-yellow-500/15 text-yellow-300 border border-yellow-500/25',
@@ -86,7 +87,7 @@ const CATEGORIES: CategoryDef[] = [
     tagline: 'Regional & handverlesen',
     image: img03,
     accent: 'text-rose-400',
-    bg: 'bg-gradient-to-br from-rose-950/60 via-rose-900/30 to-slate-950',
+    bg: 'bg-linear-to-br from-rose-950/60 via-rose-900/30 to-slate-950',
     border: 'border-rose-500/30',
     dot: 'bg-rose-400',
     badge: 'bg-rose-500/15 text-rose-300 border border-rose-500/25',
@@ -99,7 +100,7 @@ const CATEGORIES: CategoryDef[] = [
     tagline: 'Gemixt mit Liebe & einer Prise Wahnsinn',
     image: img04,
     accent: 'text-fuchsia-400',
-    bg: 'bg-gradient-to-br from-fuchsia-950/60 via-purple-900/30 to-slate-950',
+    bg: 'bg-linear-to-br from-fuchsia-950/60 via-purple-900/30 to-slate-950',
     border: 'border-fuchsia-500/30',
     dot: 'bg-fuchsia-400',
     badge: 'bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/25',
@@ -112,7 +113,7 @@ const CATEGORIES: CategoryDef[] = [
     tagline: 'Elztal · Heinemann · Steiger',
     image: img05,
     accent: 'text-orange-400',
-    bg: 'bg-gradient-to-br from-orange-950/60 via-amber-900/30 to-slate-950',
+    bg: 'bg-linear-to-br from-orange-950/60 via-amber-900/30 to-slate-950',
     border: 'border-orange-500/30',
     dot: 'bg-orange-400',
     badge: 'bg-orange-500/15 text-orange-300 border border-orange-500/25',
@@ -125,7 +126,7 @@ const CATEGORIES: CategoryDef[] = [
     tagline: 'Cool bleiben!',
     image: img06,
     accent: 'text-cyan-400',
-    bg: 'bg-gradient-to-br from-cyan-950/60 via-blue-900/30 to-slate-950',
+    bg: 'bg-linear-to-br from-cyan-950/60 via-blue-900/30 to-slate-950',
     border: 'border-cyan-500/30',
     dot: 'bg-cyan-400',
     badge: 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/25',
@@ -138,7 +139,7 @@ const CATEGORIES: CategoryDef[] = [
     tagline: 'Warm ums Herz',
     image: img07,
     accent: 'text-orange-300',
-    bg: 'bg-gradient-to-br from-stone-900/80 via-amber-950/40 to-slate-950',
+    bg: 'bg-linear-to-br from-stone-900/80 via-amber-950/40 to-slate-950',
     border: 'border-orange-400/30',
     dot: 'bg-orange-300',
     badge: 'bg-orange-400/15 text-orange-200 border border-orange-400/25',
@@ -151,7 +152,7 @@ const CATEGORIES: CategoryDef[] = [
     tagline: 'Klein aber oho',
     image: img08,
     accent: 'text-lime-400',
-    bg: 'bg-gradient-to-br from-lime-950/60 via-green-900/30 to-slate-950',
+    bg: 'bg-linear-to-br from-lime-950/60 via-green-900/30 to-slate-950',
     border: 'border-lime-500/30',
     dot: 'bg-lime-400',
     badge: 'bg-lime-500/15 text-lime-300 border border-lime-500/25',
@@ -161,17 +162,27 @@ const CATEGORIES: CategoryDef[] = [
 
 // ── Sticky nav with active highlight ─────────────────────────────────────────
 
-function StickyNav({ activeId, onSelect }: { activeId: string; onSelect: (id: string) => void }) {
+function StickyNav({
+  activeId,
+  onSelect,
+}: {
+  activeId: Kategorie
+  onSelect: (id: Kategorie) => void
+}) {
   return (
     <nav className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-white/8 shadow-2xl">
       <div className="max-w-7xl mx-auto px-3">
-        <div className="flex overflow-x-auto gap-0.5 py-1.5 scrollbar-none">
+        {/* Tailwind hat keine eingebaute scrollbar-none-Klasse, daher per Arbitrary Property */}
+        <div className="flex overflow-x-auto gap-0.5 py-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {CATEGORIES.map((cat) => {
             const isActive = activeId === cat.id
             return (
               <button
                 key={cat.id}
+                type="button"
                 onClick={() => onSelect(cat.id)}
+                aria-label={cat.label}
+                aria-pressed={isActive}
                 className={`
                   flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs whitespace-nowrap
                   transition-all duration-200 shrink-0 cursor-pointer font-medium
@@ -184,13 +195,13 @@ function StickyNav({ activeId, onSelect }: { activeId: string; onSelect: (id: st
               >
                 <Image
                   src={cat.image}
-                  alt={cat.label}
+                  alt=""
                   width={24}
                   height={24}
                   className="rounded-full object-cover"
                 />
+                {/* Auf Mobile reicht das Bild, der Name kommt ab sm dazu */}
                 <span className="hidden sm:inline">{cat.label}</span>
-                <span className="sm:hidden">{cat.emoji}</span>
               </button>
             )
           })}
@@ -249,19 +260,10 @@ function ItemRow({ item, cat }: { item: MenuItem; cat: CategoryDef }) {
 
 // ── Category section ──────────────────────────────────────────────────────────
 
-function CategorySection({
-  cat,
-  items,
-  sectionRef,
-}: {
-  cat: CategoryDef
-  items: MenuItem[]
-  sectionRef: (el: HTMLElement | null) => void
-}) {
+function CategorySection({ cat, items }: { cat: CategoryDef; items: MenuItem[] }) {
   return (
     <section
       id={`cat-${cat.id}`}
-      ref={sectionRef}
       className={`relative overflow-hidden border-b border-white/5 ${cat.bg}`}
     >
       <div className="max-w-7xl mx-auto px-4 py-10 md:py-14">
@@ -321,19 +323,19 @@ function CategorySection({
 
 // ── Nav grid (hero) ───────────────────────────────────────────────────────────
 
-function CategoryNavGrid({ onSelect }: { onSelect: (id: string) => void }) {
+function CategoryNavGrid({ onSelect }: { onSelect: (id: Kategorie) => void }) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 max-w-7xl mx-auto px-4 pb-10">
       {CATEGORIES.map((cat) => (
         <button
           key={cat.id}
+          type="button"
           onClick={() => onSelect(cat.id)}
           className={`
             group flex flex-col items-center gap-2 p-3 rounded-2xl cursor-pointer
             border ${cat.border} bg-white/4 hover:bg-white/8
             transition-all duration-200 hover:scale-105 hover:shadow-lg
           `}
-          style={{ boxShadow: `0 0 0 0 ${cat.headerGlow}` }}
         >
           <div
             className="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border border-white/10 shadow-lg"
@@ -341,7 +343,7 @@ function CategoryNavGrid({ onSelect }: { onSelect: (id: string) => void }) {
           >
             <Image
               src={cat.image}
-              alt={cat.label}
+              alt=""
               width={80}
               height={80}
               className="w-full h-full object-cover"
@@ -361,14 +363,14 @@ function CategoryNavGrid({ onSelect }: { onSelect: (id: string) => void }) {
 // ── Main component ────────────────────────────────────────────────────────────
 
 export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
-  const [activeId, setActiveId] = useState<string>(CATEGORIES[0].id)
+  const [activeId, setActiveId] = useState<Kategorie>(CATEGORIES[0].id)
 
   const activeCat = CATEGORIES.find((c) => c.id === activeId)!
 
   // Group items by category, sorted by sortierung
-  const byCategory = React.useMemo(
+  const byCategory = useMemo(
     () =>
-      CATEGORIES.reduce<Record<string, MenuItem[]>>((acc, cat) => {
+      CATEGORIES.reduce<Partial<Record<Kategorie, MenuItem[]>>>((acc, cat) => {
         acc[cat.id] = items
           .filter((item) => item.kategorie === cat.id)
           .sort((a, b) => (a.sortierung ?? 99) - (b.sortierung ?? 99))
@@ -377,9 +379,9 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
     [items],
   )
 
-  const handleSelect = (id: string) => {
+  const handleSelect = (id: Kategorie) => {
     setActiveId(id)
-    // scroll to the section top after render
+    // Erst nach dem Rendern der neuen Kategorie zum Abschnitt scrollen
     setTimeout(() => {
       document
         .getElementById('getraenkekarte-section')
@@ -400,17 +402,6 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
             backgroundSize: '40px 40px',
           }}
         />
-        {/* <div className="relative max-w-7xl mx-auto px-4 text-center mb-10">
-          <p className="text-xs tracking-widest uppercase text-slate-500 mb-3">
-            Rettungsanker Freiburg
-          </p>
-          <h1 className="headingA text-5xl sm:text-7xl lg:text-8xl font-black leading-none mb-4 bg-linear-to-br from-white via-yellow-400 to-amber-500 bg-clip-text text-transparent">
-            Getränke&shy;karte
-          </h1>
-          <p className="text-slate-400 text-base md:text-lg max-w-md mx-auto">
-            Was darf&apos;s sein? Wir haben für jeden Durst das Richtige.
-          </p>
-        </div>*/}
         <header className="relative overflow-hidden pt-10 pb-8 px-4">
           {/* Background glow */}
           <div
@@ -423,29 +414,19 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
           <div className="max-w-4xl mx-auto text-center relative z-10">
             {/* Anchor + Logo row */}
             <div className="flex items-center justify-center gap-3 mb-3">
-              <Image
-                src={LogoNeu}
-                alt="Logo Neu"
-                className="w-7 h-7"
-                style={{ color: 'oklch(0.78 0.18 75)' }}
-              />
+              <Image src={LogoNeu} alt="" className="w-7 h-7" />
               <span
-                className="font-oswald text-sm tracking-[0.25em] uppercase font-sans"
+                className="text-sm tracking-[0.25em] uppercase font-sans"
                 style={{ color: 'oklch(0.6 0.02 80)' }}
               >
                 Rettungsanker Freiburg
               </span>
-              <Image
-                src={LogoNeu}
-                alt="Logo Neu"
-                className="w-7 h-7"
-                style={{ color: 'oklch(0.78 0.18 75)' }}
-              />
+              <Image src={LogoNeu} alt="" className="w-7 h-7" />
             </div>
 
             {/* Main title */}
             <h1
-              className="font-bangers text-gold-shimmer headingA text-yellow-600"
+              className="headingA text-yellow-600"
               style={{ fontSize: 'clamp(3rem, 10vw, 6rem)', lineHeight: 1.05 }}
             >
               getränkekarte
@@ -453,7 +434,7 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
 
             {/* Subtitle */}
             <p
-              className="font-body mt-2 text-base md:text-lg font-sans"
+              className="mt-2 text-base md:text-lg font-sans"
               style={{ color: 'oklch(0.6 0.02 80)' }}
             >
               Was darf es sein? Wir haben für jeden Durst das Richtige.
@@ -461,7 +442,7 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
 
             {/* Gold divider */}
             <div className="gold-divider mt-5 max-w-xs mx-auto">
-              <Image src="/Assets/Svg/ankerIcon.svg" alt="anchor" width={16} height={16} className="shrink-0" />
+              <AnkerIcon className="w-4 h-4 shrink-0" />
             </div>
           </div>
         </header>
@@ -474,13 +455,9 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
       <StickyNav activeId={activeId} onSelect={handleSelect} />
 
       {/* ── Active section only ───────────────────────────────────────────────── */}
-      <div id="getraenkekarte-section">
-        <CategorySection
-          key={activeId}
-          cat={activeCat}
-          items={byCategory[activeId] ?? []}
-          sectionRef={() => {}}
-        />
+      {/* scroll-mt verhindert, dass die Sticky-Nav den Abschnittsanfang verdeckt */}
+      <div id="getraenkekarte-section" className="scroll-mt-14">
+        <CategorySection key={activeId} cat={activeCat} items={byCategory[activeId] ?? []} />
       </div>
 
       {/* ── Footer ───────────────────────────────────────────────────────────── */}
