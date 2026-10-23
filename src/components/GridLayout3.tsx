@@ -210,7 +210,9 @@ export default async function BenroGrid() {
     <section className="w-full py-12 md:py-16 lg:py-20 px-4 md:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center gap-y-12 mb-10 md:mb-14">
-          <p className=" text-center text-5xl headingA md:text-7xl lg:text-[6rem] font-bold text-yellow-500 ">
+          {/* Auf schmalen Handys skaliert die Schrift mit der Breite, sonst ragt das längste Wort
+              (nicht umbrechbar) über den Rand und erzeugt eine seitliche Scrollleiste. */}
+          <p className=" text-center text-[clamp(2rem,11vw,3rem)] headingA md:text-7xl lg:text-[6rem] font-bold text-yellow-500 ">
             gastlichkeit ist unsere philosophie
           </p>
           <p className="mt-20 mb-24 text-4xl headingA md:text-4xl lg:text-[5rem] font-bold text-slate-700 text-balance">
