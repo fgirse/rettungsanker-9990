@@ -16,9 +16,9 @@ type BundesligaTeam = {
   goalDiff: number
 }
 
-type CurrentGroup = {
-  groupName: string
-  groupOrderID: number
+type CurrentMatch = {
+  leagueSeason: number
+  group: { groupOrderID: number }
 }
 
 export type FreiburgMarqueeData = {
@@ -31,17 +31,24 @@ export type FreiburgMarqueeData = {
 
 export default async function FreiburgMarquee() {
   let table: BundesligaTeam[] = []
-  let currentGroup: CurrentGroup = { groupName: '', groupOrderID: 0 }
+  let matchday = 0
 
   try {
-    ;[table, currentGroup] = await Promise.all([
-      fetch('https://api.openligadb.de/getbltable/bl1/2025', {
-        next: { revalidate: 1800 },
-      }).then((r) => r.json()),
-      fetch('https://api.openligadb.de/getcurrentgroup/bl1', {
-        next: { revalidate: 1800 },
-      }).then((r) => r.json()),
-    ])
+    // Saison und Spieltag aus den Spielen des aktuellen Spieltags lesen.
+    // Vorher war die Saison fest eingetragen, nach dem Saisonwechsel kam so die alte Tabelle.
+    const matches: CurrentMatch[] = await fetch('https://api.openligadb.de/getmatchdata/bl1', {
+      next: { revalidate: 1800 },
+    }).then((r) => r.json())
+
+    // Ersatzwert: Die Saison beginnt im Juli und heißt nach ihrem Startjahr
+    const now = new Date()
+    const season =
+      matches[0]?.leagueSeason ?? (now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1)
+    matchday = matches[0]?.group.groupOrderID ?? 0
+
+    table = await fetch(`https://api.openligadb.de/getbltable/bl1/${season}`, {
+      next: { revalidate: 1800 },
+    }).then((r) => r.json())
   } catch {
     return null
   }
@@ -51,7 +58,6 @@ export default async function FreiburgMarquee() {
 
   if (!team || rank === 0) return null
 
-  const matchday = currentGroup.groupOrderID
   const data: FreiburgMarqueeData = {
     team,
     rank,
