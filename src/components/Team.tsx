@@ -75,7 +75,8 @@ export default function Team() {
                     src={person.imageUrl}
                     width={224}
                     height={224}
-                    className="size-56 rounded-full outline-1 -outline-offset-1 outline-black/5"
+                    // Kleinere Bilder unterhalb lg, damit Bild und Name in die (halbe) Spaltenbreite passen
+                    className="size-40 sm:size-32 md:size-40 lg:size-56 rounded-full outline-1 -outline-offset-1 outline-black/5"
                   />
                   <div>
                     <p className="text-3xl font-sans tracking-tight text-gray-50">{person.name}</p>
