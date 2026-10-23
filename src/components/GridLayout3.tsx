@@ -211,8 +211,9 @@ export default async function BenroGrid() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center gap-y-12 mb-10 md:mb-14">
           {/* Auf schmalen Handys skaliert die Schrift mit der Breite, sonst ragt das längste Wort
-              (nicht umbrechbar) über den Rand und erzeugt eine seitliche Scrollleiste. */}
-          <p className=" text-center text-[clamp(2rem,11vw,3rem)] headingA md:text-7xl lg:text-[6rem] font-bold text-yellow-500 ">
+              (nicht umbrechbar) über den Rand und erzeugt eine seitliche Scrollleiste.
+              leading-none ersetzt die Zeilenhöhe, die text-5xl vorher mitgebracht hat. */}
+          <p className=" text-center text-[clamp(2rem,11vw,3rem)] leading-none headingA md:text-7xl lg:text-[6rem] font-bold text-yellow-500 ">
             gastlichkeit ist unsere philosophie
           </p>
           <p className="mt-20 mb-24 text-4xl headingA md:text-4xl lg:text-[5rem] font-bold text-slate-700 text-balance">
