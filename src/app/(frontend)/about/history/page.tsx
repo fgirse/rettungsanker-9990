@@ -1,5 +1,5 @@
 // Geschichte-Seite: zeigt den Weltraumflug-Film statt der früheren Timeline.
-// Kein Autoplay und nur preload="metadata", damit das 24 MB große Video erst
+// Kein Autoplay und nur preload="metadata", damit das ca. 31 MB große Video erst
 // beim Abspielen geladen wird. Das Vorschaubild (Szene bei 1:10) ersetzt den fast
 // schwarzen Videoanfang.
 // Die Breite ist zusätzlich durch die Fensterhöhe begrenzt, damit das Video im Querformat
