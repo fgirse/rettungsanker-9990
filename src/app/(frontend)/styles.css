@@ -377,8 +377,17 @@ body {
 
 .bg-wohin {
   background-image:
-    /* Oben und unten deckend in der Footer-Farbe #1a252d, damit das Bild ohne Kante in den Footer übergeht */
-    linear-gradient(to bottom, #1a252d 0%, rgba(26, 37, 45, 0) 20%, rgba(26, 37, 45, 0) 55%, #1a252d 100%),
+    /* Oben und unten deckend in der Footer-Farbe #1a252d, damit das Bild ohne Kante in den Footer übergeht.
+       Mehrere Stufen statt linear: Ein gerader Verlauf bis 100 % lässt am Abschnittsende eine sichtbare Linie stehen. */
+    linear-gradient(
+      to bottom,
+      #1a252d 0%,
+      rgba(26, 37, 45, 0) 20%,
+      rgba(26, 37, 45, 0) 45%,
+      rgba(26, 37, 45, 0.45) 62%,
+      rgba(26, 37, 45, 0.82) 78%,
+      #1a252d 95%
+    ),
     url('/Assets/Img/west-side-story.png');
   background-size: cover;
   background-repeat: no-repeat;

@@ -2,9 +2,10 @@ import ContactForm from '@/components/ContactForm'
 
 export default function ContactSection() {
   return (
+    // Oberste Ebene deckt den gelben Schein am oberen Rand ab, damit er weich einblendet statt an der Kante zu beginnen
     <section
       id="section-contact"
-      className="relative overflow-hidden bg-[radial-gradient(circle_at_top,rgba(234,179,8,0.2),transparent_35%),linear-gradient(180deg,#1b252d_0%,#1c252c_100%)] px-6 py-20 md:px-10 lg:px-16 lg:py-28"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#1b252d_0%,rgba(27,37,45,0)_20%),radial-gradient(circle_at_top,rgba(234,179,8,0.2),transparent_35%),linear-gradient(180deg,#1b252d_0%,#1c252c_100%)] px-6 py-20 md:px-10 lg:px-16 lg:py-28"
     >
       <div className="mx-auto max-w-6xl">
         {/* minmax(0, 1fr) erlaubt der Spalte, schmaler als ihr breitestes Wort zu werden; sonst zieht
