@@ -143,7 +143,8 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
                 ))}
               </NavigationMenuList>
             </NavigationMenu>
-            <div className="flex items-center gap-4">
+            {/* mr-5 spiegelt das ml-5 des Logos, sonst klebt der Button am rechten Rand */}
+            <div className="mr-5 flex items-center gap-4">
               <Button
                 asChild
                 variant="secondary"

@@ -243,11 +243,12 @@ function ItemRow({ item, cat }: { item: MenuItem; cat: CategoryDef }) {
       </div>
 
       {/* price */}
-      <div className="shrink-0 text-right">
+      {/* whitespace-nowrap hält Betrag und € in einer Zeile */}
+      <div className="shrink-0 whitespace-nowrap text-right">
         <span className={`font-bold text-base md:text-lg ${cat.accent} leading-none`}>
           {item.preis}
         </span>
-        <span className="block text-slate-500 text-xs">€</span>
+        <span className="ml-1 text-slate-500 text-xs">€</span>
       </div>
 
       {/* hover left bar */}
