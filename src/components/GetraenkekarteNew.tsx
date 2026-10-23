@@ -3,14 +3,15 @@
 import React, { useMemo, useState } from 'react'
 import Image, { StaticImageData } from 'next/image'
 
-import img01 from '../../public/Assets/Img/01_fassbier.png'
-import img02 from '../../public/Assets/Img/02_flaschenpost.png'
-import img03 from '../../public/Assets/Img/03_weine.png'
-import img04 from '../../public/Assets/Img/04_cocktails_longdrinks.png'
-import img05 from '../../public/Assets/Img/05_kurze_braende.png'
-import img06 from '../../public/Assets/Img/06_softdrinks.png'
-import img07 from '../../public/Assets/Img/07_kaffee_tee.png'
-import img08 from '../../public/Assets/Img/08_snacks.png'
+// Einheitliche, einfarbige Illustrationen von game-icons.net (CC BY 3.0, Namensnennung im Impressum)
+import img01 from '../../public/Assets/Svg/getraenke/01_beer-stein.svg'
+import img02 from '../../public/Assets/Svg/getraenke/02_beer-bottle.svg'
+import img03 from '../../public/Assets/Svg/getraenke/03_wine-bottle.svg'
+import img04 from '../../public/Assets/Svg/getraenke/04_martini.svg'
+import img05 from '../../public/Assets/Svg/getraenke/05_brandy-bottle.svg'
+import img06 from '../../public/Assets/Svg/getraenke/06_soda-bottle.svg'
+import img07 from '../../public/Assets/Svg/getraenke/07_coffee-cup.svg'
+import img08 from '../../public/Assets/Svg/getraenke/08_pretzel.svg'
 
 import LogoNeu from '../../public/Assets/Img/LogoNeu.png'
 import AnkerIcon from './AnkerIcon'
@@ -198,7 +199,7 @@ function StickyNav({
                   alt=""
                   width={24}
                   height={24}
-                  className="rounded-full object-cover"
+                  className="object-contain"
                 />
                 {/* Auf Mobile reicht das Bild, der Name kommt ab sm dazu */}
                 <span className="hidden sm:inline">{cat.label}</span>
@@ -272,7 +273,7 @@ function CategorySection({ cat, items }: { cat: CategoryDef; items: MenuItem[] }
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8">
           {/* Illustration */}
           <div
-            className="shrink-0 w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden border border-white/10 shadow-2xl"
+            className="shrink-0 w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden border border-white/10 bg-[#1a252d] p-5 shadow-2xl"
             style={{ boxShadow: `0 0 40px 0 ${cat.headerGlow}` }}
           >
             <Image
@@ -280,7 +281,7 @@ function CategorySection({ cat, items }: { cat: CategoryDef; items: MenuItem[] }
               alt={cat.label}
               width={160}
               height={160}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
 
@@ -339,7 +340,7 @@ function CategoryNavGrid({ onSelect }: { onSelect: (id: Kategorie) => void }) {
           `}
         >
           <div
-            className="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border border-white/10 shadow-lg"
+            className="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border border-white/10 bg-[#1a252d] p-2.5 shadow-lg"
             style={{ boxShadow: `0 4px 20px 0 ${cat.headerGlow}` }}
           >
             <Image
@@ -347,7 +348,7 @@ function CategoryNavGrid({ onSelect }: { onSelect: (id: Kategorie) => void }) {
               alt=""
               width={80}
               height={80}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
           <span
