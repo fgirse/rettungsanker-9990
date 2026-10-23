@@ -104,7 +104,9 @@ const Impressum = () => {
             </svg>
             Zurück
           </Link>
-          <h1 className="headingA text-5xl md:text-7xl text-white m-0">
+          {/* Gelb statt Weiß, sonst verschwimmt die Schrift mit dem weißen Rand von headingA;
+              font-normal! gegen die globale h1-Fettschrift (Bowlby One hat nur einen Schnitt) */}
+          <h1 className="headingA text-5xl md:text-7xl text-yellow-500 font-normal! m-0">
             Impressum
           </h1>
           <div className="mt-4 w-16 h-1 bg-yellow-400 rounded-full" />

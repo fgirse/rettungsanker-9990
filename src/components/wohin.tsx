@@ -11,10 +11,11 @@ const Wohin = () => (
   >
     <h1 className="mt-[12vh] text-yellow-500 headingA text-[3rem] md:text-[6rem] ">Wohin ?</h1>
     <div className="flex flex-col justify-center items-center">
-      <h1 className="mb-[3vh] text-[0.66rem] text-white md:w-[33vw] font-sans md:text-sm">
+      {/* Absatz statt h1: die globale h1-Regel blies den Text sonst auf 42–64px in einer schmalen Spalte auf */}
+      <p className="mt-0 mb-[3vh] w-[90vw] max-w-3xl font-sans text-lg leading-snug text-white md:w-[70vw] md:text-2xl lg:w-[50vw] lg:text-3xl">
         Sie finden die genaue Lage unseres Rettungsankers in der Kartenillustration der Altstadt
         Freiburg oder ganz profesionelle in Open-Street-Map
-      </h1>
+      </p>
       <Modale01 />
 
       <Modale02 />
