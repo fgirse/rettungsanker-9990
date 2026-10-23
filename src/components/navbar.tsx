@@ -122,12 +122,13 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
               href={LOGO.url}
               className="flex max-h-12 items-center gap-2 text-lg font-semibold tracking-tighter"
             >
+              {/* Feste Breite auf kleinen Bildschirmen, sonst wächst das Logo auf 150 px und ragt aus der Kopfzeile */}
               <Image
                 src={LOGO.src}
                 alt={LOGO.alt}
                 width={150}
                 height={48}
-                className="inline-block lg:w-16 ml-5"
+                className="inline-block w-22 lg:w-16 ml-5"
               />
               <span className="hidden text-foreground md:inline-block">{LOGO.title}</span>
             </a>
