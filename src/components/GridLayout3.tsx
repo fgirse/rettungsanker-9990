@@ -216,7 +216,7 @@ export default async function BenroGrid() {
           <p className=" text-center text-[clamp(2rem,11vw,3rem)] leading-none headingA md:text-7xl lg:text-[6rem] font-bold text-yellow-500 ">
             gastlichkeit ist unsere philosophie
           </p>
-          <p className="mt-20 mb-24 text-4xl headingA md:text-4xl lg:text-[5rem] font-bold text-yellow-500 text-balance">
+          <p className="mt-20 mb-24 text-4xl headingA md:text-4xl lg:text-[5rem] font-bold text-slate-700 text-balance">
             unser angebot
           </p>
           <p className=" text-center font-sans text-muted-foreground text-lg md:text-2xl lg:text-[2rem] max-w-2xl mx-auto text-pretty">
