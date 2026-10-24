@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import FreiburgMarquee from './FreiburgMarquee'
 
 const LiveTV = () => {
@@ -20,12 +21,12 @@ const LiveTV = () => {
               Turniere von UEFA EM- und FIFA WM Turnieren.
             </p>
 
-            <a
+            <Link
               href="/#section-contact"
               className="mt-6 inline-flex items-center justify-center rounded-lg bg-yellow-500 px-6 py-3 font-sans font-semibold text-white transition hover:opacity-90 hover:border-8 hover:border-gray-100"
             >
               Reservierung Live TV
-            </a>
+            </Link>
           </div>
         </div>
       </div>

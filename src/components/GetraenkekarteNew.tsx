@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from 'react'
 import Image, { StaticImageData } from 'next/image'
+import Link from 'next/link'
 
 // Einheitliche, einfarbige Illustrationen von game-icons.net (CC BY 3.0, Namensnennung im Impressum)
 import img01 from '../../public/Assets/Svg/getraenke/01_beer-stein.svg'
@@ -486,12 +487,12 @@ export function KategorieSeite({ kategorie, items }: { kategorie: Kategorie; ite
     <div className="bg-slate-950 text-white font-sans min-h-screen">
       <CategorySection cat={cat} items={sorted} />
       <div className="bg-slate-950 py-10 text-center border-t border-white/5">
-        <a
+        <Link
           href="/getraenkekarte"
           className="inline-flex items-center justify-center rounded-lg bg-yellow-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-yellow-400"
         >
           Zur ganzen Getränkekarte
-        </a>
+        </Link>
         <p className="text-slate-500 text-sm mt-6">Alle Preise inkl. MwSt.</p>
       </div>
     </div>
