@@ -116,7 +116,8 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
           className,
         )}
       >
-        <div className="container h-28">
+        {/* mx-auto zentriert: Tailwind 4 macht das bei container nicht mehr, ab 96rem (1728px) klebte die Leiste sonst links */}
+        <div className="container mx-auto h-28">
           <div className="flex h-full items-center justify-between">
             <a
               href={LOGO.url}
