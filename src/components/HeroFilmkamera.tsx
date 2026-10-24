@@ -9,7 +9,7 @@ import Filmkamera from '../../public/Assets/Svg/filmkamera.svg'
 const VIDEO_SRC = '/media/rettungsanker-weltraumflug-layla.mp4'
 const POSTER_SRC = '/media/rettungsanker-weltraumflug-layla-poster.jpg'
 
-// Filmkamera im Hero: Klick spielt den Weltraumflug-Film sofort im Vollbild ab.
+// Filmkamera (Hero und Geschichte-Seite): Klick spielt den Weltraumflug-Film sofort im Vollbild ab.
 // Nach dem Ende (oder bei Esc/Schließen) geht es zurück an die vorherige Scrollposition.
 export default function HeroFilmkamera() {
   const overlayRef = useRef<HTMLDivElement>(null)
@@ -77,10 +77,12 @@ export default function HeroFilmkamera() {
           src={Filmkamera}
           alt=""
           // Dunkle Kachel wie in der Getränkekarte, sonst geht das gelbe Symbol im bunten Hintergrund unter
-          className="w-28! xl:w-36! rounded-2xl border border-yellow-500/40 bg-[#1a252d] p-4 shadow-[0_0_40px_rgba(234,179,8,0.25)] transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
+          className="w-20! md:w-24! lg:w-28! xl:w-36! rounded-xl md:rounded-2xl border border-yellow-500/40 bg-[#1a252d] p-3 md:p-4 shadow-[0_0_40px_rgba(234,179,8,0.25)] transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
           priority={false}
         />
-        <span className="headingA text-lg xl:text-2xl text-yellow-500 group-hover:text-yellow-300">
+        {/* Schwarze Schrift mit weißer Kontur; die gestaffelten Grautöne nach rechts unten
+            ergeben die 3D-Kante, der weiche Schatten am Ende hebt den Schriftzug vom Hintergrund ab */}
+        <span className="headingA text-base text-black [text-shadow:-1px_-1px_0_#fff,1px_-1px_0_#fff,-1px_1px_0_#fff,1px_1px_0_#fff,2px_2px_0_#d4d4d4,3px_3px_0_#a3a3a3,4px_4px_0_#737373,5px_5px_0_#404040,6px_7px_6px_rgba(0,0,0,0.6)] md:text-lg xl:text-2xl">
           film ab!
         </span>
       </button>

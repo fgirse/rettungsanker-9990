@@ -37,8 +37,10 @@ function Hero() {
       </div>
       {/* Ab Tablet als Sticker abseits des Schriftzugs, damit das gedrehte Band ihn nicht überdeckt:
           Tablet unten rechts, Desktop rechts neben dem Schriftzug. Auf dem Handy bleibt es darunter. */}
-      {/* Filmkamera nur auf Desktop, links gegenüber dem Angebots-Band */}
-      <div className="absolute left-[4vw] top-1/2 z-10 hidden -translate-y-1/2 lg:block">
+      {/* Filmkamera: Handy und Tablet unten links, wo das schräge Angebots-Band am höchsten steht;
+          Desktop links auf der Bühne. Auf dem Handy ragt der Hero um Kopfzeile (7rem) minus 5vh unter den
+          Bildschirmrand, daher der berechnete Abstand nach unten. */}
+      <div className="absolute bottom-[calc(7rem-2vh)] left-[5vw] z-10 md:bottom-[12vh] md:left-[4vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2">
         <HeroFilmkamera />
       </div>
       <div className="relative z-10 flex flex-col items-center justify-center md:absolute md:right-[4vw] md:bottom-[12vh] lg:right-[2vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2">
