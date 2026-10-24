@@ -430,7 +430,7 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
 
             {/* Main title – Mindestgröße so klein, dass die breite Schrift auch auf schmalen Handys ganz sichtbar bleibt */}
             <h1
-              className="headingA text-yellow-600"
+              className="headingA text-yellow-500"
               style={{ fontSize: 'clamp(1.5rem, 9vw, 6rem)', lineHeight: 1.05 }}
             >
               getränkekarte

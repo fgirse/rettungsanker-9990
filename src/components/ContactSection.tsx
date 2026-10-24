@@ -13,7 +13,7 @@ export default function ContactSection() {
             Zweispaltig erst ab xl, weil Überschrift und Formular bei 1024px nicht nebeneinander passen. */}
         <div className="grid grid-cols-[minmax(0,1fr)] gap-10 xl:grid-cols-[0.9fr_1.1fr] xl:items-start">
           <div className="max-w-xl">
-            <p className="font-sans headingA text-4xl max-sm:text-[clamp(1.5rem,8vw,2.25rem)] lg:text-7xl uppercase tracking-[0.4em] text-yellow-500/80">
+            <p className="font-sans headingA text-4xl max-sm:text-[clamp(1.5rem,8vw,2.25rem)] lg:text-7xl uppercase tracking-[0.4em] text-yellow-500">
               Kontakt
             </p>
             <h2 className="mt-4 font-sans text-3xl font-black text-white md:text-5xl">

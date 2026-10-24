@@ -5,7 +5,7 @@ import FreiburgMarquee from './FreiburgMarquee'
 const LiveTV = () => {
   return (
     <section id="section-liveTV" className="">
-      <p className="text-5xl lg:text-[7rem] headingA text-yellow-600 text-center mt-60">
+      <p className="text-5xl lg:text-[7rem] headingA text-yellow-500 text-center mt-60">
         Fussball <br />
         live tv
       </p>
