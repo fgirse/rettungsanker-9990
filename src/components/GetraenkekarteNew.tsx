@@ -473,3 +473,27 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
     </div>
   )
 }
+
+// ── Einzelne Rubrik als eigene Seite (z. B. /weine, /cocktails) ───────────────
+
+// Nutzt dieselbe Darstellung wie die Getränkekarte, damit beide Seiten gleich aussehen
+// und die Einträge nur an einer Stelle im CMS gepflegt werden.
+export function KategorieSeite({ kategorie, items }: { kategorie: Kategorie; items: MenuItem[] }) {
+  const cat = CATEGORIES.find((c) => c.id === kategorie)!
+  const sorted = [...items].sort((a, b) => (a.sortierung ?? 99) - (b.sortierung ?? 99))
+
+  return (
+    <div className="bg-slate-950 text-white font-sans min-h-screen">
+      <CategorySection cat={cat} items={sorted} />
+      <div className="bg-slate-950 py-10 text-center border-t border-white/5">
+        <a
+          href="/getraenkekarte"
+          className="inline-flex items-center justify-center rounded-lg bg-yellow-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-yellow-400"
+        >
+          Zur ganzen Getränkekarte
+        </a>
+        <p className="text-slate-500 text-sm mt-6">Alle Preise inkl. MwSt.</p>
+      </div>
+    </div>
+  )
+}

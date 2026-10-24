@@ -1,16 +1,14 @@
-import React from 'react'
+import { KategorieSeite } from '@/components/GetraenkekarteNew'
+import { ladeKategorie } from '@/lib/getraenke'
 
+export const dynamic = 'force-dynamic'
 
-const 
-
-Cocktails
- = () => {
-  return (
-    <div className="bg-slate-800 min-h-screen flex flex-col items-center justify-center">
-        
-        <h1 className="text-4xl md:text-6xl font-bold headingA text-center mb-12 text-yellow-500">cocktails & longdrinks</h1>
-        </div>
-  )
+export const metadata = {
+  title: 'Cocktails & Longdrinks – Rettungsanker Freiburg',
+  description: 'Cocktails und Longdrinks im Rettungsanker Freiburg.',
 }
 
-export default Cocktails
+export default async function Cocktails() {
+  const items = await ladeKategorie('cocktails-longdrinks')
+  return <KategorieSeite kategorie="cocktails-longdrinks" items={items} />
+}

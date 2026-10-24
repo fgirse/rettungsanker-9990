@@ -1,13 +1,14 @@
-import React from 'react'
+import { KategorieSeite } from '@/components/GetraenkekarteNew'
+import { ladeKategorie } from '@/lib/getraenke'
 
+export const dynamic = 'force-dynamic'
 
-const Weine = () => {
-  return (
-    <div className="bg-slate-800 min-h-screen flex flex-col items-center justify-center">
-        
-        <h1 className="text-4xl md:text-6xl font-bold headingA text-center mb-12 text-yellow-500">regionale weine</h1>
-        </div>
-  )
+export const metadata = {
+  title: 'Weine – Rettungsanker Freiburg',
+  description: 'Regionale Weine im Rettungsanker Freiburg.',
 }
 
-export default Weine
+export default async function Weine() {
+  const items = await ladeKategorie('weine')
+  return <KategorieSeite kategorie="weine" items={items} />
+}

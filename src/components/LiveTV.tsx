@@ -21,7 +21,7 @@ const LiveTV = () => {
             </p>
 
             <a
-              href="#section-contact"
+              href="/#section-contact"
               className="mt-6 inline-flex items-center justify-center rounded-lg bg-yellow-500 px-6 py-3 font-sans font-semibold text-white transition hover:opacity-90 hover:border-8 hover:border-gray-100"
             >
               Reservierung Live TV
