@@ -30,17 +30,18 @@ export default function HeroAnimatedText() {
 
   return (
     <>
+      {/* flach: feste Zeilenhöhe und Verschiebungen aufheben, Größe nach Fensterhöhe (siehe styles.css) */}
       <p
         ref={dieRef}
         id="1"
-        className="mb-12 relative text-[45vw] headingE text-amber-50 text-center top-[-16vh] md:text-[43vw] md:top-[-14vh] lg:top-[1vh] lg:text-[22vw]"
+        className="mb-12 relative text-[45vw] headingE text-amber-50 text-center top-[-16vh] md:text-[43vw] md:top-[-14vh] lg:top-[1vh] lg:text-[22vw] flach:top-0! flach:my-0! flach:text-[34svh]! flach:leading-none!"
       >
         die
       </p>
       <p
         ref={kiezkneipeRef}
         id="2"
-        className="relative text-[12vw] top-[-8vh] headingA text-red-800 text-center md:top-[2vh] lg:text-[6vw] lg:top-[8vw]"
+        className="relative text-[12vw] top-[-8vh] headingA text-red-800 text-center md:top-[2vh] lg:text-[6vw] lg:top-[8vw] flach:top-0! flach:mt-[3svh]! flach:mb-0! flach:text-[9svh]! flach:leading-none!"
       >
         kiezkneipe
       </p>

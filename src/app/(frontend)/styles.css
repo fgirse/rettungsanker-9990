@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+/* Flache Querformat-Fenster (Handy quer, kleine Laptops): hier richtet sich der Hero nach der Höhe statt nach der Breite */
+@custom-variant flach (@media (orientation: landscape) and (max-height: 720px));
+
 :root {
   --font-sans: 'Architects Daughter', monospace;
   --font-mono: 'Bowlby One SC', monospace;
