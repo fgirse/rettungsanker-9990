@@ -4,6 +4,7 @@ import LogoNeu from '../../public/Assets/Img/LogoAlt.png'
 //import Marquee from '@/components/MarqueeCooperateComp';
 import Angebot from '@/components/AngebotDesMonats'
 import HeroAnimatedText from '@/components/HeroAnimatedText'
+import HeroFilmkamera from '@/components/HeroFilmkamera'
 
 function Hero() {
   return (
@@ -36,6 +37,10 @@ function Hero() {
       </div>
       {/* Ab Tablet als Sticker abseits des Schriftzugs, damit das gedrehte Band ihn nicht überdeckt:
           Tablet unten rechts, Desktop rechts neben dem Schriftzug. Auf dem Handy bleibt es darunter. */}
+      {/* Filmkamera nur auf Desktop, links gegenüber dem Angebots-Band */}
+      <div className="absolute left-[4vw] top-1/2 z-10 hidden -translate-y-1/2 lg:block">
+        <HeroFilmkamera />
+      </div>
       <div className="relative z-10 flex flex-col items-center justify-center md:absolute md:right-[4vw] md:bottom-[12vh] lg:right-[2vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2">
         <Angebot />
       </div>

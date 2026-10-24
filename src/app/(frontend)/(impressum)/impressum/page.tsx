@@ -346,9 +346,10 @@ const Impressum = () => {
                   unterliegen dem Urheberrecht. Soweit nicht anders angegeben,
                   sind alle Rechte bei Rettungsanker Freiburg GbR.
                 </p>
-                {/* Pflichtangabe der CC-BY-Lizenz für die Grafiken der Getränkekarte */}
+                {/* Pflichtangabe der CC-BY-Lizenz für die Grafiken der Getränkekarte und die Filmkamera im Hero */}
                 <p>
-                  Grafiken der Getränkekarte: Lorc, Delapouite und Caro Asercion,{' '}
+                  Grafiken der Getränkekarte und Filmkamera auf der Startseite: Lorc, Delapouite und Caro
+                  Asercion,{' '}
                   <a
                     href="https://game-icons.net"
                     target="_blank"
