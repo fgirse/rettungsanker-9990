@@ -13,7 +13,8 @@ const POSTER_SRC = '/media/rettungsanker-weltraumflug-layla-poster.jpg'
 // Nach dem Ende (oder bei Esc/Schließen) geht es zurück an die vorherige Scrollposition.
 export default function HeroFilmkamera() {
   const overlayRef = useRef<HTMLDivElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const videoHostRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
   const scrollYRef = useRef(0)
   const [open, setOpen] = useState(false)
   // Portal erst nach dem Mounten, auf dem Server gibt es kein document
@@ -21,11 +22,17 @@ export default function HeroFilmkamera() {
   useEffect(() => setMounted(true), [])
 
   const close = () => {
+    // Video ganz entfernen, damit außerhalb des Films kein zweites Video im DOM liegt
+    // (iPhone-Safari stoppte sonst das Sturmwellen-Video im Hero)
     const video = videoRef.current
     if (video) {
       video.pause()
-      video.currentTime = 0
+      video.removeAttribute('src')
+      video.load()
+      video.remove()
+      videoRef.current = null
     }
+    overlayRef.current?.classList.replace('flex', 'hidden')
     setOpen(false)
     // Erst nach dem Verlassen des Vollbilds zurückscrollen, sonst setzt der Browser die Position danach wieder
     const restore = () =>
@@ -36,12 +43,23 @@ export default function HeroFilmkamera() {
 
   const start = () => {
     const overlay = overlayRef.current
-    const video = videoRef.current
-    if (!overlay || !video) return
+    const host = videoHostRef.current
+    if (!overlay || !host) return
     scrollYRef.current = window.scrollY
-    setOpen(true)
+
     // Vollbild und play() müssen direkt im Klick passieren, sonst blockiert der Browser beides.
-    // Das Overlay ist dafür immer im DOM, nur unsichtbar.
+    // Deshalb Overlay sofort sichtbar schalten und das Video hier erzeugen statt über React-State.
+    overlay.classList.replace('hidden', 'flex')
+    const video = document.createElement('video')
+    video.className = 'h-full w-full object-contain'
+    video.playsInline = true
+    video.poster = POSTER_SRC
+    video.src = VIDEO_SRC
+    video.addEventListener('ended', close)
+    host.replaceChildren(video)
+    videoRef.current = video
+
+    setOpen(true)
     overlay.requestFullscreen?.().catch(() => {})
     video.play().catch(() => {})
   }
@@ -88,29 +106,19 @@ export default function HeroFilmkamera() {
       </button>
 
       {/* Per Portal an body, weil der verschobene (translate) Eltern-Container fixed sonst einsperrt.
-          Bleibt gerendert (statt display:none), damit requestFullscreen sofort greifen kann. */}
+          Geschlossen per display:none; start() schaltet direkt auf flex, damit requestFullscreen greift. */}
       {mounted &&
         createPortal(
           <div
             ref={overlayRef}
-            className={`fixed inset-0 z-200 flex items-center justify-center bg-black transition-opacity duration-300 ${
-              open ? 'visible opacity-100' : 'pointer-events-none invisible opacity-0'
-            }`}
+            className={`fixed inset-0 z-200 items-center justify-center bg-black ${open ? 'flex' : 'hidden'}`}
             role="dialog"
             aria-modal="true"
             aria-hidden={!open}
             aria-label="Rettungsanker – Weltraumflug mit Layla"
           >
-            <video
-              ref={videoRef}
-              className="h-full w-full object-contain"
-              playsInline
-              preload="none"
-              poster={POSTER_SRC}
-              onEnded={close}
-            >
-              <source src={VIDEO_SRC} type="video/mp4" />
-            </video>
+            {/* Platzhalter, in den start() das Video einsetzt */}
+            <div ref={videoHostRef} className="contents" />
             <button
               type="button"
               onClick={close}
