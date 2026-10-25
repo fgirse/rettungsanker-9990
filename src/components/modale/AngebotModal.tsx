@@ -56,12 +56,13 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
       <div className="flex items-center justify-center">
         {/* Hellgelber Bierdeckel (yellow-50) mit gewelltem Rand und roten Ringen (red-800), leicht schräg hingelegt.
             Der rote Schriftzug kreist dauerhaft (auch ohne Maus auf Handy/Tablet),
-            in der Mitte das aktuelle Produktbild aus dem CMS. */}
+            in der Mitte das aktuelle Produktbild aus dem CMS. Am Desktop größer, damit der Schriftzug
+            mehr Umfang hat und weiter gesperrt wirkt. */}
         <button
           type="button"
           onClick={openModal}
           aria-label={`Angebot des Monats: ${[productOfTheMonth.description, productOfTheMonth.price].filter(Boolean).join(', ')} – Details öffnen`}
-          className="group relative block aspect-square w-36 -rotate-6 cursor-pointer rounded-full transition-transform duration-300 hover:scale-105 hover:rotate-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500 md:w-44 lg:w-48 xl:w-56"
+          className="group relative block aspect-square w-36 -rotate-6 cursor-pointer rounded-full transition-transform duration-300 hover:scale-105 hover:rotate-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500 md:w-44 lg:w-56 xl:w-64"
         >
           <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full drop-shadow-[0_8px_12px_rgba(0,0,0,0.55)]" aria-hidden="true">
             <defs>
@@ -139,7 +140,7 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
                     Angebot des Monats
                   </DialogTitle>
 
-                  <div className="relative overflow-hidden rounded-2xl bg-red-800 p-8">
+                  <div className="relative overflow-hidden rounded-2xl bg-linear-to-b from-orange-300 to-orange-100 p-8">
                     {/* Badge */}
                     {productOfTheMonth.badge && (
                       <div className="absolute top-4 right-4">
@@ -154,7 +155,7 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
                       {/* Subtitle */}
                       {productOfTheMonth.subtitle && (
                         <div className="text-center">
-                          <p className="text-3xl text-yellow-500 headingA font-medium">
+                          <p className="text-3xl text-red-800 headingA font-medium">
                             {productOfTheMonth.subtitle}
                           </p>
                         </div>
@@ -172,19 +173,19 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
 
                       {/* Product Info */}
                       <div className="space-y-3 text-center">
-                        <h3 className="text-2xl font-bold text-gray-50 uppercase font-sans">
+                        <h3 className="text-2xl font-bold text-red-800 uppercase font-sans">
                           {productOfTheMonth.title}
                         </h3>
 
                         {productOfTheMonth.description && (
-                          <p className="text-base font-black font-sans text-gray-100 leading-relaxed">
+                          <p className="text-base font-black font-sans text-gray-800 leading-relaxed">
                             {productOfTheMonth.description}
                           </p>
                         )}
 
                         {productOfTheMonth.price && (
                           <div className="pt-3">
-                            <span className="text-4xl font-sans font-black text-yellow-500">
+                            <span className="text-4xl font-sans font-black text-red-800">
                               {productOfTheMonth.price}
                             </span>
                           </div>
