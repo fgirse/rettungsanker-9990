@@ -8,12 +8,43 @@ import {
   Transition,
   TransitionChild,
 } from '@headlessui/react'
-import { Fragment, useState, useRef, useEffect } from 'react'
+import { Fragment, useId, useState } from 'react'
 import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 import type { Media } from '@/payload-types'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
+
+// Gewellter Rand eines Bierdeckels (viewBox 0–100): Kreis mit 28 sanften Zacken
+const DECKEL_RAND =
+  Array.from({ length: 361 }, (_, i) => {
+    const w = (i * Math.PI) / 180
+    const r = 47 + 1.6 * Math.cos(28 * w)
+    return `${i ? 'L' : 'M'}${(50 + r * Math.cos(w)).toFixed(2)},${(50 + r * Math.sin(w)).toFixed(2)}`
+  }).join(' ') + ' Z'
+
+// Deckel-Fläche mit angeknabberter Ecke oben rechts (per Maske ausgeschnitten)
+function DeckelFlaeche({ id, fill, ring }: { id: string; fill: string; ring: string }) {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      className="absolute inset-0 h-full w-full drop-shadow-[0_6px_8px_rgba(0,0,0,0.55)]"
+      aria-hidden="true"
+    >
+      <defs>
+        <mask id={id}>
+          <rect width="100" height="100" fill="white" />
+          <circle cx="84" cy="20" r="6" fill="black" />
+          <circle cx="90" cy="29" r="4.5" fill="black" />
+          <circle cx="76" cy="13" r="4.5" fill="black" />
+        </mask>
+      </defs>
+      <g mask={`url(#${id})`}>
+        <path d={DECKEL_RAND} fill={fill} />
+        <circle cx="50" cy="50" r="40" fill="none" stroke={ring} strokeWidth="1.6" />
+        <circle cx="50" cy="50" r="37" fill="none" stroke={ring} strokeWidth="0.6" strokeDasharray="2 1.6" />
+      </g>
+    </svg>
+  )
+}
 
 interface AngebotModalProps {
   productOfTheMonth: {
@@ -30,61 +61,8 @@ interface AngebotModalProps {
 
 export default function AngebotModal({ productOfTheMonth, productImage }: AngebotModalProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [isMounted, setIsMounted] = useState(false)
-  const buttonRef = useRef<HTMLButtonElement>(null)
-
-  // Ensure component is mounted on client before running GSAP
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  // Blend in/out animation with GSAP - only run after mount
-  useGSAP(() => {
-    if (buttonRef.current && isMounted) {
-      const tl = gsap.timeline({ repeat: -1, yoyo: true })
-
-      tl.to(buttonRef.current, {
-        opacity: 0.3,
-        scale: 0.95,
-        duration: 2,
-        ease: 'power1.inOut',
-      }).to(buttonRef.current, {
-        opacity: 1,
-        scale: 1,
-        duration: 2,
-        ease: 'power1.inOut',
-      })
-
-      return () => {
-        tl.kill()
-      }
-    }
-  }, [isMounted])
-
-  // Hover animation
-  const handleMouseEnter = () => {
-    if (buttonRef.current && isMounted) {
-      gsap.to(buttonRef.current, {
-        scale: 1.05,
-        borderColor: 'rgba(132, 204, 22, 0.8)',
-        backgroundColor: 'rgba(132, 204, 22, 0.3)',
-        duration: 0.3,
-        ease: 'power2.out',
-      })
-    }
-  }
-
-  const handleMouseLeave = () => {
-    if (buttonRef.current && isMounted) {
-      gsap.to(buttonRef.current, {
-        scale: 1,
-        borderColor: 'rgba(132, 204, 22, 0.3)',
-        backgroundColor: 'rgba(132, 204, 22, 0.1)',
-        duration: 0.3,
-        ease: 'power2.out',
-      })
-    }
-  }
+  // Doppelpunkte aus useId entfernen, sie stören in url(#…)
+  const maskId = `deckel${useId().replace(/[^a-zA-Z0-9]/g, '')}`
 
   function closeModal() {
     setIsOpen(false)
@@ -97,15 +75,51 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
   return (
     <>
       <div className="flex items-center justify-center">
+        {/* Bierdeckel, der schräg auf dem Tresen liegt und sich alle paar Sekunden umdreht:
+            vorne der Schriftzug, hinten Produkt und Preis. Läuft von selbst, damit es auch ohne Maus
+            (Handy/Tablet) wirkt; Hover hebt ihn nur leicht an. */}
         <button
-          ref={buttonRef}
           type="button"
           onClick={openModal}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          className="rounded-lg border-2 border-lime-500/30 bg-lime-300/60 px-6 py-3 text-lg font-medium font-sans text-white rotate-30 backdrop-blur-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-400/80 focus-visible:ring-offset-2 lg:text-2xl"
+          aria-label={`Angebot des Monats: ${[productOfTheMonth.description, productOfTheMonth.price].filter(Boolean).join(', ')} – Details öffnen`}
+          className="group relative block aspect-square w-36 -rotate-12 cursor-pointer perspective-[900px] transition-transform duration-300 hover:scale-110 hover:-rotate-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500 md:w-44 lg:w-48 xl:w-56"
         >
-          Angebot des Monats
+          <span aria-hidden="true" className="bierdeckel-flip relative block h-full w-full transform-3d">
+            {/* Vorderseite */}
+            <span className="absolute inset-0 flex flex-col items-center justify-center gap-1 backface-hidden">
+              <DeckelFlaeche id={`${maskId}v`} fill="#f5ecd7" ring="#9f0712" />
+              {productOfTheMonth.badge && (
+                <span className="relative font-sans text-[0.55rem] font-black uppercase leading-none tracking-[0.3em] text-red-800 md:text-xs">
+                  ★ {productOfTheMonth.badge} ★
+                </span>
+              )}
+              <span className="relative text-center font-mono text-base leading-[1.05] text-red-800 uppercase md:text-xl lg:text-[1.35rem] xl:text-2xl">
+                Angebot
+                <br />
+                <span className="text-[0.6em]">des</span>
+                <br />
+                Monats
+              </span>
+            </span>
+            {/* Rückseite */}
+            <span className="absolute inset-0 flex rotate-y-180 flex-col items-center justify-center gap-1 backface-hidden">
+              <DeckelFlaeche id={`${maskId}r`} fill="#1a252d" ring="#f0b100" />
+              <span className="relative h-[42%] w-[30%]">
+                <Image
+                  src={productImage}
+                  alt=""
+                  fill
+                  sizes="80px"
+                  className="object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
+                />
+              </span>
+              {productOfTheMonth.price && (
+                <span className="relative font-mono text-sm leading-none text-yellow-500 md:text-base lg:text-lg xl:text-xl">
+                  {productOfTheMonth.price}
+                </span>
+              )}
+            </span>
+          </span>
         </button>
       </div>
 
