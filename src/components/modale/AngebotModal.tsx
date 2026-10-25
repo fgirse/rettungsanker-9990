@@ -13,6 +13,14 @@ import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 import type { Media } from '@/payload-types'
 
+// Gewellter Rand eines Bierdeckels (viewBox 0–100): Kreis mit 32 sanften Zacken
+const DECKEL_RAND =
+  Array.from({ length: 361 }, (_, i) => {
+    const w = (i * Math.PI) / 180
+    const r = 47 + 1.4 * Math.cos(32 * w)
+    return `${i ? 'L' : 'M'}${(50 + r * Math.cos(w)).toFixed(2)},${(50 + r * Math.sin(w)).toFixed(2)}`
+  }).join(' ') + ' Z'
+
 // Kreisbahn für den umlaufenden Schriftzug (viewBox 0–100, Radius 38, Start oben)
 const TEXT_RADIUS = 38
 const TEXT_BAHN = `M 50,${50 - TEXT_RADIUS} a ${TEXT_RADIUS},${TEXT_RADIUS} 0 1,1 0,${2 * TEXT_RADIUS} a ${TEXT_RADIUS},${TEXT_RADIUS} 0 1,1 0,-${2 * TEXT_RADIUS}`
@@ -46,26 +54,35 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
   return (
     <>
       <div className="flex items-center justify-center">
-        {/* Runde Plakette nach Framer-Vorlage „Rotating Text Badge“: dunkle Scheibe mit grauem Ring,
-            der Schriftzug kreist dauerhaft (auch ohne Maus auf Handy/Tablet), in der Mitte das
-            aktuelle Produktbild aus dem CMS vor einem weichgezeichneten Farbschein desselben Bildes. */}
+        {/* Weißer Bierdeckel mit gewelltem Rand und roten Ringen, leicht schräg hingelegt.
+            Der rote Schriftzug kreist dauerhaft (auch ohne Maus auf Handy/Tablet),
+            in der Mitte das aktuelle Produktbild aus dem CMS. */}
         <button
           type="button"
           onClick={openModal}
           aria-label={`Angebot des Monats: ${[productOfTheMonth.description, productOfTheMonth.price].filter(Boolean).join(', ')} – Details öffnen`}
-          className="group relative block aspect-square w-36 cursor-pointer rounded-full transition-transform duration-300 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500 md:w-44 lg:w-48 xl:w-56"
+          className="group relative block aspect-square w-36 -rotate-6 cursor-pointer rounded-full transition-transform duration-300 hover:scale-105 hover:rotate-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500 md:w-44 lg:w-48 xl:w-56"
         >
-          <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full drop-shadow-[0_8px_16px_rgba(0,0,0,0.6)]" aria-hidden="true">
-            <circle cx="50" cy="50" r="47" fill="#161616" stroke="#3b3b3b" strokeWidth="5" />
+          <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full drop-shadow-[0_8px_12px_rgba(0,0,0,0.55)]" aria-hidden="true">
+            <defs>
+              {/* Zum Rand hin leicht abgetönt, wirkt wie gepresste Pappe */}
+              <radialGradient id={`${bahnId}pappe`}>
+                <stop offset="70%" stopColor="#ffffff" />
+                <stop offset="100%" stopColor="#ece8e1" />
+              </radialGradient>
+            </defs>
+            <path d={DECKEL_RAND} fill={`url(#${bahnId}pappe)`} stroke="#d6d1c8" strokeWidth="0.5" />
+            <circle cx="50" cy="50" r="44.5" fill="none" stroke="#b91c1c" strokeWidth="1.4" />
+            <circle cx="50" cy="50" r="35.5" fill="none" stroke="#b91c1c" strokeWidth="1.4" />
+            <circle cx="50" cy="50" r="33.8" fill="none" stroke="#b91c1c" strokeWidth="0.4" strokeDasharray="1.2 1" />
           </svg>
 
-          {/* Bild in der Mitte: unscharfe, vergrößerte Kopie als Farbkugel, darüber das scharfe Bild */}
-          <span aria-hidden="true" className="absolute inset-[25%] overflow-hidden rounded-full bg-[radial-gradient(circle_at_40%_65%,#c2410c,#7c2d12_75%)]">
-            <Image src={productImage} alt="" fill sizes="120px" className="scale-[2.2] object-cover opacity-60 blur-md saturate-150" />
-            <Image src={productImage} alt="" fill sizes="120px" className="object-contain p-[5%] drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]" />
+          {/* Produktbild in der Mitte auf hellem, warmem Grund */}
+          <span aria-hidden="true" className="absolute inset-[23%] overflow-hidden rounded-full bg-[radial-gradient(circle,#fffbeb,#fde4c4_85%)]">
+            <Image src={productImage} alt="" fill sizes="120px" className="object-contain p-[5%] drop-shadow-[0_3px_4px_rgba(0,0,0,0.35)]" />
           </span>
 
-          {/* Umlaufender Schriftzug; textLength verteilt ihn exakt auf den ganzen Kreis */}
+          {/* Umlaufender Schriftzug in der Bowlby-Schrift; textLength verteilt ihn exakt auf den ganzen Kreis */}
           <svg
             viewBox="0 0 100 100"
             className="absolute inset-0 h-full w-full animate-[spin_18s_linear_infinite] motion-reduce:animate-none"
@@ -74,10 +91,9 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
             <defs>
               <path id={bahnId} d={TEXT_BAHN} />
             </defs>
-            {/* Systemschrift statt font-sans: die ist hier auf die Handschrift Architects Daughter gesetzt */}
-            <text className="fill-white font-[ui-sans-serif,system-ui,sans-serif] text-[6.4px] font-semibold uppercase">
+            <text className="fill-[#b91c1c] font-mono text-[6px] uppercase">
               <textPath href={`#${bahnId}`} textLength={2 * Math.PI * TEXT_RADIUS - 2} lengthAdjust="spacing">
-                Angebot des Monats ✦ Angebot des Monats ✦
+                Angebot des Monats ★ Angebot des Monats ★
               </textPath>
             </text>
           </svg>
