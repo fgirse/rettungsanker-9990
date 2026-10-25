@@ -118,7 +118,7 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <DialogBackdrop className="fixed inset-0 bg-black/60" />
+            <DialogBackdrop className="fixed inset-0 bg-black/40" />
           </TransitionChild>
 
           <div className="fixed inset-0 overflow-y-auto">
@@ -132,19 +132,19 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <DialogPanel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-gray-900 p-8 text-left align-middle shadow-2xl transition-all">
-                  <DialogTitle
-                    as="h3"
-                    className="text-3xl font-bold text-gray-900 mb-6 text-center uppercase tracking-wide"
-                  >
+                <DialogPanel className="w-full max-w-2xl transform overflow-hidden rounded-2xl border border-white/25 bg-white/10 p-8 text-left align-middle shadow-2xl backdrop-blur-xl transition-all">
+                  {/* Nur für Screenreader: sichtbar wäre sie doppelt zu „Bier des Monats“ im Glas-Panel */}
+                  <DialogTitle as="h3" className="sr-only">
                     Angebot des Monats
                   </DialogTitle>
 
-                  <div className="relative overflow-hidden rounded-2xl bg-linear-to-b from-orange-300 to-orange-100 p-8">
+                  {/* Glas-Optik: halbdurchsichtiger Verlauf über dem verschwommenen Hintergrund des Panels.
+                      Kein eigenes backdrop-blur hier, verschachtelt sähe es nur das Panel statt der Seite. */}
+                  <div className="relative overflow-hidden rounded-2xl border border-white/40 bg-linear-to-b from-yellow-600/80 to-yellow-100/60 p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]">
                     {/* Badge */}
                     {productOfTheMonth.badge && (
                       <div className="absolute top-4 right-4">
-                        <Badge className="bg-yellow-600 text-white px-4 py-2 text-base font-bold uppercase">
+                        <Badge className="bg-red-800 text-white px-4 py-2 text-base font-bold uppercase">
                           {productOfTheMonth.badge}
                         </Badge>
                       </div>
