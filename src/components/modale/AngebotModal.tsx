@@ -54,7 +54,7 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
   return (
     <>
       <div className="flex items-center justify-center">
-        {/* Gelber Bierdeckel (yellow-600) mit gewelltem Rand und roten Ringen (red-800), leicht schräg hingelegt.
+        {/* Hellgelber Bierdeckel (yellow-50) mit gewelltem Rand und roten Ringen (red-800), leicht schräg hingelegt.
             Der rote Schriftzug kreist dauerhaft (auch ohne Maus auf Handy/Tablet),
             in der Mitte das aktuelle Produktbild aus dem CMS. */}
         <button
@@ -67,11 +67,11 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
             <defs>
               {/* Zum Rand hin leicht abgedunkelt, wirkt wie gepresste Pappe */}
               <radialGradient id={`${bahnId}pappe`}>
-                <stop offset="70%" stopColor="#d08700" />
-                <stop offset="100%" stopColor="#b87700" />
+                <stop offset="70%" stopColor="#fefce8" />
+                <stop offset="100%" stopColor="#fef9c2" />
               </radialGradient>
             </defs>
-            <path d={DECKEL_RAND} fill={`url(#${bahnId}pappe)`} stroke="#8a5a00" strokeWidth="0.5" />
+            <path d={DECKEL_RAND} fill={`url(#${bahnId}pappe)`} stroke="#e2d796" strokeWidth="0.5" />
             <circle cx="50" cy="50" r="44.5" fill="none" stroke="#9f0712" strokeWidth="1.4" />
             <circle cx="50" cy="50" r="35.5" fill="none" stroke="#9f0712" strokeWidth="1.4" />
             <circle cx="50" cy="50" r="33.8" fill="none" stroke="#9f0712" strokeWidth="0.4" strokeDasharray="1.2 1" />
@@ -79,11 +79,11 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
 
           {/* Produktbild in der Mitte, so groß wie innerhalb der Ringe möglich. object-cover mit Ausschnitt weit unten (78 %)
               zeigt das Flaschenetikett formatfüllend statt der ganzen, schmalen Flasche. */}
-          <span aria-hidden="true" className="absolute inset-[18%] overflow-hidden rounded-full bg-[radial-gradient(circle,#fffbeb,#fde4c4_85%)]">
+          <span aria-hidden="true" className="absolute inset-[18%] overflow-hidden rounded-full bg-yellow-50">
             <Image src={productImage} alt="" fill sizes="160px" className="object-cover object-[50%_78%]" />
           </span>
 
-          {/* Umlaufender Schriftzug in der Bowlby-Schrift, einmal rundherum; textLength verteilt ihn
+          {/* Umlaufender Schriftzug in der Bowlby-Schrift, einmal rundherum; auf Handy und Desktop verteilt textLength ihn
               mit weitem Buchstabenabstand exakt auf den ganzen Kreis */}
           <svg
             viewBox="0 0 100 100"
@@ -93,10 +93,14 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
             <defs>
               <path id={bahnId} d={TEXT_BAHN} />
             </defs>
-            <text className="fill-red-800 font-mono text-[9px] uppercase">
+            <text className="fill-red-800 font-mono text-[9px] uppercase md:hidden lg:block">
               <textPath href={`#${bahnId}`} textLength={2 * Math.PI * TEXT_RADIUS - 2} lengthAdjust="spacing">
                 Angebot des Monats ★
               </textPath>
+            </text>
+            {/* Tablet: enger gesetzt, reicht nur über rund drei Viertel des Kreises; die Lücke kreist mit */}
+            <text className="hidden fill-red-800 font-mono text-[9px] uppercase tracking-[2.5px] md:block lg:hidden">
+              <textPath href={`#${bahnId}`}>Angebot des Monats ★</textPath>
             </text>
           </svg>
         </button>
