@@ -54,7 +54,7 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
   return (
     <>
       <div className="flex items-center justify-center">
-        {/* Weißer Bierdeckel mit gewelltem Rand und roten Ringen, leicht schräg hingelegt.
+        {/* Gelber Bierdeckel (yellow-600) mit gewelltem Rand und roten Ringen (red-800), leicht schräg hingelegt.
             Der rote Schriftzug kreist dauerhaft (auch ohne Maus auf Handy/Tablet),
             in der Mitte das aktuelle Produktbild aus dem CMS. */}
         <button
@@ -65,21 +65,22 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
         >
           <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full drop-shadow-[0_8px_12px_rgba(0,0,0,0.55)]" aria-hidden="true">
             <defs>
-              {/* Zum Rand hin leicht abgetönt, wirkt wie gepresste Pappe */}
+              {/* Zum Rand hin leicht abgedunkelt, wirkt wie gepresste Pappe */}
               <radialGradient id={`${bahnId}pappe`}>
-                <stop offset="70%" stopColor="#ffffff" />
-                <stop offset="100%" stopColor="#ece8e1" />
+                <stop offset="70%" stopColor="#d08700" />
+                <stop offset="100%" stopColor="#b87700" />
               </radialGradient>
             </defs>
-            <path d={DECKEL_RAND} fill={`url(#${bahnId}pappe)`} stroke="#d6d1c8" strokeWidth="0.5" />
-            <circle cx="50" cy="50" r="44.5" fill="none" stroke="#b91c1c" strokeWidth="1.4" />
-            <circle cx="50" cy="50" r="35.5" fill="none" stroke="#b91c1c" strokeWidth="1.4" />
-            <circle cx="50" cy="50" r="33.8" fill="none" stroke="#b91c1c" strokeWidth="0.4" strokeDasharray="1.2 1" />
+            <path d={DECKEL_RAND} fill={`url(#${bahnId}pappe)`} stroke="#8a5a00" strokeWidth="0.5" />
+            <circle cx="50" cy="50" r="44.5" fill="none" stroke="#9f0712" strokeWidth="1.4" />
+            <circle cx="50" cy="50" r="35.5" fill="none" stroke="#9f0712" strokeWidth="1.4" />
+            <circle cx="50" cy="50" r="33.8" fill="none" stroke="#9f0712" strokeWidth="0.4" strokeDasharray="1.2 1" />
           </svg>
 
-          {/* Produktbild in der Mitte auf hellem, warmem Grund */}
-          <span aria-hidden="true" className="absolute inset-[23%] overflow-hidden rounded-full bg-[radial-gradient(circle,#fffbeb,#fde4c4_85%)]">
-            <Image src={productImage} alt="" fill sizes="120px" className="object-contain p-[5%] drop-shadow-[0_3px_4px_rgba(0,0,0,0.35)]" />
+          {/* Produktbild in der Mitte, so groß wie innerhalb der Ringe möglich. object-cover mit Ausschnitt weit unten (78 %)
+              zeigt das Flaschenetikett formatfüllend statt der ganzen, schmalen Flasche. */}
+          <span aria-hidden="true" className="absolute inset-[18%] overflow-hidden rounded-full bg-[radial-gradient(circle,#fffbeb,#fde4c4_85%)]">
+            <Image src={productImage} alt="" fill sizes="160px" className="object-cover object-[50%_78%]" />
           </span>
 
           {/* Umlaufender Schriftzug in der Bowlby-Schrift, einmal rundherum; textLength verteilt ihn
@@ -92,7 +93,7 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
             <defs>
               <path id={bahnId} d={TEXT_BAHN} />
             </defs>
-            <text className="fill-[#b91c1c] font-mono text-[9px] uppercase">
+            <text className="fill-red-800 font-mono text-[9px] uppercase">
               <textPath href={`#${bahnId}`} textLength={2 * Math.PI * TEXT_RADIUS - 2} lengthAdjust="spacing">
                 Angebot des Monats ★
               </textPath>
@@ -134,11 +135,11 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
                     Angebot des Monats
                   </DialogTitle>
 
-                  <div className="relative overflow-hidden rounded-2xl bg-lime-400 p-8">
+                  <div className="relative overflow-hidden rounded-2xl bg-red-800 p-8">
                     {/* Badge */}
                     {productOfTheMonth.badge && (
                       <div className="absolute top-4 right-4">
-                        <Badge className="bg-red-600 text-white px-4 py-2 text-base font-bold uppercase">
+                        <Badge className="bg-yellow-600 text-white px-4 py-2 text-base font-bold uppercase">
                           {productOfTheMonth.badge}
                         </Badge>
                       </div>
@@ -172,14 +173,14 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
                         </h3>
 
                         {productOfTheMonth.description && (
-                          <p className="text-base font-black font-sans text-gray-800 leading-relaxed">
+                          <p className="text-base font-black font-sans text-gray-100 leading-relaxed">
                             {productOfTheMonth.description}
                           </p>
                         )}
 
                         {productOfTheMonth.price && (
                           <div className="pt-3">
-                            <span className="text-4xl font-sans font-black text-yellow-600">
+                            <span className="text-4xl font-sans font-black text-yellow-500">
                               {productOfTheMonth.price}
                             </span>
                           </div>
@@ -191,7 +192,7 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
                   <div className="mt-6 flex justify-center gap-4">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-lg border border-transparent bg-lime-500 px-6 py-3 text-base font-semibold text-white hover:bg-lime-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-lg border border-transparent bg-red-800 px-6 py-3 text-base font-semibold text-white hover:bg-red-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-800 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
                       Schließen
