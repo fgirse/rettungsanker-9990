@@ -30,7 +30,9 @@ function Hero() {
       >
         <source src="/Assets/Img/hans_flying_music.mp4" type="video/mp4" />
       </video>
-      <div className="relative z-10 flex flex-col items-center">
+      {/* Handy: Logo und Schriftzug gemeinsam nach unten, damit sie mittig zwischen Kopfzeile und Bierdeckel
+          stehen (gemessen 360–430 px Breite, jeweils rund 74 px). Die vh-Versätze darin bleiben unberührt. */}
+      <div className="relative z-10 flex flex-col items-center translate-y-16.5 md:translate-y-0 flach:translate-y-0!">
         <div className="relative top-[-26vh] w-[74vw] md:w-[70vw] lg:hidden flach:top-0! flach:w-[60svh]!">
           <Image src={LogoNeu} alt="LogoAlt" className="mt-3 flach:mt-0" />
         </div>
