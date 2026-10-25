@@ -5,6 +5,7 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -62,5 +63,14 @@ export default buildConfig({
     : undefined,
   endpoints: [contactMailEndpoint],
   sharp,
-  plugins: [],
+  plugins: [
+    // Uploads dauerhaft in Vercel Blob statt im lokalen Ordner media/ (auf Vercel nicht beschreibbar).
+    // clientUploads: der Browser lädt direkt hoch, sonst scheitern Dateien über 4,5 MB am Funktionslimit.
+    // Ohne Token (z. B. lokal ohne .env-Eintrag) schaltet sich das Plugin ab und es gilt wieder media/.
+    vercelBlobStorage({
+      collections: { media: true },
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+      clientUploads: true,
+    }),
+  ],
 })

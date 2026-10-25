@@ -7,7 +7,8 @@ export async function getProductOfTheMonth() {
   try {
     const productOfTheMonth = await payload.findGlobal({
       slug: 'productOfTheMonth' as any,
-      depth: 0,
+      // depth 1 liefert das Bild als Objekt mit url, bei 0 käme nur die ID
+      depth: 1,
     })
 
     return productOfTheMonth
