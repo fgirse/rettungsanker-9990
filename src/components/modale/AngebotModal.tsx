@@ -21,8 +21,8 @@ const DECKEL_RAND =
     return `${i ? 'L' : 'M'}${(50 + r * Math.cos(w)).toFixed(2)},${(50 + r * Math.sin(w)).toFixed(2)}`
   }).join(' ') + ' Z'
 
-// Kreisbahn für den umlaufenden Schriftzug (viewBox 0–100, Radius 38, Start oben)
-const TEXT_RADIUS = 38
+// Kreisbahn für den umlaufenden Schriftzug (viewBox 0–100, Radius 37, Start oben)
+const TEXT_RADIUS = 37
 const TEXT_BAHN = `M 50,${50 - TEXT_RADIUS} a ${TEXT_RADIUS},${TEXT_RADIUS} 0 1,1 0,${2 * TEXT_RADIUS} a ${TEXT_RADIUS},${TEXT_RADIUS} 0 1,1 0,-${2 * TEXT_RADIUS}`
 
 interface AngebotModalProps {
@@ -82,7 +82,8 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
             <Image src={productImage} alt="" fill sizes="120px" className="object-contain p-[5%] drop-shadow-[0_3px_4px_rgba(0,0,0,0.35)]" />
           </span>
 
-          {/* Umlaufender Schriftzug in der Bowlby-Schrift; textLength verteilt ihn exakt auf den ganzen Kreis */}
+          {/* Umlaufender Schriftzug in der Bowlby-Schrift, einmal rundherum; textLength verteilt ihn
+              mit weitem Buchstabenabstand exakt auf den ganzen Kreis */}
           <svg
             viewBox="0 0 100 100"
             className="absolute inset-0 h-full w-full animate-[spin_18s_linear_infinite] motion-reduce:animate-none"
@@ -91,9 +92,9 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
             <defs>
               <path id={bahnId} d={TEXT_BAHN} />
             </defs>
-            <text className="fill-[#b91c1c] font-mono text-[6px] uppercase">
+            <text className="fill-[#b91c1c] font-mono text-[9px] uppercase">
               <textPath href={`#${bahnId}`} textLength={2 * Math.PI * TEXT_RADIUS - 2} lengthAdjust="spacing">
-                Angebot des Monats ★ Angebot des Monats ★
+                Angebot des Monats ★
               </textPath>
             </text>
           </svg>

@@ -10,6 +10,13 @@
   --color-foreground: #ffffff;
   /* Goldton für Akzente wie .gold-divider – passend zum Verlauf der Trennlinien */
   --gold: oklch(0.78 0.18 75);
+  /* Höhe der hölzernen Kopfzeile: auf Handy/Tablet 20 % flacher als am Desktop (7rem).
+     Hero und Filmkamera rechnen mit diesem Wert, damit alles zusammenpasst. */
+  --kopfzeile: 5.625rem;
+
+  @media (min-width: 64rem) {
+    --kopfzeile: 7rem;
+  }
 }
 
 * {

@@ -8,8 +8,8 @@ import HeroFilmkamera from '@/components/HeroFilmkamera'
 
 function Hero() {
   return (
-    // flach: Hero genau so hoch wie der sichtbare Bereich unter der Kopfzeile (h-28 = 7rem)
-    <section className="-mt-[5vh] relative overflow-hidden lg:mt-0 h-screen w-full flex flex-col items-center justify-center flach:mt-0 flach:h-[calc(100svh-7rem)]">
+    // flach: Hero genau so hoch wie der sichtbare Bereich unter der Kopfzeile (--kopfzeile aus styles.css)
+    <section className="-mt-[5vh] relative overflow-hidden lg:mt-0 h-screen w-full flex flex-col items-center justify-center flach:mt-0 flach:h-[calc(100svh-var(--kopfzeile))]">
       {/* Background video for mobile and tablet only */}
       <video
         className="absolute inset-0 w-full h-full object-cover lg:hidden -z-10"
@@ -37,15 +37,16 @@ function Hero() {
         <HeroAnimatedText />
       </div>
       {/* Filmkamera: Handy und Tablet unten links, wo das schräge Angebots-Band am höchsten steht;
-          Desktop links auf der Bühne. Auf dem Handy ragt der Hero um Kopfzeile (7rem) minus 5vh unter den
+          Desktop links auf der Bühne. Auf dem Handy ragt der Hero um die Kopfzeilenhöhe minus 5vh unter den
           Bildschirmrand, daher der berechnete Abstand nach unten. In flachen Fenstern immer unten links. */}
-      <div className="absolute bottom-[calc(7rem-2vh)] left-[5vw] z-10 md:bottom-[12vh] md:left-[4vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 flach:top-auto! flach:bottom-[4svh]! flach:left-[3vw]! flach:translate-y-0!">
+      <div className="absolute bottom-[calc(var(--kopfzeile)-2vh)] left-[5vw] z-10 md:bottom-[12vh] md:left-[4vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 flach:top-auto! flach:bottom-[4svh]! flach:left-[3vw]! flach:translate-y-0!">
         <HeroFilmkamera />
       </div>
       {/* Ab Tablet als Sticker abseits des Schriftzugs, damit das gedrehte Band ihn nicht überdeckt:
-          Tablet unten rechts, Desktop rechts neben dem Schriftzug. Auf dem Handy bleibt es darunter.
+          Tablet unten rechts, Desktop rechts neben dem Schriftzug. Auf dem Handy bleibt es darunter,
+          etwas nach rechts unten versetzt.
           In flachen Fenstern immer unten rechts. */}
-      <div className="relative z-10 flex flex-col items-center justify-center md:absolute md:right-[4vw] md:bottom-[12vh] lg:right-[2vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 flach:absolute! flach:top-auto! flach:right-[3vw]! flach:bottom-[2svh]! flach:translate-y-0! flach:origin-bottom-right flach:scale-75">
+      <div className="relative z-10 flex flex-col items-center justify-center translate-x-[18vw] translate-y-[5vh] md:translate-x-0 md:translate-y-0 md:absolute md:right-[4vw] md:bottom-[12vh] lg:right-[2vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 flach:absolute! flach:top-auto! flach:right-[3vw]! flach:bottom-[2svh]! flach:translate-x-0! flach:translate-y-0! flach:origin-bottom-right flach:scale-75">
         <Angebot />
       </div>
     </section>
