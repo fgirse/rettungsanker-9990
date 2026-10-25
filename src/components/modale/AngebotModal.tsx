@@ -13,38 +13,9 @@ import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 import type { Media } from '@/payload-types'
 
-// Gewellter Rand eines Bierdeckels (viewBox 0–100): Kreis mit 28 sanften Zacken
-const DECKEL_RAND =
-  Array.from({ length: 361 }, (_, i) => {
-    const w = (i * Math.PI) / 180
-    const r = 47 + 1.6 * Math.cos(28 * w)
-    return `${i ? 'L' : 'M'}${(50 + r * Math.cos(w)).toFixed(2)},${(50 + r * Math.sin(w)).toFixed(2)}`
-  }).join(' ') + ' Z'
-
-// Deckel-Fläche mit angeknabberter Ecke oben rechts (per Maske ausgeschnitten)
-function DeckelFlaeche({ id, fill, ring }: { id: string; fill: string; ring: string }) {
-  return (
-    <svg
-      viewBox="0 0 100 100"
-      className="absolute inset-0 h-full w-full drop-shadow-[0_6px_8px_rgba(0,0,0,0.55)]"
-      aria-hidden="true"
-    >
-      <defs>
-        <mask id={id}>
-          <rect width="100" height="100" fill="white" />
-          <circle cx="84" cy="20" r="6" fill="black" />
-          <circle cx="90" cy="29" r="4.5" fill="black" />
-          <circle cx="76" cy="13" r="4.5" fill="black" />
-        </mask>
-      </defs>
-      <g mask={`url(#${id})`}>
-        <path d={DECKEL_RAND} fill={fill} />
-        <circle cx="50" cy="50" r="40" fill="none" stroke={ring} strokeWidth="1.6" />
-        <circle cx="50" cy="50" r="37" fill="none" stroke={ring} strokeWidth="0.6" strokeDasharray="2 1.6" />
-      </g>
-    </svg>
-  )
-}
+// Kreisbahn für den umlaufenden Schriftzug (viewBox 0–100, Radius 38, Start oben)
+const TEXT_RADIUS = 38
+const TEXT_BAHN = `M 50,${50 - TEXT_RADIUS} a ${TEXT_RADIUS},${TEXT_RADIUS} 0 1,1 0,${2 * TEXT_RADIUS} a ${TEXT_RADIUS},${TEXT_RADIUS} 0 1,1 0,-${2 * TEXT_RADIUS}`
 
 interface AngebotModalProps {
   productOfTheMonth: {
@@ -61,8 +32,8 @@ interface AngebotModalProps {
 
 export default function AngebotModal({ productOfTheMonth, productImage }: AngebotModalProps) {
   const [isOpen, setIsOpen] = useState(false)
-  // Doppelpunkte aus useId entfernen, sie stören in url(#…)
-  const maskId = `deckel${useId().replace(/[^a-zA-Z0-9]/g, '')}`
+  // Doppelpunkte aus useId entfernen, sie stören in href="#…"
+  const bahnId = `angebot${useId().replace(/[^a-zA-Z0-9]/g, '')}`
 
   function closeModal() {
     setIsOpen(false)
@@ -75,51 +46,41 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
   return (
     <>
       <div className="flex items-center justify-center">
-        {/* Bierdeckel, der schräg auf dem Tresen liegt und sich alle paar Sekunden umdreht:
-            vorne der Schriftzug, hinten Produkt und Preis. Läuft von selbst, damit es auch ohne Maus
-            (Handy/Tablet) wirkt; Hover hebt ihn nur leicht an. */}
+        {/* Runde Plakette nach Framer-Vorlage „Rotating Text Badge“: dunkle Scheibe mit grauem Ring,
+            der Schriftzug kreist dauerhaft (auch ohne Maus auf Handy/Tablet), in der Mitte das
+            aktuelle Produktbild aus dem CMS vor einem weichgezeichneten Farbschein desselben Bildes. */}
         <button
           type="button"
           onClick={openModal}
           aria-label={`Angebot des Monats: ${[productOfTheMonth.description, productOfTheMonth.price].filter(Boolean).join(', ')} – Details öffnen`}
-          className="group relative block aspect-square w-36 -rotate-12 cursor-pointer perspective-[900px] transition-transform duration-300 hover:scale-110 hover:-rotate-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500 md:w-44 lg:w-48 xl:w-56"
+          className="group relative block aspect-square w-36 cursor-pointer rounded-full transition-transform duration-300 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500 md:w-44 lg:w-48 xl:w-56"
         >
-          <span aria-hidden="true" className="bierdeckel-flip relative block h-full w-full transform-3d">
-            {/* Vorderseite */}
-            <span className="absolute inset-0 flex flex-col items-center justify-center gap-1 backface-hidden">
-              <DeckelFlaeche id={`${maskId}v`} fill="#f5ecd7" ring="#9f0712" />
-              {productOfTheMonth.badge && (
-                <span className="relative font-sans text-[0.55rem] font-black uppercase leading-none tracking-[0.3em] text-red-800 md:text-xs">
-                  ★ {productOfTheMonth.badge} ★
-                </span>
-              )}
-              <span className="relative text-center font-mono text-base leading-[1.05] text-red-800 uppercase md:text-xl lg:text-[1.35rem] xl:text-2xl">
-                Angebot
-                <br />
-                <span className="text-[0.6em]">des</span>
-                <br />
-                Monats
-              </span>
-            </span>
-            {/* Rückseite */}
-            <span className="absolute inset-0 flex rotate-y-180 flex-col items-center justify-center gap-1 backface-hidden">
-              <DeckelFlaeche id={`${maskId}r`} fill="#1a252d" ring="#f0b100" />
-              <span className="relative h-[42%] w-[30%]">
-                <Image
-                  src={productImage}
-                  alt=""
-                  fill
-                  sizes="80px"
-                  className="object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
-                />
-              </span>
-              {productOfTheMonth.price && (
-                <span className="relative font-mono text-sm leading-none text-yellow-500 md:text-base lg:text-lg xl:text-xl">
-                  {productOfTheMonth.price}
-                </span>
-              )}
-            </span>
+          <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full drop-shadow-[0_8px_16px_rgba(0,0,0,0.6)]" aria-hidden="true">
+            <circle cx="50" cy="50" r="47" fill="#161616" stroke="#3b3b3b" strokeWidth="5" />
+          </svg>
+
+          {/* Bild in der Mitte: unscharfe, vergrößerte Kopie als Farbkugel, darüber das scharfe Bild */}
+          <span aria-hidden="true" className="absolute inset-[25%] overflow-hidden rounded-full bg-[radial-gradient(circle_at_40%_65%,#c2410c,#7c2d12_75%)]">
+            <Image src={productImage} alt="" fill sizes="120px" className="scale-[2.2] object-cover opacity-60 blur-md saturate-150" />
+            <Image src={productImage} alt="" fill sizes="120px" className="object-contain p-[5%] drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]" />
           </span>
+
+          {/* Umlaufender Schriftzug; textLength verteilt ihn exakt auf den ganzen Kreis */}
+          <svg
+            viewBox="0 0 100 100"
+            className="absolute inset-0 h-full w-full animate-[spin_18s_linear_infinite] motion-reduce:animate-none"
+            aria-hidden="true"
+          >
+            <defs>
+              <path id={bahnId} d={TEXT_BAHN} />
+            </defs>
+            {/* Systemschrift statt font-sans: die ist hier auf die Handschrift Architects Daughter gesetzt */}
+            <text className="fill-white font-[ui-sans-serif,system-ui,sans-serif] text-[6.4px] font-semibold uppercase">
+              <textPath href={`#${bahnId}`} textLength={2 * Math.PI * TEXT_RADIUS - 2} lengthAdjust="spacing">
+                Angebot des Monats ✦ Angebot des Monats ✦
+              </textPath>
+            </text>
+          </svg>
         </button>
       </div>
 
