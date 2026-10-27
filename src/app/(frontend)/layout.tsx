@@ -6,6 +6,7 @@ import { getCachedNavigation } from '@/globals/navigation/queries'
 import type { Navigation as NavigationType } from '@/payload-types'
 import { Footer12 } from '@/components/footer'
 import ScrollToTop from '@/components/BackToTop/ScrollToTop'
+import { SprachProvider } from '@/i18n/SprachProvider'
 
 export const metadata: Metadata = {
   description: 'Die Kiezkneipe',
@@ -58,10 +59,13 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="de" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <Navbar9 navigation={menuItems} />
-        <main>{children}</main>
-        <ScrollToTop />
-        <Footer12 />
+        {/* Sprachwahl gilt für die ganze Seite, damit später alle Bereiche übersetzen können */}
+        <SprachProvider>
+          <Navbar9 navigation={menuItems} />
+          <main>{children}</main>
+          <ScrollToTop />
+          <Footer12 />
+        </SprachProvider>
       </body>
     </html>
   )

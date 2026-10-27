@@ -412,3 +412,25 @@ body {
   height: 100vh;
   width: 86vw;
 }
+
+/* Aufgelegte Landesflagge am Mast (MastFlagge): flattert leicht, vom Mast (links) aus */
+@keyframes flagge-wehen {
+  0%,
+  100% {
+    transform: skewY(-2deg);
+  }
+  50% {
+    transform: skewY(2deg);
+  }
+}
+
+.flagge-wehen {
+  transform-origin: left center;
+  animation: flagge-wehen 1.1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flagge-wehen {
+    animation: none;
+  }
+}

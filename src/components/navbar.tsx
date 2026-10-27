@@ -37,6 +37,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
+import { SprachWahl } from '@/components/SprachWahl'
 
 interface MenuLink {
   label: string
@@ -145,7 +146,9 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
               </NavigationMenuList>
             </NavigationMenu>
             {/* mr-5 spiegelt das ml-5 des Logos, sonst klebt der Button am rechten Rand */}
-            <div className="mr-5 flex items-center gap-4">
+            <div className="mr-5 flex items-center gap-2 md:gap-4">
+              {/* Matrose am Mast: Klick öffnet die Sprachwahl, danach hisst er die passende Flagge */}
+              <SprachWahl />
               <Button
                 asChild
                 variant="secondary"
