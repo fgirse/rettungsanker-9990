@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import Image from 'next/image'
 
 export default function HeroAnimatedText() {
   const dieRef = useRef<HTMLParagraphElement>(null)
@@ -41,7 +42,22 @@ export default function HeroAnimatedText() {
         id="1"
         className="relative text-[45vw] headingE text-amber-50 text-center top-[-16vh] leading-[24px] my-0! md:text-[43vw] md:top-[-14vh] lg:top-[1vh] lg:text-[22vw] lg:leading-[32px] lg:my-[24px]! flach:top-0! flach:my-0! flach:text-[34svh]! flach:leading-none!"
       >
-        die
+        d
+        {/* Desktop: Rettungsanker-Logo als i-Punkt, so breit wie der Strich des I. Maße in em, damit es mit der Schrift mitwächst;
+            0,408 em = Abstand von Oberkante Schriftbox bis Oberkante Kapitälchen (1,098 − 0,69). */}
+        <span className="relative">
+          i
+          <Image
+            src="/Assets/image1.svg"
+            alt=""
+            aria-hidden
+            width={324}
+            height={258}
+            unoptimized
+            className="pointer-events-none absolute left-1/2 hidden! w-[0.32em] max-w-none -translate-x-1/2 top-[calc(0.408em-0.05em-0.255em)] lg:block!"
+          />
+        </span>
+        e
       </p>
       <p
         ref={kiezkneipeRef}
