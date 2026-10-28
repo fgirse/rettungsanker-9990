@@ -1,5 +1,6 @@
 import React from 'react'
 import type { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/next'
 import './styles.css'
 import { Navbar9 } from '@/components/navbar'
 import { getCachedNavigation } from '@/globals/navigation/queries'
@@ -66,6 +67,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           <ScrollToTop />
           <Footer12 />
         </SprachProvider>
+        {/* Cookiefreie Besucherstatistik von Vercel, sichtbar im Dashboard unter „Analytics" */}
+        <Analytics />
       </body>
     </html>
   )
