@@ -96,7 +96,12 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  fallbackLocale: null;
+  fallbackLocale:
+    | ('false' | 'none' | 'null')
+    | false
+    | null
+    | ('de' | 'en' | 'fr' | 'it' | 'ru')
+    | ('de' | 'en' | 'fr' | 'it' | 'ru')[];
   globals: {
     generalSettings: GeneralSetting;
     navigation: Navigation;
@@ -109,7 +114,7 @@ export interface Config {
     productOfTheMonth: ProductOfTheMonthSelect<false> | ProductOfTheMonthSelect<true>;
     partners: PartnersSelect<false> | PartnersSelect<true>;
   };
-  locale: null;
+  locale: 'de' | 'en' | 'fr' | 'it' | 'ru';
   user: User;
   jobs: {
     tasks: unknown;

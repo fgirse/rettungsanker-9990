@@ -38,6 +38,9 @@ import {
 } from '@/components/ui/navigation-menu'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
 import { SprachWahl } from '@/components/SprachWahl'
+import { useSprache } from '@/i18n/SprachProvider'
+import { lokalisierterPfad } from '@/i18n/sprachen'
+import { texte } from '@/i18n/texte'
 
 interface MenuLink {
   label: string
@@ -85,6 +88,8 @@ interface Navbar9Props {
 
 const Navbar9 = ({ className, navigation }: Navbar9Props) => {
   const [open, setOpen] = useState<boolean>(false)
+  const { sprache } = useSprache()
+  const t = texte(sprache)
 
   useEffect(() => {
     const handleResize = () => {
@@ -121,7 +126,7 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
         <div className="container mx-auto h-(--kopfzeile)">
           <div className="flex h-full items-center justify-between">
             <a
-              href={LOGO.url}
+              href={lokalisierterPfad(LOGO.url, sprache)}
               className="flex max-h-12 items-center gap-2 text-lg font-semibold tracking-tighter"
             >
               {/* Feste Breite auf kleinen Bildschirmen, sonst wächst das Logo auf 150 px und ragt aus der Kopfzeile */}
@@ -159,7 +164,12 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
                 </a>
               </Button>
               <div className="lg:hidden">
-                <Button variant="ghost" size="icon" onClick={handleMobileMenu}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleMobileMenu}
+                  aria-label={open ? t.menueSchliessen : t.menueOeffnen}
+                >
                   {open ? (
                     <X className="size-5.5 stroke-foreground" />
                   ) : (
@@ -233,6 +243,7 @@ const MenuSubLink = ({ link }: MenuSubLinkProps) => {
 }
 
 const MobileNavigationMenu = ({ open, setOpen, navigation }: MobileNavigationMenuProps) => {
+  const { sprache } = useSprache()
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetContent
@@ -243,7 +254,7 @@ const MobileNavigationMenu = ({ open, setOpen, navigation }: MobileNavigationMen
         <div className="flex-1 overflow-y-auto">
           <div className="container pb-12">
             <div className="absolute -m-px h-px w-px overflow-hidden border-0 mask-clip-border p-0 text-nowrap whitespace-nowrap">
-              <SheetTitle className="text-primary">Mobile Navigation</SheetTitle>
+              <SheetTitle className="text-primary">{texte(sprache).mobileNavigation}</SheetTitle>
             </div>
             <div className="flex h-full flex-col justify-between gap-20">
               <Accordion type="multiple" className="w-full">

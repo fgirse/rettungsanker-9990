@@ -270,15 +270,15 @@ body {
   font-weight: 400;
   src:
     local(''),
-    url('../../../public/fonts/ArchitectsDaughter/architects-daughter-v17-latin-regular.eot')
+    url('../../../../public/fonts/ArchitectsDaughter/architects-daughter-v17-latin-regular.eot')
       format('embedded-opentype'),
-    url('../../../public/fonts/ArchitectsDaughter/architects-daughter-v17-latin-regular.woff2')
+    url('../../../../public/fonts/ArchitectsDaughter/architects-daughter-v17-latin-regular.woff2')
       format('woff2'),
-    url('../../../public/fonts/ArchitectsDaughter/architects-daughter-v17-latin-regular.woff')
+    url('../../../../public/fonts/ArchitectsDaughter/architects-daughter-v17-latin-regular.woff')
       format('woff'),
-    url('../../../public/fonts/ArchitectsDaughter/architects-daughter-v17-latin-regular.ttf')
+    url('../../../../public/fonts/ArchitectsDaughter/architects-daughter-v17-latin-regular.ttf')
       format('truetype'),
-    url('../../../public/fonts/ArchitectsDaughter/architects-daughter-v17-latin-regular.svg')
+    url('../../../../public/fonts/ArchitectsDaughter/architects-daughter-v17-latin-regular.svg')
       format('svg');
 }
 
@@ -289,12 +289,12 @@ body {
   font-weight: 400;
   src:
     local(''),
-    url('../../../public/fonts/BowlbyOneSC/bowlby-one-sc-v19-latin-regular.eot')
+    url('../../../../public/fonts/BowlbyOneSC/bowlby-one-sc-v19-latin-regular.eot')
       format('embedded-opentype'),
-    url('../../../public/fonts/BowlbyOneSC/bowlby-one-sc-v19-latin-regular.woff2') format('woff2'),
-    url('../../../public/fonts/BowlbyOneSC/bowlby-one-sc-v19-latin-regular.woff') format('woff'),
-    url('../../../public/fonts/BowlbyOneSC/bowlby-one-sc-v19-latin-regular.ttf') format('truetype'),
-    url('../../../public/fonts/BowlbyOneSC/bowlby-one-sc-v19-latin-regular.svg') format('svg');
+    url('../../../../public/fonts/BowlbyOneSC/bowlby-one-sc-v19-latin-regular.woff2') format('woff2'),
+    url('../../../../public/fonts/BowlbyOneSC/bowlby-one-sc-v19-latin-regular.woff') format('woff'),
+    url('../../../../public/fonts/BowlbyOneSC/bowlby-one-sc-v19-latin-regular.ttf') format('truetype'),
+    url('../../../../public/fonts/BowlbyOneSC/bowlby-one-sc-v19-latin-regular.svg') format('svg');
 }
 
 .Galerie {
@@ -375,13 +375,13 @@ body {
 .shape-lighthouse {
   shape-margin: 80px;
   float: left;
-  shape-outside: url('../../../public/Assets/Img/lighthouse3.png');
+  shape-outside: url('../../../../public/Assets/Img/lighthouse3.png');
   shape-image-threshold: 0.6;
 }
 
 .portraitMick {
   shape-margin: 80px;
-  shape-outside: url('../../../public/Assets/Img/portraitmick.png');
+  shape-outside: url('../../../../public/Assets/Img/portraitmick.png');
   shape-image-threshold: 0.6;
 }
 

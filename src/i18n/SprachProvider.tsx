@@ -1,12 +1,13 @@
 'use client'
 
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
-import { istSprachCode, STANDARD_SPRACHE, type SprachCode } from './sprachen'
+import { usePathname, useRouter } from 'next/navigation'
+import { lokalisierterPfad, SPRACH_COOKIE, type SprachCode } from './sprachen'
 
-// Speicherort der Wahl: localStorage für den Browser, Cookie damit der Server
-// später (bei echten Übersetzungen) die Sprache schon beim Rendern kennt.
-const SPEICHER_SCHLUESSEL = 'sprache'
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365
+// Merkt sich über den Seitenwechsel hinweg, dass gerade aktiv gewählt wurde.
+// Nach dem Wechsel wird das Layout neu aufgebaut und hätte den Zustand sonst vergessen.
+const WECHSEL_SCHLUESSEL = 'spracheGewechselt'
 
 interface SprachKontextWert {
   sprache: SprachCode
@@ -17,32 +18,42 @@ interface SprachKontextWert {
 
 const SprachKontext = createContext<SprachKontextWert | null>(null)
 
-export function SprachProvider({ children }: { children: React.ReactNode }) {
-  const [sprache, setSprache] = useState<SprachCode>(STANDARD_SPRACHE)
+// Die Sprache steckt in der Adresse (/en/…, /fr/…); der Server gibt sie hier herein.
+export function SprachProvider({
+  sprache,
+  children,
+}: {
+  sprache: SprachCode
+  children: React.ReactNode
+}) {
+  const router = useRouter()
+  const pfad = usePathname()
   const [gewechselt, setGewechselt] = useState(false)
 
-  // Gespeicherte Wahl erst nach dem Mounten lesen, sonst weicht das Server-HTML ab
   useEffect(() => {
     try {
-      const gespeichert = localStorage.getItem(SPEICHER_SCHLUESSEL)
-      if (istSprachCode(gespeichert)) setSprache(gespeichert)
+      if (sessionStorage.getItem(WECHSEL_SCHLUESSEL) === sprache) {
+        sessionStorage.removeItem(WECHSEL_SCHLUESSEL)
+        setGewechselt(true)
+      }
     } catch {
-      // Privater Modus o. ä.: dann bleibt es bei Deutsch
+      // Privater Modus o. ä.: Flagge steht dann ohne Animation oben
     }
-  }, [])
-
-  useEffect(() => {
-    document.documentElement.lang = sprache
   }, [sprache])
 
-  const setzeSprache = useCallback((code: SprachCode) => {
-    setSprache(code)
-    setGewechselt(true)
-    try {
-      localStorage.setItem(SPEICHER_SCHLUESSEL, code)
-    } catch {}
-    document.cookie = `${SPEICHER_SCHLUESSEL}=${code}; path=/; max-age=${COOKIE_MAX_AGE}; samesite=lax`
-  }, [])
+  const setzeSprache = useCallback(
+    (code: SprachCode) => {
+      if (code === sprache) return
+      // Cookie zuerst: die Middleware leitet Adressen ohne Kürzel danach in die gewählte Sprache
+      document.cookie = `${SPRACH_COOKIE}=${code}; path=/; max-age=${COOKIE_MAX_AGE}; samesite=lax`
+      try {
+        sessionStorage.setItem(WECHSEL_SCHLUESSEL, code)
+      } catch {}
+      // Gleiche Seite in der neuen Sprache, Sprungmarke (#…) bleibt erhalten
+      router.push(`${lokalisierterPfad(pfad, code)}${window.location.hash}`)
+    },
+    [sprache, pfad, router],
+  )
 
   return (
     <SprachKontext.Provider value={{ sprache, gewechselt, setzeSprache }}>

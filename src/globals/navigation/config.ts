@@ -25,6 +25,7 @@ export const Navigation: GlobalConfig = {
           name: 'label',
           type: 'text',
           required: true,
+          localized: true,
         },
         {
           name: 'subItems',
@@ -44,11 +45,13 @@ export const Navigation: GlobalConfig = {
               name: 'label',
               type: 'text',
               required: true,
+              localized: true,
             },
             {
               name: 'description',
               type: 'text',
               required: false,
+              localized: true,
               admin: {
                 description: 'Optional description for the sub-item',
               },

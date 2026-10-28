@@ -27,3 +27,33 @@ export const istSprachCode = (wert: unknown): wert is SprachCode =>
 
 export const findeSprache = (code: SprachCode): Sprache =>
   SPRACHEN.find((s) => s.code === code) ?? SPRACHEN[0]
+
+export const SPRACH_CODES = SPRACHEN.map((s) => s.code)
+
+// Name des Cookies, in dem die Wahl des Besuchers liegt (liest auch die Middleware)
+export const SPRACH_COOKIE = 'sprache'
+
+// Liest die Sprache aus dem ersten Pfadteil, z. B. "/fr/impressum" → "fr".
+// Pfade ohne Sprachkürzel gehören zur Standardsprache Deutsch.
+export function spracheAusPfad(pfad: string): SprachCode {
+  const erster = pfad.split('/')[1]
+  return istSprachCode(erster) ? erster : STANDARD_SPRACHE
+}
+
+// Entfernt ein vorhandenes Sprachkürzel: "/fr/impressum" → "/impressum"
+export function pfadOhneSprache(pfad: string): string {
+  const teile = pfad.split('/')
+  if (!istSprachCode(teile[1])) return pfad || '/'
+  return '/' + teile.slice(2).join('/')
+}
+
+// Baut den Link für eine Sprache. Deutsch bleibt ohne Kürzel ("/impressum"),
+// alle anderen bekommen es vorangestellt ("/en/impressum").
+// Externe Links, reine Anker ("#…") und mailto/tel bleiben unverändert.
+export function lokalisierterPfad(url: string | undefined, sprache: SprachCode): string | undefined {
+  if (!url || !url.startsWith('/') || url.startsWith('//')) return url
+  const ohne = pfadOhneSprache(url)
+  if (sprache === STANDARD_SPRACHE) return ohne
+  // "/#kontakt" → "/en#kontakt" statt "/en/#kontakt", damit Next nicht erst umleitet
+  return ohne === '/' || ohne.startsWith('/#') ? `/${sprache}${ohne.slice(1)}` : `/${sprache}${ohne}`
+}

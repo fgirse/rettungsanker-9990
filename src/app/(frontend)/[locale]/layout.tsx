@@ -1,5 +1,6 @@
 import React from 'react'
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { Analytics } from '@vercel/analytics/next'
 import './styles.css'
 import { Navbar9 } from '@/components/navbar'
@@ -8,6 +9,8 @@ import type { Navigation as NavigationType } from '@/payload-types'
 import { Footer12 } from '@/components/footer'
 import ScrollToTop from '@/components/BackToTop/ScrollToTop'
 import { SprachProvider } from '@/i18n/SprachProvider'
+import { istSprachCode, lokalisierterPfad, SPRACH_CODES, type SprachCode } from '@/i18n/sprachen'
+import { texte } from '@/i18n/texte'
 
 export const metadata: Metadata = {
   description: 'Die Kiezkneipe',
@@ -17,9 +20,17 @@ export const metadata: Metadata = {
   },
 }
 
-function mapGlobalToMenuItems(navigation: NavigationType | null) {
+// Alle Sprachen beim Build vorbereiten, damit jede Sprachversion statisch ausgeliefert werden kann
+export function generateStaticParams() {
+  return SPRACH_CODES.map((locale) => ({ locale }))
+}
+
+// Interne Links zeigen auf die gleiche Seite in der aktuellen Sprache ("/impressum" → "/fr/impressum")
+function mapGlobalToMenuItems(navigation: NavigationType | null, sprache: SprachCode) {
+  const kontakt = { title: texte(sprache).kontakt, url: lokalisierterPfad('/#section-contact', sprache) }
+
   if (!navigation?.menuItems || navigation.menuItems.length === 0) {
-    return [{ title: 'Kontakt', url: '/#section-contact' }]
+    return [kontakt]
   }
 
   const mappedItems = navigation.menuItems.map((item) => {
@@ -29,7 +40,7 @@ function mapGlobalToMenuItems(navigation: NavigationType | null) {
         title: item.label,
         links: item.subItems.map((sub) => ({
           label: sub.label,
-          url: sub.URL,
+          url: lokalisierterPfad(sub.URL, sprache),
           description: sub.description || undefined,
         })),
       }
@@ -37,31 +48,38 @@ function mapGlobalToMenuItems(navigation: NavigationType | null) {
     // Otherwise it's a simple link
     return {
       title: item.label,
-      url: item.URL,
+      url: lokalisierterPfad(item.URL, sprache),
     }
   })
 
   const hasContactLink = mappedItems.some(
-    (item) => item.url === '/#section-contact' || item.title.toLowerCase() === 'kontakt',
+    (item) => item.url === kontakt.url || item.title.toLowerCase() === kontakt.title.toLowerCase(),
   )
 
   if (!hasContactLink) {
-    mappedItems.push({ title: 'Kontakt', url: '/#section-contact' })
+    mappedItems.push(kontakt)
   }
 
   return mappedItems
 }
 
-export default async function RootLayout(props: { children: React.ReactNode }) {
+export default async function RootLayout(props: {
+  children: React.ReactNode
+  params: Promise<{ locale: string }>
+}) {
   const { children } = props
-  const navigation = await getCachedNavigation()
-  const menuItems = mapGlobalToMenuItems(navigation)
+  const { locale } = await props.params
+  // Unbekanntes Kürzel wie /xy/… → 404 statt einer leeren Seite
+  if (!istSprachCode(locale)) notFound()
+
+  const navigation = await getCachedNavigation(locale)
+  const menuItems = mapGlobalToMenuItems(navigation, locale)
 
   return (
-    <html lang="de" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body suppressHydrationWarning>
-        {/* Sprachwahl gilt für die ganze Seite, damit später alle Bereiche übersetzen können */}
-        <SprachProvider>
+        {/* Sprache kommt aus der Adresse; der Provider reicht sie an alle Client-Bausteine weiter */}
+        <SprachProvider sprache={locale}>
           <Navbar9 navigation={menuItems} />
           <main>{children}</main>
           <ScrollToTop />

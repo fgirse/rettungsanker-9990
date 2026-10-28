@@ -11,6 +11,7 @@ import { Flagge } from '@/components/Flaggen'
 import { MastFlagge } from '@/components/MastFlagge'
 import { useSprache } from '@/i18n/SprachProvider'
 import { findeSprache, SPRACHEN } from '@/i18n/sprachen'
+import { texte } from '@/i18n/texte'
 
 export function SprachWahl() {
   const { sprache, setzeSprache } = useSprache()
@@ -19,7 +20,7 @@ export function SprachWahl() {
     <DropdownMenu modal={false}>
       {/* Das Mastbild selbst ist der Auslöser – spart in der vollen Kopfzeile einen eigenen Knopf */}
       <DropdownMenuTrigger
-        aria-label={`Sprache wählen, aktuell ${findeSprache(sprache).name}`}
+        aria-label={`${texte(sprache).spracheWaehlen} ${findeSprache(sprache).name}`}
         className="group relative rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-yellow-400"
       >
         <MastFlagge className="h-16 transition-transform group-hover:scale-105 group-data-[state=open]:scale-105 2xl:h-20" />

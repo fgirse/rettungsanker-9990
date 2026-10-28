@@ -38,6 +38,19 @@ export default buildConfig({
   },
   collections: [Users, Media, Pages, Marquee, About, BentoGrid, Getraenkekarte],
   globals: [GeneralSettings, Navigation, ProductOfTheMonth, Partners],
+  // Inhalte je Sprache pflegbar: nur Felder mit `localized: true` bekommen pro Sprache einen eigenen Wert.
+  // fallback: fehlt eine Übersetzung, wird der deutsche Text angezeigt.
+  localization: {
+    locales: [
+      { code: 'de', label: 'Deutsch' },
+      { code: 'en', label: 'English' },
+      { code: 'fr', label: 'Français' },
+      { code: 'it', label: 'Italiano' },
+      { code: 'ru', label: 'Русский' },
+    ],
+    defaultLocale: 'de',
+    fallback: true,
+  },
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
