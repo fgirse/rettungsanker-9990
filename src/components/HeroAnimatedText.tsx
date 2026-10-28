@@ -39,14 +39,14 @@ export default function HeroAnimatedText() {
       <p
         ref={dieRef}
         id="1"
-        className="relative text-[45vw] headingE text-amber-50 text-center top-[-16vh] leading-[24px] my-0! md:text-[43vw] md:top-[-14vh] lg:top-[1vh] lg:text-(length:--die) lg:leading-[32px] lg:my-[24px]! flach:top-0! flach:my-0! flach:text-[34svh]! flach:leading-none! lg:flach:text-(length:--die)!"
+        className="relative text-[45vw] headingE text-amber-50 text-center top-[-16vh] leading-[24px] my-0! md:text-[43vw] md:top-[-14vh] lg:top-[1vh] lg:text-[22vw] lg:leading-[32px] lg:my-[24px]! flach:top-0! flach:my-0! flach:text-[34svh]! flach:leading-none!"
       >
         die
       </p>
       <p
         ref={kiezkneipeRef}
         id="2"
-        className="relative text-[12vw] top-[calc(19.08vw-16vh-12.33px)] headingA text-red-800 text-center leading-[24px] my-0! md:top-[calc(18.416vw-14vh-13.83px)] lg:text-[calc(var(--die)*3/11)] lg:top-[calc(var(--die)*0.4261+1vh-68.83px)] lg:leading-[32px] lg:my-[24px]! flach:top-0! flach:mt-[calc(11.17px-7.107svh)]! flach:mb-0! flach:text-[9svh]! flach:leading-none! lg:flach:text-[calc(var(--die)*9/34)]! lg:flach:mt-[calc(11.17px-var(--die)*0.209)]!"
+        className="relative text-[12vw] top-[calc(19.08vw-16vh-12.33px)] headingA text-red-800 text-center leading-[24px] my-0! md:top-[calc(18.416vw-14vh-13.83px)] lg:text-[6vw] lg:top-[calc(9.374vw+1vh-68.83px)] lg:leading-[32px] lg:my-[24px]! flach:top-0! flach:mt-[calc(11.17px-7.107svh)]! flach:mb-0! flach:text-[9svh]! flach:leading-none!"
       >
         kiezkneipe
       </p>
