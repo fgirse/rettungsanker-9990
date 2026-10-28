@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import LogoNeu from '../../public/Assets/Img/LogoAlt.png'
+import LogoAlt from '../../public/Assets/Img/LogoAlt.png'
+import LogoNeu from '../../public/Assets/Img/LogoNeu.png'
 //import Marquee from '@/components/MarqueeCooperateComp';
 import Angebot from '@/components/AngebotDesMonats'
 import HeroAnimatedText from '@/components/HeroAnimatedText'
@@ -33,10 +34,18 @@ function Hero({ sprache }: { sprache: SprachCode }) {
         <source src="/Assets/Img/hans_flying_music.mp4" type="video/mp4" />
       </video>
       {/* Handy: Logo und Schriftzug gemeinsam nach unten, damit sie mittig zwischen Kopfzeile und Bierdeckel
-          stehen (gemessen 360–430 px Breite, jeweils rund 74 px). Die vh-Versätze darin bleiben unberührt. */}
-      <div className="relative z-10 flex flex-col items-center translate-y-16.5 md:translate-y-0 flach:translate-y-0!">
+          stehen (gemessen 360–430 px Breite, jeweils rund 74 px). Die vh-Versätze darin bleiben unberührt.
+          Desktop: --die ist die Schriftgröße von „die“, alles andere (Logo, „kiezkneipe“, Versätze) rechnet damit.
+          Sie ist auf die Fensterhöhe begrenzt, damit Logo und Schriftzug (zusammen rund 1,85 × --die hoch)
+          unter die Kopfzeile passen; das Anheben setzt die Gruppe mittig in den sichtbaren Bereich. */}
+      <div className="relative z-10 flex flex-col items-center translate-y-16.5 md:translate-y-0 lg:translate-y-[calc(var(--die)*-0.265-11px)] lg:[--die:min(22vw,calc(51svh-4.3rem))] flach:translate-y-0!">
         <div className="relative top-[-26vh] w-[74vw] md:w-[70vw] lg:hidden flach:top-0! flach:w-[60svh]!">
-          <Image src={LogoNeu} alt={START[sprache].hero.logoAlt} className="mt-3 flach:mt-0" />
+          <Image src={LogoAlt} alt={START[sprache].hero.logoAlt} className="mt-3 flach:mt-0" />
+        </div>
+        {/* Desktop-Logo, so breit wie der Schriftzug. Der Abstand nach unten gleicht den leeren Raum über
+            „die“ aus (Oberlänge der Schrift), damit sichtbar ein kleiner Spalt bleibt. */}
+        <div className="hidden lg:block lg:w-[calc(var(--die)*1.61)] lg:mb-[calc(var(--die)*0.27)] lg:flach:w-[calc(var(--die)*1.6)]! lg:flach:-mb-[calc(var(--die)*0.09)]!">
+          <Image src={LogoNeu} alt={START[sprache].hero.logoAlt} priority />
         </div>
         <HeroAnimatedText />
       </div>
