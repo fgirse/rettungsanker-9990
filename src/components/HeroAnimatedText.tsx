@@ -45,10 +45,10 @@ export default function HeroAnimatedText() {
         d
         {/* Desktop: Rettungsanker-Logo als runder i-Punkt. Maße in em, damit er mit der Schrift mitwächst;
             0,408 em = Abstand von Oberkante Schriftbox bis Oberkante Kapitälchen (1,098 − 0,69).
-            Das Logo (Seitenverhältnis 1,26) passt bei 78 % Breite ganz in den Kreis, der schwarze Grund füllt den Rest. */}
+            Das Logo (Seitenverhältnis 1,26) passt bei 78 % Breite ganz in den Kreis, der schwarze Grund füllt den Rest; feiner weißer Rand. */}
         <span className="relative">
           i
-          <span className="pointer-events-none absolute left-1/2 top-[calc(0.408em-0.05em-0.36em)] hidden! size-[0.36em] -translate-x-1/2 items-center justify-center overflow-hidden rounded-full bg-black lg:flex!">
+          <span className="pointer-events-none absolute left-1/2 top-[calc(0.408em-0.05em-0.36em)] hidden! size-[0.36em] -translate-x-1/2 items-center justify-center overflow-hidden rounded-full border-[0.5px] border-white/70 bg-black lg:flex!">
             <Image
               src="/Assets/image1.svg"
               alt=""
