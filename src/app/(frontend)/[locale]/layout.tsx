@@ -9,15 +9,30 @@ import type { Navigation as NavigationType } from '@/payload-types'
 import { Footer12 } from '@/components/footer'
 import ScrollToTop from '@/components/BackToTop/ScrollToTop'
 import { SprachProvider } from '@/i18n/SprachProvider'
-import { istSprachCode, lokalisierterPfad, SPRACH_CODES, type SprachCode } from '@/i18n/sprachen'
+import {
+  istSprachCode,
+  lokalisierterPfad,
+  SPRACH_CODES,
+  spracheAusParams,
+  type SprachCode,
+  type SprachParams,
+} from '@/i18n/sprachen'
 import { texte } from '@/i18n/texte'
+import { SEITEN } from '@/i18n/inhalte/seiten'
 
-export const metadata: Metadata = {
-  description: 'Die Kiezkneipe',
-  title: 'Rettungsanker-Freiburg',
-  icons: {
-    icon: '/Assets/Svg/faviconLogoNeu.svg',
-  },
+// Titel und Beschreibung je Sprache; Unterseiten überschreiben sie mit eigenen Werten
+export async function generateMetadata({ params }: { params: SprachParams }): Promise<Metadata> {
+  const sprache = await spracheAusParams(params)
+  const t = SEITEN[sprache].meta
+  return {
+    // Basis für relative Adressen in Metadaten (z. B. die Sprachverweise der Startseite)
+    metadataBase: new URL('https://rettungsanker-freiburg.de'),
+    title: t.titel,
+    description: t.beschreibung,
+    icons: {
+      icon: '/Assets/Svg/faviconLogoNeu.svg',
+    },
+  }
 }
 
 // Alle Sprachen beim Build vorbereiten, damit jede Sprachversion statisch ausgeliefert werden kann

@@ -8,8 +8,10 @@ import { TypingText } from "./CustomTexts";
 import Lighthouse from "../../public/Assets/Img/lighthouse3.png";
 import PortraitMick from "../../public/Assets/Img/portraitmick.png";
 import { RichText } from '@payloadcms/richtext-lexical/react';
+import { START } from '@/i18n/inhalte/start';
 
-export default function AboutClient({ about }) {
+export default function AboutClient({ about, sprache }) {
+  const t = START[sprache].about;
   return (
     <section
       id="section-about"
@@ -25,7 +27,7 @@ export default function AboutClient({ about }) {
         className={`${styles.innerWidth} mx-auto ${styles.flexCenter} flex-col`}
       >
         <TypingText
-          title="| about us"
+          title={t.ueberschrift}
           textStyles="text-yellow-500 text-center mt-[7vh] lg:mt-[0vh]" />
 
         <motion.div
@@ -40,12 +42,13 @@ export default function AboutClient({ about }) {
               src={Lighthouse}
               height="320"
               width="230"
-              alt="Leuchtturm"
+              alt={t.leuchtturmAlt}
               className="shape-lighthouse h-54 w-60" />
           </div>
 
           <div className="w-[90vw] -mt-12 text-[1rem] md:text-[1.66rem] px-5 text-gray-300  lg:text-[3.0rem] lg:leading-12 font-sans">
-            <RichText data={about.content_about} />
+            {/* Kann kurz fehlen, solange die Datenbank noch nicht auf Sprachen umgestellt ist */}
+            {about.content_about && <RichText data={about.content_about} />}
           </div>
 
           <div className="flex flex-row justify-center items-center gap-x-5">
@@ -54,19 +57,19 @@ export default function AboutClient({ about }) {
               height="80"
               width="60"
               float="left"
-              alt="Portrait"
+              alt={t.portraitAlt}
               className=" mt-5 rounded-full portraitMick" />
             <p className=" font-sans text-gray-300 text-[1.0rem] md:text-[1.66rem] lg:text-[3.0rem] lg:leading-12">
 
-              Michael Schreck <br />und<br /> das Team des Rettungsankers
+              Michael Schreck <br />{t.und}<br /> {t.team}
             </p>
           </div>
         </motion.div>
-        <p className="text-yellow-500 text-center">scrolling down</p>
+        <p className="text-yellow-500 text-center">{t.weiter}</p>
         <motion.img
           variants={fadeIn("up", "tween", 0.3, 1)}
           src="/Assets/Img/arrow-down.svg"
-          alt="arrow down"
+          alt={t.pfeilAlt}
           className="w-4.5 h-7 object-contain mt-7"
         />
       </motion.div>

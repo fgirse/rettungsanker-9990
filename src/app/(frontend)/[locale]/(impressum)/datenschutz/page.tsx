@@ -1,6 +1,9 @@
 import React from 'react'
 import * as Separator from '@radix-ui/react-separator'
 import Link from 'next/link'
+import { RechtsHinweis } from '@/components/RechtsHinweis'
+import { lokalisierterPfad, spracheAusParams, type SprachParams } from '@/i18n/sprachen'
+import { SEITEN } from '@/i18n/inhalte/seiten'
 
 // ─── Nav structure ─────────────────────────────────────────────────────────────
 
@@ -159,7 +162,9 @@ function SidebarNav() {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-const Datenschutz = () => {
+const Datenschutz = async ({ params }: { params: SprachParams }) => {
+  const sprache = await spracheAusParams(params)
+  const t = SEITEN[sprache].recht
   const currentDate = new Date().toLocaleDateString('de-DE', {
     year: 'numeric',
     month: 'long',
@@ -171,7 +176,7 @@ const Datenschutz = () => {
       <header className="relative border-b border-zinc-800 bg-[#1a252d]/80 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-16 md:py-20">
           <Link
-            href="/"
+            href={lokalisierterPfad('/', sprache)!}
             className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-500 hover:text-yellow-400 transition-colors duration-200 mb-8"
           >
             <svg
@@ -186,12 +191,12 @@ const Datenschutz = () => {
             >
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
-            Zurück
+            {t.zurueck}
           </Link>
           {/* Gelb statt Weiß, sonst verschwimmt die Schrift mit dem weißen Rand von headingA;
               font-normal! gegen die globale h1-Fettschrift (Bowlby One hat nur einen Schnitt) */}
           <h1 className="headingA text-5xl md:text-7xl text-yellow-500 font-normal! m-0">
-            Datenschutz&shy;erklärung
+            {t.datenschutz}
           </h1>
           <div className="mt-4 w-16 h-1 bg-yellow-400 rounded-full" />
           <p className="mt-5 text-zinc-400 text-sm font-mono">
@@ -201,8 +206,11 @@ const Datenschutz = () => {
         </div>
       </header>
 
+      <RechtsHinweis sprache={sprache} />
+
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-16">
+      {/* lang="de": Bildschirmleser lesen den deutschen Rechtstext auch auf fremdsprachigen Seiten richtig vor */}
+      <main lang="de" className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8 xl:gap-12">
           {/* Sidebar */}
           <SidebarNav />

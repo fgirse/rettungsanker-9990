@@ -13,12 +13,14 @@ export const BentoGrid: CollectionConfig = {
 
     {
       name: 'title_biere',
+      localized: true,
       type: 'text',
       required: true,
     },
 
     {
       name: 'content_biere',
+      localized: true,
       type: 'richText',
       required: true,
     },
@@ -30,12 +32,14 @@ export const BentoGrid: CollectionConfig = {
     },
     {
       name: 'title_weine',
+      localized: true,
       type: 'text',
       required: true,
     },
 
     {
       name: 'content_weine',
+      localized: true,
       type: 'richText',
       required: true,
     },
@@ -47,12 +51,14 @@ export const BentoGrid: CollectionConfig = {
     },
     {
       name: 'title_cocktails',
+      localized: true,
       type: 'text',
       required: true,
     },
 
     {
       name: 'content_cocktails',
+      localized: true,
       type: 'richText',
       required: true,
     },
@@ -65,12 +71,14 @@ export const BentoGrid: CollectionConfig = {
 
     {
       name: 'title_fussball',
+      localized: true,
       type: 'text',
       required: true,
     },
 
     {
       name: 'content_fussball',
+      localized: true,
       type: 'richText',
       required: true,
     },
@@ -82,12 +90,14 @@ export const BentoGrid: CollectionConfig = {
     },
     {
       name: 'title_events',
+      localized: true,
       type: 'text',
       required: true,
     },
 
     {
       name: 'content_events',
+      localized: true,
       type: 'richText',
       required: true,
     },
@@ -99,12 +109,14 @@ export const BentoGrid: CollectionConfig = {
     },
     {
       name: 'title_albers',
+      localized: true,
       type: 'text',
       required: true,
     },
 
     {
       name: 'content_albers',
+      localized: true,
       type: 'richText',
       required: true,
     },
@@ -116,12 +128,14 @@ export const BentoGrid: CollectionConfig = {
     },
     {
       name: 'title_logoNeu',
+      localized: true,
       type: 'text',
       required: true,
     },
 
     {
       name: 'content_logoNeu',
+      localized: true,
       type: 'richText',
       required: true,
     },

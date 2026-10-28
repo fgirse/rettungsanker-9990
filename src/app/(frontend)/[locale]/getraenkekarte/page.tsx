@@ -1,12 +1,14 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import GetraenkekarteComponent, { type MenuItem, type Kategorie } from '@/components/GetraenkekarteNew'
+import { spracheAusParams, type SprachParams } from '@/i18n/sprachen'
+import { SEITEN } from '@/i18n/inhalte/seiten'
 
 export const dynamic = 'force-dynamic'
 
-export const metadata = {
-  title: 'Getränkekarte – Rettungsanker Freiburg',
-  description: 'Unsere Biere, Weine, Cocktails, Softdrinks, Kaffee & Snacks.',
+export async function generateMetadata({ params }: { params: SprachParams }) {
+  const t = SEITEN[await spracheAusParams(params)].meta.getraenkekarte
+  return { title: t.titel, description: t.beschreibung }
 }
 
 // Raw document shape — matches the Getraenkekarte collection fields.
@@ -21,7 +23,8 @@ type GetraenkekarteDoc = {
   sortierung?: number | null
 }
 
-export default async function GetraenkekartePage() {
+export default async function GetraenkekartePage({ params }: { params: SprachParams }) {
+  const sprache = await spracheAusParams(params)
   const payload = await getPayload({ config })
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,6 +33,7 @@ export default async function GetraenkekartePage() {
     sort: 'sortierung',
     limit: 500,
     pagination: false,
+    locale: sprache,
   })
 
   const items: MenuItem[] = (result.docs as GetraenkekarteDoc[]).map((doc) => ({

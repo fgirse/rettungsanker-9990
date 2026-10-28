@@ -7,6 +7,9 @@ import { cn } from '@/lib/utils'
 import LogoNeu from '../../public/Assets/Img/LogoNeu.png'
 import Lighthouse from '../../public/Assets/Img/lighthouse3.png'
 import Waves from '@/components/waves'
+import { useSprache } from '@/i18n/SprachProvider'
+import { lokalisierterPfad } from '@/i18n/sprachen'
+import { SEITEN } from '@/i18n/inhalte/seiten'
 
 interface Footer12Props {
   className?: string
@@ -14,28 +17,32 @@ interface Footer12Props {
 
 const Footer12 = ({ className }: Footer12Props) => {
   const [year, setYear] = useState<number | null>(null)
+  const { sprache } = useSprache()
+  const t = SEITEN[sprache].footer
+  // Interne Links bleiben in der aktuellen Sprache
+  const pfad = (url: string) => lokalisierterPfad(url, sprache)!
 
   useEffect(() => {
     setYear(new Date().getFullYear())
   }, [])
 
   const navigation = [
-    { name: 'Über uns', href: '/#section-about' },
-    { name: 'Getränkekarte', href: '/#section-getraenkekarte' },
-    { name: 'Galerie', href: '/#section-gallery' },
-    { name: 'Team', href: '/#section-team' },
-    { name: 'Kontakt', href: '/#section-contact' },
-    { name: 'Anfahrt', href: '/#section-wohin' },
+    { name: t.ueberUns, href: pfad('/#section-about') },
+    { name: t.getraenkekarte, href: pfad('/#section-getraenkekarte') },
+    { name: t.galerie, href: pfad('/#section-gallery') },
+    { name: t.team, href: pfad('/#section-team') },
+    { name: t.kontakt, href: pfad('/#section-contact') },
+    { name: t.anfahrt, href: pfad('/#section-wohin') },
   ]
 
   const social = [
-    { name: 'Website', href: 'https://www.rettungsanker-freiburg.de' },
-    { name: 'E-Mail', href: 'mailto:rettungsanker-freiburg@gmx.de' },
+    { name: t.website, href: 'https://www.rettungsanker-freiburg.de' },
+    { name: t.email, href: 'mailto:rettungsanker-freiburg@gmx.de' },
   ]
 
   const legal = [
-    { name: 'Impressum', href: '/impressum' },
-    { name: 'Datenschutz', href: '/datenschutz' },
+    { name: t.impressum, href: pfad('/impressum') },
+    { name: t.datenschutz, href: pfad('/datenschutz') },
   ]
 
   return (
@@ -43,9 +50,9 @@ const Footer12 = ({ className }: Footer12Props) => {
       <nav className="container flex flex-col items-center gap-8">
         <div className="text-center">
           <p className="font-sans text-xs uppercase tracking-[0.35em] text-yellow-500/80">
-            Sitemap
+            {t.sitemap}
           </p>
-          <p className="mt-2 font-sans text-zinc-300">Alles Wichtige auf einen Blick</p>
+          <p className="mt-2 font-sans text-zinc-300">{t.ueberblick}</p>
         </div>
 
         <ul className="flex flex-wrap items-center justify-center gap-3">
@@ -109,8 +116,7 @@ const Footer12 = ({ className }: Footer12Props) => {
       <div className="container flex flex-col items-center justify-center gap-4 md:h-24 md:flex-row">
         <p className="text-center text-sm leading-loose text-muted-foreground">
           &copy; {year || '2024'}{' '}
-          <span className="uppercase font-black text-lime-400">medicusdesign</span> Basel 🇨🇭 All
-          rights reserved.
+          <span className="uppercase font-black text-lime-400">medicusdesign</span> Basel 🇨🇭 {t.rechte}
         </p>
       </div>
     </section>

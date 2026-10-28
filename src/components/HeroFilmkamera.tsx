@@ -5,6 +5,8 @@ import { createPortal } from 'react-dom'
 import Image from 'next/image'
 // Symbol „film-projector“ von Delapouite, game-icons.net (CC BY 3.0, Namensnennung im Impressum)
 import Filmkamera from '../../public/Assets/Svg/filmkamera.svg'
+import { useSprache } from '@/i18n/SprachProvider'
+import { START } from '@/i18n/inhalte/start'
 
 const VIDEO_SRC = '/media/rettungsanker-weltraumflug-layla.mp4'
 const POSTER_SRC = '/media/rettungsanker-weltraumflug-layla-poster.jpg'
@@ -17,6 +19,7 @@ export default function HeroFilmkamera() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const scrollYRef = useRef(0)
   const [open, setOpen] = useState(false)
+  const t = START[useSprache().sprache].hero
   // Portal erst nach dem Mounten, auf dem Server gibt es kein document
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
@@ -88,7 +91,7 @@ export default function HeroFilmkamera() {
       <button
         type="button"
         onClick={start}
-        aria-label="Film abspielen: Rettungsanker – Weltraumflug mit Layla"
+        aria-label={`${t.filmAbspielen}: ${t.filmTitel}`}
         className="group flex cursor-pointer flex-col items-center gap-2 focus-visible:outline-2 focus-visible:outline-yellow-500"
       >
         <Image
@@ -101,7 +104,7 @@ export default function HeroFilmkamera() {
         {/* Schwarze Schrift mit weißer Kontur; die gestaffelten Grautöne nach rechts unten
             ergeben die 3D-Kante, der weiche Schatten am Ende hebt den Schriftzug vom Hintergrund ab */}
         <span className="headingA text-base text-black [text-shadow:-1px_-1px_0_#fff,1px_-1px_0_#fff,-1px_1px_0_#fff,1px_1px_0_#fff,2px_2px_0_#d4d4d4,3px_3px_0_#a3a3a3,4px_4px_0_#737373,5px_5px_0_#404040,6px_7px_6px_rgba(0,0,0,0.6)] md:text-lg xl:text-2xl">
-          film ab!
+          {t.filmAb}
         </span>
       </button>
 
@@ -115,17 +118,17 @@ export default function HeroFilmkamera() {
             role="dialog"
             aria-modal="true"
             aria-hidden={!open}
-            aria-label="Rettungsanker – Weltraumflug mit Layla"
+            aria-label={t.filmTitel}
           >
             {/* Platzhalter, in den start() das Video einsetzt */}
             <div ref={videoHostRef} className="contents" />
             <button
               type="button"
               onClick={close}
-              aria-label="Film schließen"
+              aria-label={t.filmSchliessen}
               className="absolute top-6 right-6 rounded-full bg-black/60 px-4 py-2 font-sans text-white transition hover:bg-yellow-600"
             >
-              ✕ Schließen
+              ✕ {t.schliessen}
             </button>
           </div>,
           document.body,

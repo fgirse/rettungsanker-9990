@@ -6,6 +6,7 @@ export const About: CollectionConfig = {
   fields: [
     {
       name: 'title_about',
+      localized: true,
       type: 'text',
       required: true,
     },
@@ -18,6 +19,7 @@ export const About: CollectionConfig = {
 
     {
       name: 'content_about',
+      localized: true,
       type: 'richText',
       required: true,
     },

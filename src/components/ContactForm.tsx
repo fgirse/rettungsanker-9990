@@ -9,6 +9,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
+import { useSprache } from '@/i18n/SprachProvider'
+import { KONTAKT } from '@/i18n/inhalte/kontakt'
 
 declare global {
   interface Window {
@@ -53,7 +55,11 @@ const initialState: FormState = {
   turnstileToken: '',
 }
 
-function resolveErrorMessage(status: number, payload: unknown): string {
+type FehlerArt = 'captcha' | 'rate-limit' | 'unavailable' | 'generic'
+
+// Ordnet eine Server-Antwort einer Fehlerart zu. Die Art bestimmt Symbol, Farbe und den
+// übersetzten Text – früher wurde dafür der deutsche Wortlaut der Meldung verglichen.
+function fehlerArtAusAntwort(status: number, payload: unknown): FehlerArt {
   const response = payload as
     | {
         message?: string
@@ -68,47 +74,25 @@ function resolveErrorMessage(status: number, payload: unknown): string {
     response?.error ||
     response?.errors?.find((entry) => entry.message)?.message
 
-  if (status === 429) {
-    return 'Zu viele Anfragen in kurzer Zeit. Bitte warte kurz und versuche es dann erneut.'
-  }
+  if (status === 429) return 'rate-limit'
+  if (status === 503) return 'unavailable'
 
-  if (status === 503) {
-    return 'Das Kontaktformular ist im Moment nicht verfügbar. Bitte versuche es später erneut.'
-  }
-
-  if (serverMessage) {
-    const normalizedMessage = serverMessage.toLowerCase()
-
-    if (normalizedMessage.includes('captcha') || normalizedMessage.includes('turnstile')) {
-      return 'Die Captcha-Prüfung ist fehlgeschlagen oder abgelaufen. Bitte bestätige sie erneut.'
-    }
-  }
-
-  return serverMessage || 'Die Nachricht konnte nicht gesendet werden.'
-}
-
-function getErrorVariant(message: string): 'captcha' | 'rate-limit' | 'unavailable' | 'generic' {
-  const normalizedMessage = message.toLowerCase()
-
+  const normalizedMessage = serverMessage?.toLowerCase() ?? ''
   if (normalizedMessage.includes('captcha') || normalizedMessage.includes('turnstile')) {
     return 'captcha'
-  }
-
-  if (normalizedMessage.includes('zu viele anfragen') || normalizedMessage.includes('warte kurz')) {
-    return 'rate-limit'
-  }
-
-  if (
-    normalizedMessage.includes('nicht verfügbar') ||
-    normalizedMessage.includes('später erneut')
-  ) {
-    return 'unavailable'
   }
 
   return 'generic'
 }
 
+class SendeFehler extends Error {
+  constructor(public art: FehlerArt) {
+    super(art)
+  }
+}
+
 export default function ContactForm() {
+  const t = KONTAKT[useSprache().sprache].formular
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ''
   const turnstileContainerRef = useRef<HTMLDivElement>(null)
   const turnstileWidgetIdRef = useRef<string | null>(null)
@@ -122,10 +106,10 @@ export default function ContactForm() {
   const [submitProgress, setSubmitProgress] = useState(0)
   const [isTurnstileScriptLoaded, setIsTurnstileScriptLoaded] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const [errorVariant, setErrorVariant] = useState<FehlerArt | null>(null)
   const [successMessage, setSuccessMessage] = useState('')
   const [isSuccessVisible, setIsSuccessVisible] = useState(false)
 
-  const errorVariant = errorMessage ? getErrorVariant(errorMessage) : null
   const StatusIcon =
     errorVariant === 'captcha'
       ? ShieldAlert
@@ -136,17 +120,24 @@ export default function ContactForm() {
           : AlertTriangle
   const statusTitle =
     errorVariant === 'captcha'
-      ? 'Captcha erneut bestätigen'
+      ? t.titel.captcha
       : errorVariant === 'rate-limit'
-        ? 'Kurz warten und erneut senden'
+        ? t.titel.rateLimit
         : errorVariant === 'unavailable'
-          ? 'Formular temporär nicht verfügbar'
-          : 'Senden fehlgeschlagen'
+          ? t.titel.nichtVerfuegbar
+          : t.titel.allgemein
+
+  // Setzt Meldung und Fehlerart gemeinsam; leerer Text blendet die Meldung aus
+  function zeigeFehler(text: string, art: FehlerArt = 'generic') {
+    setErrorMessage(text)
+    setErrorVariant(text ? art : null)
+  }
 
   useEffect(() => {
     if (!turnstileSiteKey) {
-      setErrorMessage('Captcha ist nicht konfiguriert. Bitte später erneut versuchen.')
+      zeigeFehler(t.fehler.captchaFehlt)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [turnstileSiteKey])
 
   useEffect(() => {
@@ -218,7 +209,7 @@ export default function ContactForm() {
           ...current,
           turnstileToken: token,
         }))
-        setErrorMessage('')
+        zeigeFehler('')
       },
       'expired-callback': () => {
         setFormData((current) => ({
@@ -231,7 +222,7 @@ export default function ContactForm() {
           ...current,
           turnstileToken: '',
         }))
-        setErrorMessage('Captcha konnte nicht geladen werden. Bitte versuche es erneut.')
+        zeigeFehler(t.fehler.captchaLaden, 'captcha')
       },
     })
 
@@ -267,12 +258,12 @@ export default function ContactForm() {
     event.preventDefault()
 
     if (!formData.turnstileToken) {
-      setErrorMessage('Bitte bestätige zuerst das Captcha.')
+      zeigeFehler(t.fehler.captchaZuerst, 'captcha')
       return
     }
 
     setIsSubmitting(true)
-    setErrorMessage('')
+    zeigeFehler('')
     setSuccessMessage('')
 
     try {
@@ -289,7 +280,7 @@ export default function ContactForm() {
       if (!response.ok) {
         const result = (await response.json().catch(() => null)) as unknown
 
-        throw new Error(resolveErrorMessage(response.status, result))
+        throw new SendeFehler(fehlerArtAusAntwort(response.status, result))
       }
 
       setFormData({
@@ -298,11 +289,16 @@ export default function ContactForm() {
       })
       setSubmitProgress(100)
       resetTurnstile()
-      setSuccessMessage('Nachricht gesendet. Wir melden uns so schnell wie möglich bei dir.')
+      setSuccessMessage(t.erfolg)
     } catch (error) {
-      const message =
-        error instanceof Error ? error.message : 'Ein unerwarteter Fehler ist aufgetreten.'
-      setErrorMessage(message)
+      const art = error instanceof SendeFehler ? error.art : 'generic'
+      const text = {
+        captcha: t.fehler.captcha,
+        'rate-limit': t.fehler.rateLimit,
+        unavailable: t.fehler.nichtVerfuegbar,
+        generic: error instanceof SendeFehler ? t.fehler.allgemein : t.fehler.unerwartet,
+      }[art]
+      zeigeFehler(text, art)
       setSubmitProgress(100)
       resetTurnstile()
     } finally {
@@ -328,7 +324,7 @@ export default function ContactForm() {
               />
             </div>
             <p className="font-sans text-xs tracking-wide text-yellow-300/90">
-              Nachricht wird sicher übermittelt ... {Math.round(submitProgress)}%
+              {t.uebermittlung} {Math.round(submitProgress)}%
             </p>
           </div>
         ) : null}
@@ -336,7 +332,7 @@ export default function ContactForm() {
         <div className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="contact-name" className="font-sans text-zinc-100">
-              Name
+              {t.name}
             </Label>
             <Input
               id="contact-name"
@@ -344,7 +340,7 @@ export default function ContactForm() {
               type="text"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Dein Name"
+              placeholder={t.namePlatzhalter}
               required
               className="h-11 border-zinc-700 bg-zinc-900/80 font-sans text-white placeholder:text-zinc-500"
             />
@@ -352,7 +348,7 @@ export default function ContactForm() {
 
           <div className="space-y-2">
             <Label htmlFor="contact-email" className="font-sans text-zinc-100">
-              E-Mail
+              {t.email}
             </Label>
             <Input
               id="contact-email"
@@ -360,7 +356,7 @@ export default function ContactForm() {
               type="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="name@beispiel.de"
+              placeholder={t.emailPlatzhalter}
               required
               className="h-11 border-zinc-700 bg-zinc-900/80 font-sans text-white placeholder:text-zinc-500"
             />
@@ -368,7 +364,7 @@ export default function ContactForm() {
 
           <div className="space-y-2">
             <Label htmlFor="contact-phone" className="font-sans text-zinc-100">
-              Telefonnummer
+              {t.telefon}
             </Label>
             <Input
               id="contact-phone"
@@ -376,7 +372,7 @@ export default function ContactForm() {
               type="tel"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="Optional für Rückfragen"
+              placeholder={t.telefonPlatzhalter}
               className="h-11 border-zinc-700 bg-zinc-900/80 font-sans text-white placeholder:text-zinc-500"
             />
           </div>
@@ -385,7 +381,7 @@ export default function ContactForm() {
         <div className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="contact-event-date" className="font-sans text-zinc-100">
-              Veranstaltungsdatum
+              {t.datum}
             </Label>
             <Input
               id="contact-event-date"
@@ -399,7 +395,7 @@ export default function ContactForm() {
 
           <div className="space-y-2">
             <Label htmlFor="contact-subject" className="font-sans text-zinc-100">
-              Betreff
+              {t.betreff}
             </Label>
             <Input
               id="contact-subject"
@@ -407,7 +403,7 @@ export default function ContactForm() {
               type="text"
               value={formData.subject}
               onChange={handleChange}
-              placeholder="Worum geht es?"
+              placeholder={t.betreffPlatzhalter}
               className="h-11 border-zinc-700 bg-zinc-900/80 font-sans text-white placeholder:text-zinc-500"
             />
           </div>
@@ -438,21 +434,21 @@ export default function ContactForm() {
 
         <div className="space-y-2">
           <Label htmlFor="contact-message" className="font-sans text-zinc-100">
-            Nachricht
+            {t.nachricht}
           </Label>
           <Textarea
             id="contact-message"
             name="message"
             value={formData.message}
             onChange={handleChange}
-            placeholder="Schreib hier deine Nachricht"
+            placeholder={t.nachrichtPlatzhalter}
             required
             className="min-h-40 border-zinc-700 bg-zinc-900/80 font-sans text-white placeholder:text-zinc-500"
           />
         </div>
 
         <div className="space-y-2">
-          <Label className="font-sans text-zinc-100">Captcha</Label>
+          <Label className="font-sans text-zinc-100">{t.captcha}</Label>
           <div
             ref={turnstileContainerRef}
             className={cn(
@@ -463,7 +459,7 @@ export default function ContactForm() {
             )}
           />
           <p className="font-sans text-sm text-zinc-400">
-            Cloudflare Turnstile schützt dieses Formular vor automatisierten Anfragen.
+            {t.captchaHinweis}
           </p>
         </div>
 
@@ -477,7 +473,7 @@ export default function ContactForm() {
           >
             <CheckCircle2 className="mt-0.5 size-5 shrink-0" />
             <div>
-              <p className="font-bold text-emerald-100">Nachricht erfolgreich gesendet</p>
+              <p className="font-bold text-emerald-100">{t.erfolgTitel}</p>
               <p>{successMessage}</p>
             </div>
           </div>
@@ -506,8 +502,7 @@ export default function ContactForm() {
 
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <p className="font-sans text-sm leading-6 text-zinc-400">
-            Mit dem Absenden bestätigst du, dass wir deine Anfrage zur Bearbeitung per E-Mail
-            verarbeiten dürfen. Turnstile und serverseitiges Rate-Limiting blockieren Missbrauch.
+            {t.einwilligung}
           </p>
           <Button
             type="submit"
@@ -517,10 +512,10 @@ export default function ContactForm() {
             {isSubmitting ? (
               <span className="inline-flex items-center gap-2">
                 <Loader2 className="size-4 animate-spin" />
-                Wird gesendet ...
+                {t.sendet}
               </span>
             ) : (
-              'Nachricht senden'
+              t.senden
             )}
           </Button>
         </div>

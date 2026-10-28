@@ -1,7 +1,8 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
+import type { SprachCode } from '@/i18n/sprachen'
 
-export async function getProductOfTheMonth() {
+export async function getProductOfTheMonth(locale: SprachCode) {
   const payload = await getPayload({ config })
 
   try {
@@ -9,6 +10,7 @@ export async function getProductOfTheMonth() {
       slug: 'productOfTheMonth' as any,
       // depth 1 liefert das Bild als Objekt mit url, bei 0 käme nur die ID
       depth: 1,
+      locale,
     })
 
     return productOfTheMonth

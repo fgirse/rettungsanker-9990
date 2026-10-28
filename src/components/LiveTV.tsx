@@ -1,13 +1,16 @@
 import React from 'react'
 import Link from 'next/link'
 import FreiburgMarquee from './FreiburgMarquee'
+import { lokalisierterPfad, type SprachCode } from '@/i18n/sprachen'
+import { START } from '@/i18n/inhalte/start'
 
-const LiveTV = () => {
+const LiveTV = ({ sprache }: { sprache: SprachCode }) => {
+  const t = START[sprache].liveTv
   return (
     <section id="section-liveTV" className="">
       <p className="text-5xl lg:text-[7rem] headingA text-yellow-500 text-center mt-60">
-        Fussball <br />
-        live tv
+        {t.zeile1} <br />
+        {t.zeile2}
       </p>
       <div className="mt-[4vh] lg:mt-5 bg-[url('/Assets/Img/sportarenawc.jpg')] bg-cover lg:bg-contain bg-no-repeat bg-center h-screen w-full flex-col items-center rounded-xl">
         <div>
@@ -16,16 +19,14 @@ const LiveTV = () => {
           </div>
           <div className="flex flex-col items-center justify-center">
             <p className="text-center font-sans text-shadow-green-500  lg:mt-[-36vh] text-[1.0rem] md:text-[1.5rem] lg:text-[2.33rem] bg-black/40 w-[80vw] lg:w-[50vw] rounded-xl p-6  ">
-              Jeden Bundesligaspieltag: live TV die Spiele unseres SC Freiburg. Alle Euro-League
-              Spiele des SC Freiburg! Ausgewählte Spiele der Champions-League und Spiele der grossen
-              Turniere von UEFA EM- und FIFA WM Turnieren.
+              {t.text}
             </p>
 
             <Link
-              href="/#section-contact"
+              href={lokalisierterPfad('/#section-contact', sprache)!}
               className="mt-6 inline-flex items-center justify-center rounded-lg bg-yellow-500 px-6 py-3 font-sans font-semibold text-white transition hover:opacity-90 hover:border-8 hover:border-gray-100"
             >
-              Reservierung Live TV
+              {t.reservierung}
             </Link>
           </div>
         </div>

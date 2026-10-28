@@ -33,17 +33,20 @@ export const Getraenkekarte: CollectionConfig = {
     },
     {
       name: 'artikel',
+      localized: true,
       type: 'text',
       required: true,
       label: 'Artikel',
     },
     {
       name: 'beschreibung',
+      localized: true,
       type: 'textarea',
       label: 'Beschreibung',
     },
     {
       name: 'volumen',
+      localized: true,
       type: 'text',
       label: 'Volumen / Menge',
       admin: {

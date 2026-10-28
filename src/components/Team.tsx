@@ -1,51 +1,57 @@
 import Image from 'next/image'
 import MatroseImSeil from '../../public/Assets/Img/matroseimseil.png'
 import LogoAlt from '../../public/Assets/Img/LogoAlt.png'
+import type { SprachCode } from '@/i18n/sprachen'
+import { START, type StartTexte } from '@/i18n/inhalte/start'
 
-const people = [
+type Rolle = keyof StartTexte['team']['rollen']
+
+// rolle verweist auf die übersetzte Bezeichnung in START.team.rollen
+const people: { name: string; rolle: Rolle; imageUrl: string }[] = [
   {
     name: 'Mick',
-    role: 'Captain',
+    rolle: 'captain',
     imageUrl: '/Assets/Img/portraitmick.png',
   },
   {
     name: 'Simon',
-    role: 'Obermaat',
+    rolle: 'obermaat',
     imageUrl: '/Assets/Svg/ankerIcon.svg',
   },
   {
     name: 'Anne',
-    role: 'I. Offizierin',
+    rolle: 'offizierin1',
     imageUrl: '/Assets/Svg/ankerIcon.svg',
   },
   {
     name: 'Leonie',
-    role: 'II. Offizierin',
+    rolle: 'offizierin2',
     imageUrl: '/Assets/Svg/ankerIcon.svg',
   },
   {
     name: 'Emelie',
-    role: 'II. Offizierin',
+    rolle: 'offizierin2',
     imageUrl: '/Assets/Svg/ankerIcon.svg',
   },
   {
     name: 'Jannis',
-    role: 'II. Offizier',
+    rolle: 'offizier2',
     imageUrl: '/Assets/Svg/ankerIcon.svg',
   },
   {
     name: 'Max',
-    role: 'Steward',
+    rolle: 'steward',
     imageUrl: '/Assets/Svg/ankerIcon.svg',
   },
   {
     name: 'James',
-    role: 'Funker',
+    rolle: 'funker',
     imageUrl: '/Assets/Svg/ankerIcon.svg',
   },
 ]
 
-export default function Team() {
+export default function Team({ sprache }: { sprache: SprachCode }) {
+  const t = START[sprache].team
   return (
     // Läuft unten in die Startfarbe des Kontaktbereichs (#1b252d) aus, damit dort keine harte Kante entsteht
     <div
@@ -55,15 +61,14 @@ export default function Team() {
       <div className="flex flex-col justify-between mx-auto max-w-9xl lg:px-8">
         <div className="flex flex-col items-center justify-center">
           <p className="text-[12vw] md:text-[10vw] headingA tracking-tight lg:text-[7.0rem] text-yellow-500 sm:text-4xl">
-            unser team
+            {t.titel}
           </p>
           <div className="mx-36 flex flex-row items-center justify-center gap-3">
             <Image src={LogoAlt} alt="Logo" width={800} height={20} />
             <Image src={MatroseImSeil} alt="Logo" width={100} height={100} className="mb-24" />
           </div>
           <p className="w-3/4 mt-36 mx-24 text-center font-sans text-xl lg:text-3xl text-neutral-200">
-            Wir sind eine dynamische, bunte Crew, welche mit Leidenschaft Gastro lebt und sich schon
-            jetzt auf Deinen Besuch im Rettungsanker freut!
+            {t.text}
           </p>
         </div>
         <div className="mt-12 flex flex-col items-center">
@@ -84,7 +89,7 @@ export default function Team() {
                   />
                   <div>
                     <p className="text-3xl font-sans tracking-tight text-gray-50">{person.name}</p>
-                    <p className="text-sm/ font-sans text-yellow-500">{person.role}</p>
+                    <p className="text-sm/ font-sans text-yellow-500">{t.rollen[person.rolle]}</p>
                   </div>
                 </div>
               </li>

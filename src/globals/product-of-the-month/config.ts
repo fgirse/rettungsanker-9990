@@ -19,6 +19,7 @@ export const ProductOfTheMonth: GlobalConfig = {
     },
     {
       name: 'title',
+      localized: true,
       type: 'text',
       required: true,
       label: 'Product Title',
@@ -28,6 +29,7 @@ export const ProductOfTheMonth: GlobalConfig = {
     },
     {
       name: 'subtitle',
+      localized: true,
       type: 'text',
       label: 'Subtitle',
       admin: {
@@ -36,6 +38,7 @@ export const ProductOfTheMonth: GlobalConfig = {
     },
     {
       name: 'description',
+      localized: true,
       type: 'textarea',
       label: 'Description',
       admin: {
@@ -59,6 +62,7 @@ export const ProductOfTheMonth: GlobalConfig = {
     },
     {
       name: 'badge',
+      localized: true,
       type: 'text',
       label: 'Badge Text (optional)',
       admin: {

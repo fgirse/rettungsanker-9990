@@ -12,6 +12,8 @@ import { Fragment, useId, useState } from 'react'
 import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 import type { Media } from '@/payload-types'
+import { useSprache } from '@/i18n/SprachProvider'
+import { START } from '@/i18n/inhalte/start'
 
 // Gewellter Rand eines Bierdeckels (viewBox 0–100): Kreis mit 32 sanften Zacken
 const DECKEL_RAND =
@@ -40,6 +42,7 @@ interface AngebotModalProps {
 
 export default function AngebotModal({ productOfTheMonth, productImage }: AngebotModalProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const t = START[useSprache().sprache].angebot
   // Doppelpunkte aus useId entfernen, sie stören in href="#…"
   const bahnId = `angebot${useId().replace(/[^a-zA-Z0-9]/g, '')}`
 
@@ -61,7 +64,7 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
         <button
           type="button"
           onClick={openModal}
-          aria-label={`Angebot des Monats: ${[productOfTheMonth.description, productOfTheMonth.price].filter(Boolean).join(', ')} – Details öffnen`}
+          aria-label={`${t.titel}: ${[productOfTheMonth.description, productOfTheMonth.price].filter(Boolean).join(', ')} – ${t.detailsOeffnen}`}
           className="group relative block aspect-square w-36 -rotate-6 cursor-pointer rounded-full transition-transform duration-300 hover:scale-105 hover:rotate-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500 md:w-44 lg:w-56 xl:w-64"
         >
           <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full drop-shadow-[0_8px_12px_rgba(0,0,0,0.55)]" aria-hidden="true">
@@ -96,12 +99,12 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
             </defs>
             <text className="fill-red-800 font-mono text-[9px] uppercase md:hidden lg:block">
               <textPath href={`#${bahnId}`} textLength={2 * Math.PI * TEXT_RADIUS - 2} lengthAdjust="spacing">
-                Angebot des Monats ★
+                {t.rundschrift}
               </textPath>
             </text>
             {/* Tablet: enger gesetzt, reicht nur über rund drei Viertel des Kreises; die Lücke kreist mit */}
             <text className="hidden fill-red-800 font-mono text-[9px] uppercase tracking-[2.5px] md:block lg:hidden">
-              <textPath href={`#${bahnId}`}>Angebot des Monats ★</textPath>
+              <textPath href={`#${bahnId}`}>{t.rundschrift}</textPath>
             </text>
           </svg>
         </button>
@@ -135,7 +138,7 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
                 <DialogPanel className="w-full max-w-2xl transform overflow-hidden rounded-2xl border border-white/25 bg-white/10 p-8 text-left align-middle shadow-2xl backdrop-blur-xl transition-all">
                   {/* Nur für Screenreader: sichtbar wäre sie doppelt zu „Bier des Monats“ im Glas-Panel */}
                   <DialogTitle as="h3" className="sr-only">
-                    Angebot des Monats
+                    {t.titel}
                   </DialogTitle>
 
                   {/* Glas-Optik: halbdurchsichtiger Verlauf über dem verschwommenen Hintergrund des Panels.
@@ -165,7 +168,7 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
                       <div className="relative h-64 w-full rounded-xl overflow-hidden bg-white/30">
                         <Image
                           src={productImage}
-                          alt={productOfTheMonth.title || 'Product of the Month'}
+                          alt={productOfTheMonth.title || t.titel}
                           fill
                           className="object-contain p-6"
                         />
@@ -200,7 +203,7 @@ export default function AngebotModal({ productOfTheMonth, productImage }: Angebo
                       className="inline-flex justify-center rounded-lg border border-transparent bg-red-800 px-6 py-3 text-base font-semibold text-white hover:bg-red-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-800 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
-                      Schließen
+                      {t.schliessen}
                     </button>
                   </div>
                 </DialogPanel>

@@ -1,9 +1,10 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Kategorie, MenuItem } from '@/components/GetraenkekarteNew'
+import type { SprachCode } from '@/i18n/sprachen'
 
-// Lädt alle Einträge einer Rubrik aus der Payload-Sammlung „getraenkekarte“
-export async function ladeKategorie(kategorie: Kategorie): Promise<MenuItem[]> {
+// Lädt alle Einträge einer Rubrik aus der Payload-Sammlung „getraenkekarte“ in der gewünschten Sprache
+export async function ladeKategorie(kategorie: Kategorie, locale: SprachCode): Promise<MenuItem[]> {
   const payload = await getPayload({ config })
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,6 +14,7 @@ export async function ladeKategorie(kategorie: Kategorie): Promise<MenuItem[]> {
     sort: 'sortierung',
     limit: 200,
     pagination: false,
+    locale,
   })
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

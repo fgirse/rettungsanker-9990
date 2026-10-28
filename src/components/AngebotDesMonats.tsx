@@ -1,8 +1,9 @@
 import { getProductOfTheMonth } from '@/globals/product-of-the-month/queries'
 import AngebotModal from '@/components/modale/AngebotModal'
+import type { SprachCode } from '@/i18n/sprachen'
 
-export default async function AngebotDesMonats() {
-  const productOfTheMonth = await getProductOfTheMonth()
+export default async function AngebotDesMonats({ sprache }: { sprache: SprachCode }) {
+  const productOfTheMonth = await getProductOfTheMonth(sprache)
 
   // Handle image
   let productImage: string | null = null

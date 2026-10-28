@@ -57,3 +57,11 @@ export function lokalisierterPfad(url: string | undefined, sprache: SprachCode):
   // "/#kontakt" → "/en#kontakt" statt "/en/#kontakt", damit Next nicht erst umleitet
   return ohne === '/' || ohne.startsWith('/#') ? `/${sprache}${ohne.slice(1)}` : `/${sprache}${ohne}`
 }
+
+// Seiten bekommen die Sprache als Teil der Adresse (/[locale]/…); ungültige Werte fallen auf Deutsch zurück
+export type SprachParams = Promise<{ locale: string }>
+
+export async function spracheAusParams(params: SprachParams): Promise<SprachCode> {
+  const { locale } = await params
+  return istSprachCode(locale) ? locale : STANDARD_SPRACHE
+}

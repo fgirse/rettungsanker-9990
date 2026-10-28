@@ -5,11 +5,14 @@ import { Dialog, DialogBackdrop, DialogPanel, Transition, TransitionChild } from
 import { Fragment, useState } from 'react'
 import Tooltip from '../../utils/SimpleTooltip'
 import styles from '../../styles/Home.module.scss'
+import { useSprache } from '@/i18n/SprachProvider'
+import { START } from '@/i18n/inhalte/start'
 
 const DEFAULT_CENTER = [47.99287, 7.84967]
 
 export default function Modale02() {
   const [isOpen, setIsOpen] = useState(false)
+  const t = START[useSprache().sprache].wohin
   function closeModal() {
     setIsOpen(false)
   }
@@ -22,13 +25,13 @@ export default function Modale02() {
     <>
       <div className="inset-0 flex items-center justify-center">
         <div className="example-wrapper">
-          <Tooltip content="Click zu Karte Openstreet!!!" direction="right">
+          <Tooltip content={t.osmTipp} direction="right">
             <button
               type="button"
               onClick={openModal}
               className="mb-[3vw] w-60 rounded-md border bg-yellow-600 bg-opacity-80 px-4 py-2 text-[1.66rem] font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
             >
-              Openstreet Map
+              {t.osm}
             </button>
           </Tooltip>
         </div>
@@ -81,8 +84,9 @@ export default function Modale02() {
                               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             />
                             <Marker position={DEFAULT_CENTER}>
+                              {/* Statt des Vorlagen-Texts der Kartenbibliothek: Name und Adresse */}
                               <Popup>
-                                A pretty CSS3 popup. <br /> Easily customizable.
+                                Rettungsanker Freiburg <br /> Adelhauserstraße 16
                               </Popup>
                             </Marker>
                           </>
@@ -96,7 +100,7 @@ export default function Modale02() {
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
-                      zurück
+                      {t.zurueck}
                     </button>
                   </div>
                 </DialogPanel>

@@ -16,6 +16,9 @@ import img08 from '../../public/Assets/Svg/getraenke/08_pretzel.svg'
 
 import LogoNeu from '../../public/Assets/Img/LogoNeu.png'
 import AnkerIcon from './AnkerIcon'
+import { useSprache } from '@/i18n/SprachProvider'
+import { lokalisierterPfad } from '@/i18n/sprachen'
+import { GETRAENKE } from '@/i18n/inhalte/getraenke'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -55,13 +58,12 @@ interface CategoryDef {
   headerGlow: string // inline radial glow colour for hero image
 }
 
-// Farben wechseln nur zwischen Bernstein und Gelb, passend zu Logo und Grafiken
-const CATEGORIES: CategoryDef[] = [
+// Farben wechseln nur zwischen Bernstein und Gelb, passend zu Logo und Grafiken.
+// Name und Untertitel jeder Rubrik stehen übersetzt in GETRAENKE.kategorien.
+const CATEGORIES: Omit<CategoryDef, 'label' | 'tagline'>[] = [
   {
     id: 'biere_vom_fass',
-    label: 'Biere vom Fass',
     emoji: '🍺',
-    tagline: 'Frisch gezapft & nordisch herb',
     image: img01,
     accent: 'text-amber-400',
     bg: 'bg-linear-to-br from-amber-950/60 via-yellow-900/30 to-slate-950',
@@ -72,9 +74,7 @@ const CATEGORIES: CategoryDef[] = [
   },
   {
     id: 'biere_in_flaschen',
-    label: 'Flaschenpost',
     emoji: '🍻',
-    tagline: 'Vielfältig & für jeden Geschmack',
     image: img02,
     accent: 'text-yellow-400',
     bg: 'bg-linear-to-br from-yellow-900/60 via-yellow-800/30 to-slate-950',
@@ -85,9 +85,7 @@ const CATEGORIES: CategoryDef[] = [
   },
   {
     id: 'weine',
-    label: 'Weine',
     emoji: '🍷',
-    tagline: 'Regional & handverlesen',
     image: img03,
     accent: 'text-amber-400',
     bg: 'bg-linear-to-br from-amber-950/60 via-yellow-900/30 to-slate-950',
@@ -98,9 +96,7 @@ const CATEGORIES: CategoryDef[] = [
   },
   {
     id: 'cocktails-longdrinks',
-    label: 'Cocktails & Longdrinks',
     emoji: '🍹',
-    tagline: 'Gemixt mit Liebe & einer Prise Wahnsinn',
     image: img04,
     accent: 'text-yellow-400',
     bg: 'bg-linear-to-br from-yellow-900/60 via-yellow-800/30 to-slate-950',
@@ -111,9 +107,7 @@ const CATEGORIES: CategoryDef[] = [
   },
   {
     id: 'kurze-brände',
-    label: 'Kurze & Brände',
     emoji: '🥃',
-    tagline: 'Elztal · Heinemann · Steiger',
     image: img05,
     accent: 'text-amber-400',
     bg: 'bg-linear-to-br from-amber-950/60 via-yellow-900/30 to-slate-950',
@@ -124,9 +118,7 @@ const CATEGORIES: CategoryDef[] = [
   },
   {
     id: 'softdrinks',
-    label: 'Softdrinks',
     emoji: '🥤',
-    tagline: 'Cool bleiben!',
     image: img06,
     accent: 'text-yellow-400',
     bg: 'bg-linear-to-br from-yellow-900/60 via-yellow-800/30 to-slate-950',
@@ -137,9 +129,7 @@ const CATEGORIES: CategoryDef[] = [
   },
   {
     id: 'kaffee-tee',
-    label: 'Kaffee & Tee',
     emoji: '☕',
-    tagline: 'Warm ums Herz',
     image: img07,
     accent: 'text-amber-400',
     bg: 'bg-linear-to-br from-amber-950/60 via-yellow-900/30 to-slate-950',
@@ -150,9 +140,7 @@ const CATEGORIES: CategoryDef[] = [
   },
   {
     id: 'snacks',
-    label: 'Snacks',
     emoji: '🥨',
-    tagline: 'Klein aber oho',
     image: img08,
     accent: 'text-yellow-400',
     bg: 'bg-linear-to-br from-yellow-900/60 via-yellow-800/30 to-slate-950',
@@ -163,6 +151,12 @@ const CATEGORIES: CategoryDef[] = [
   },
 ]
 
+// Rubriken mit Name und Untertitel in der aktuellen Sprache
+function useKategorien(): CategoryDef[] {
+  const t = GETRAENKE[useSprache().sprache]
+  return CATEGORIES.map((cat) => ({ ...cat, ...t.kategorien[cat.id] }))
+}
+
 // ── Sticky nav with active highlight ─────────────────────────────────────────
 
 function StickyNav({
@@ -172,12 +166,13 @@ function StickyNav({
   activeId: Kategorie
   onSelect: (id: Kategorie) => void
 }) {
+  const kategorien = useKategorien()
   return (
     <nav className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-white/8 shadow-2xl">
       <div className="max-w-7xl mx-auto px-3">
         {/* Tailwind hat keine eingebaute scrollbar-none-Klasse, daher per Arbitrary Property */}
         <div className="flex overflow-x-auto gap-0.5 py-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {CATEGORIES.map((cat) => {
+          {kategorien.map((cat) => {
             const isActive = activeId === cat.id
             return (
               <button
@@ -265,6 +260,7 @@ function ItemRow({ item, cat }: { item: MenuItem; cat: CategoryDef }) {
 // ── Category section ──────────────────────────────────────────────────────────
 
 function CategorySection({ cat, items }: { cat: CategoryDef; items: MenuItem[] }) {
+  const t = GETRAENKE[useSprache().sprache]
   return (
     <section
       id={`cat-${cat.id}`}
@@ -292,7 +288,7 @@ function CategorySection({ cat, items }: { cat: CategoryDef; items: MenuItem[] }
             <p
               className={`text-xs tracking-widest uppercase font-semibold mb-1 ${cat.accent} opacity-70`}
             >
-              {cat.emoji} Unsere Auswahl
+              {cat.emoji} {t.auswahl}
             </p>
             <h2
               className={`text-3xl md:text-4xl lg:text-5xl font-bold ${cat.accent} leading-tight`}
@@ -307,7 +303,7 @@ function CategorySection({ cat, items }: { cat: CategoryDef; items: MenuItem[] }
         {items.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-slate-600 italic">
-              Demnächst verfügbar — schau bald wieder vorbei! {cat.emoji}
+              {t.demnaechst} {cat.emoji}
             </p>
           </div>
         ) : (
@@ -328,9 +324,10 @@ function CategorySection({ cat, items }: { cat: CategoryDef; items: MenuItem[] }
 // ── Nav grid (hero) ───────────────────────────────────────────────────────────
 
 function CategoryNavGrid({ onSelect }: { onSelect: (id: Kategorie) => void }) {
+  const kategorien = useKategorien()
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 max-w-7xl mx-auto px-4 pb-10">
-      {CATEGORIES.map((cat) => (
+      {kategorien.map((cat) => (
         <button
           key={cat.id}
           type="button"
@@ -368,8 +365,10 @@ function CategoryNavGrid({ onSelect }: { onSelect: (id: Kategorie) => void }) {
 
 export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
   const [activeId, setActiveId] = useState<Kategorie>(CATEGORIES[0].id)
+  const t = GETRAENKE[useSprache().sprache]
+  const kategorien = useKategorien()
 
-  const activeCat = CATEGORIES.find((c) => c.id === activeId)!
+  const activeCat = kategorien.find((c) => c.id === activeId)!
 
   // Group items by category, sorted by sortierung
   const byCategory = useMemo(
@@ -433,7 +432,7 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
               className="headingA text-yellow-500"
               style={{ fontSize: 'clamp(1.5rem, 9vw, 6rem)', lineHeight: 1.05 }}
             >
-              getränkekarte
+              {t.titel}
             </h1>
 
             {/* Subtitle */}
@@ -441,7 +440,7 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
               className="mt-2 text-base md:text-lg font-sans"
               style={{ color: 'oklch(0.6 0.02 80)' }}
             >
-              Was darf es sein? Wir haben für jeden Durst das Richtige.
+              {t.untertitel}
             </p>
 
             {/* Gold divider */}
@@ -467,9 +466,9 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
       {/* ── Footer ───────────────────────────────────────────────────────────── */}
       <div className="bg-slate-950 py-10 text-center border-t border-white/5">
         <p className="text-slate-500 text-sm">
-          Alle Preise inkl. MwSt. · Weitere Specials auf Anfrage!
+          {t.preiseSpecials}
         </p>
-        <p className="text-slate-700 text-xs mt-1 italic">Prost 🍻 — Der Rettungsanker, Freiburg</p>
+        <p className="text-slate-700 text-xs mt-1 italic">{t.prost}</p>
       </div>
     </div>
   )
@@ -480,7 +479,9 @@ export default function GetraenkekarteNew({ items }: { items: MenuItem[] }) {
 // Nutzt dieselbe Darstellung wie die Getränkekarte, damit beide Seiten gleich aussehen
 // und die Einträge nur an einer Stelle im CMS gepflegt werden.
 export function KategorieSeite({ kategorie, items }: { kategorie: Kategorie; items: MenuItem[] }) {
-  const cat = CATEGORIES.find((c) => c.id === kategorie)!
+  const { sprache } = useSprache()
+  const t = GETRAENKE[sprache]
+  const cat = useKategorien().find((c) => c.id === kategorie)!
   const sorted = [...items].sort((a, b) => (a.sortierung ?? 99) - (b.sortierung ?? 99))
 
   return (
@@ -488,12 +489,12 @@ export function KategorieSeite({ kategorie, items }: { kategorie: Kategorie; ite
       <CategorySection cat={cat} items={sorted} />
       <div className="bg-slate-950 py-10 text-center border-t border-white/5">
         <Link
-          href="/getraenkekarte"
+          href={lokalisierterPfad('/getraenkekarte', sprache)!}
           className="inline-flex items-center justify-center rounded-lg bg-yellow-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-yellow-400"
         >
-          Zur ganzen Getränkekarte
+          {t.ganzeKarte}
         </Link>
-        <p className="text-slate-500 text-sm mt-6">Alle Preise inkl. MwSt.</p>
+        <p className="text-slate-500 text-sm mt-6">{t.preise}</p>
       </div>
     </div>
   )

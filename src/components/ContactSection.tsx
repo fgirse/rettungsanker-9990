@@ -1,6 +1,9 @@
 import ContactForm from '@/components/ContactForm'
+import type { SprachCode } from '@/i18n/sprachen'
+import { KONTAKT } from '@/i18n/inhalte/kontakt'
 
-export default function ContactSection() {
+export default function ContactSection({ sprache }: { sprache: SprachCode }) {
+  const t = KONTAKT[sprache].bereich
   return (
     // Oberste Ebene deckt den gelben Schein am oberen Rand ab, damit er weich einblendet statt an der Kante zu beginnen
     <section
@@ -14,24 +17,21 @@ export default function ContactSection() {
         <div className="grid grid-cols-[minmax(0,1fr)] gap-10 xl:grid-cols-[0.9fr_1.1fr] xl:items-start">
           <div className="max-w-xl">
             <p className="font-sans headingA text-4xl max-sm:text-[clamp(1.5rem,8vw,2.25rem)] lg:text-7xl uppercase tracking-[0.4em] text-yellow-500">
-              Kontakt
+              {t.titel}
             </p>
             <h2 className="mt-4 font-sans text-3xl font-black text-white md:text-5xl">
-              Anfragen für Reservierungen, Events und geschlossene Gesellschaften
+              {t.ueberschrift}
             </h2>
             <p className="mt-5 font-sans text-lg leading-8 text-zinc-300">
-              Schreib uns direkt über die Website. Deine Nachricht geht an rettungsanker-freiburg@gmx.de und
-              enthält auf Wunsch direkt Telefonnummer und Veranstaltungsdatum für schnellere
-              Rückfragen.
+              {t.text}
             </p>
             <div className="mt-8 space-y-4 rounded-3xl border border-yellow-500/20 bg-black/20 p-6 backdrop-blur-sm">
               <p className="font-sans text-sm uppercase tracking-[0.25em] text-yellow-500">
-                Direktkontakt
+                {t.direktkontakt}
               </p>
               <p className="font-sans text-xl font-bold text-white break-words">rettungsanker-freiburg@gmx.de</p>
               <p className="font-sans text-sm leading-6 text-zinc-400">
-                Für Spam-Schutz nutzt das Formular Cloudflare Turnstile, ein Honeypot-Feld, eine
-                Mindest-Ausfüllzeit und Redis-basiertes Rate-Limiting über Upstash.
+                {t.spamschutz}
               </p>
             </div>
           </div>

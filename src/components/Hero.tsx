@@ -5,8 +5,10 @@ import LogoNeu from '../../public/Assets/Img/LogoAlt.png'
 import Angebot from '@/components/AngebotDesMonats'
 import HeroAnimatedText from '@/components/HeroAnimatedText'
 import HeroFilmkamera from '@/components/HeroFilmkamera'
+import type { SprachCode } from '@/i18n/sprachen'
+import { START } from '@/i18n/inhalte/start'
 
-function Hero() {
+function Hero({ sprache }: { sprache: SprachCode }) {
   return (
     // flach: Hero genau so hoch wie der sichtbare Bereich unter der Kopfzeile (--kopfzeile aus styles.css)
     <section className="-mt-[5vh] relative overflow-hidden lg:mt-0 h-screen w-full flex flex-col items-center justify-center flach:mt-0 flach:h-[calc(100svh-var(--kopfzeile))]">
@@ -34,7 +36,7 @@ function Hero() {
           stehen (gemessen 360–430 px Breite, jeweils rund 74 px). Die vh-Versätze darin bleiben unberührt. */}
       <div className="relative z-10 flex flex-col items-center translate-y-16.5 md:translate-y-0 flach:translate-y-0!">
         <div className="relative top-[-26vh] w-[74vw] md:w-[70vw] lg:hidden flach:top-0! flach:w-[60svh]!">
-          <Image src={LogoNeu} alt="LogoAlt" className="mt-3 flach:mt-0" />
+          <Image src={LogoNeu} alt={START[sprache].hero.logoAlt} className="mt-3 flach:mt-0" />
         </div>
         <HeroAnimatedText />
       </div>
@@ -49,7 +51,7 @@ function Hero() {
           etwas nach rechts unten versetzt.
           In flachen Fenstern immer unten rechts. */}
       <div className="relative z-10 flex flex-col items-center justify-center translate-x-[18vw] translate-y-[5vh] md:translate-x-0 md:translate-y-0 md:absolute md:right-[4vw] md:bottom-[12vh] lg:right-[2vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 flach:absolute! flach:top-auto! flach:right-[3vw]! flach:bottom-[2svh]! flach:translate-x-0! flach:translate-y-0! flach:origin-bottom-right flach:scale-75">
-        <Angebot />
+        <Angebot sprache={sprache} />
       </div>
     </section>
   )

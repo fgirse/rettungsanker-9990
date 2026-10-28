@@ -10,6 +10,8 @@ import { RenderImageContext, RenderImageProps, RowsPhotoAlbum } from 'react-phot
 import 'react-photo-album/rows.css'
 
 import photos from '@/data/photos'
+import { useSprache } from '@/i18n/SprachProvider'
+import { START } from '@/i18n/inhalte/start'
 
 function renderNextImage(
   { alt = '', title, sizes }: RenderImageProps,
@@ -39,9 +41,10 @@ function renderNextImage(
 }
 
 export default function PhotoGallery() {
+  const { sprache } = useSprache()
   return (
     <div id="section-gallery" className="w-full py-12 px-4 bg-gradient to b from-gray-800 to-gray-900">
-      <h2 className="Galerie headingA font-bold text-yellow-500 text-center mb-8">galerie</h2>
+      <h2 className="Galerie headingA font-bold text-yellow-500 text-center mb-8">{START[sprache].galerie.titel}</h2>
       <div className="w-full max-w-6xl mx-auto">
         <RowsPhotoAlbum
           photos={photos}

@@ -4,6 +4,8 @@ import Image from 'next/image'
 import Marquee from 'react-fast-marquee'
 
 import type { FreiburgMarqueeData } from './FreiburgMarquee'
+import { useSprache } from '@/i18n/SprachProvider'
+import { START } from '@/i18n/inhalte/start'
 
 type FreiburgMarqueeClientProps = {
   data: FreiburgMarqueeData
@@ -15,6 +17,7 @@ function Dot() {
 
 function MarqueeItem({ data }: FreiburgMarqueeClientProps) {
   const { team, rank, matchday } = data
+  const t = START[useSprache().sprache].liveTv
 
   return (
     <div className="flex items-center gap-5 px-10 text-sm font-medium tracking-wide">
@@ -32,31 +35,31 @@ function MarqueeItem({ data }: FreiburgMarqueeClientProps) {
       <Dot />
 
       <span>
-        <span className="opacity-80 font-bold">Spieltag </span>
+        <span className="opacity-80 font-bold">{t.spieltag} </span>
         <span className="font-semibold">{matchday}</span>
       </span>
 
       <Dot />
 
       <span>
-        <span className="opacity-80">Rang </span>
+        <span className="opacity-80">{t.rang} </span>
         <span className="font-semibold">{rank}.</span>
       </span>
 
       <Dot />
 
       <span>
-        <span className="opacity-80">Punkte </span>
+        <span className="opacity-80">{t.punkte} </span>
         <span className="font-semibold">{team.points}</span>
         <span className="opacity-50 text-xs ml-1">
-          ({team.won}S {team.draw}U {team.lost}N)
+          ({team.won}{t.s} {team.draw}{t.u} {team.lost}{t.n})
         </span>
       </span>
 
       <Dot />
 
       <span>
-        <span className="opacity-80">Tore </span>
+        <span className="opacity-80">{t.tore} </span>
         <span className="font-semibold">
           {team.goals}:{team.opponentGoals}
         </span>
