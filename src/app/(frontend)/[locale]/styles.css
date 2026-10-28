@@ -297,6 +297,37 @@ body {
     url('../../../../public/fonts/BowlbyOneSC/bowlby-one-sc-v19-latin-regular.svg') format('svg');
 }
 
+/* Kyrillische Ergänzung für die russische Seite.
+   Architects Daughter und Bowlby One SC haben keine kyrillischen Buchstaben. Diese beiden Regeln
+   hängen unter demselben Namen ähnliche Schriften an, aber nur für den kyrillischen Zeichenbereich
+   (unicode-range): Lateinische Texte bleiben unverändert, und der Browser lädt die Dateien nur,
+   wenn auf der Seite wirklich Kyrillisch steht. Sie müssen nach den lateinischen Regeln stehen,
+   weil bei gleichem Namen die später definierte Schrift zuerst gefragt wird.
+   Neucha (Handschrift) und Russo One (fette Überschrift): SIL Open Font License, selbst gehostet. */
+@font-face {
+  font-family: 'Architects Daughter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../../../public/fonts/Neucha/neucha-v18-cyrillic-regular.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Bowlby One SC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../../../public/fonts/RussoOne/russo-one-v18-cyrillic-regular.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+/* Bowlby One SC zeigt Kleinbuchstaben als Kapitälchen. Russo One kann das nicht von sich aus,
+   der Browser bildet die Kapitälchen hier nach, damit russische Überschriften gleich wirken. */
+:lang(ru) :is(.headingA, .headingE, .headingF, .headingG, .font-mono) {
+  font-variant-caps: small-caps;
+}
+
 .Galerie {
   font-size: clamp(4rem, calc(7vw + 1rem), 9rem);
 }
