@@ -43,19 +43,22 @@ export default function HeroAnimatedText() {
         className="relative text-[45vw] headingE text-amber-50 text-center top-[-16vh] leading-[24px] my-0! md:text-[43vw] md:top-[-14vh] lg:top-[1vh] lg:text-[22vw] lg:leading-[32px] lg:my-[24px]! flach:top-0! flach:my-0! flach:text-[34svh]! flach:leading-none!"
       >
         d
-        {/* Desktop: Rettungsanker-Logo als i-Punkt, so breit wie der Strich des I. Maße in em, damit es mit der Schrift mitwächst;
-            0,408 em = Abstand von Oberkante Schriftbox bis Oberkante Kapitälchen (1,098 − 0,69). */}
+        {/* Desktop: Rettungsanker-Logo als runder i-Punkt. Maße in em, damit er mit der Schrift mitwächst;
+            0,408 em = Abstand von Oberkante Schriftbox bis Oberkante Kapitälchen (1,098 − 0,69).
+            Das Logo (Seitenverhältnis 1,26) passt bei 78 % Breite ganz in den Kreis, der schwarze Grund füllt den Rest. */}
         <span className="relative">
           i
-          <Image
-            src="/Assets/image1.svg"
-            alt=""
-            aria-hidden
-            width={324}
-            height={258}
-            unoptimized
-            className="pointer-events-none absolute left-1/2 hidden! w-[0.32em] max-w-none -translate-x-1/2 top-[calc(0.408em-0.05em-0.255em)] lg:block!"
-          />
+          <span className="pointer-events-none absolute left-1/2 top-[calc(0.408em-0.05em-0.36em)] hidden! size-[0.36em] -translate-x-1/2 items-center justify-center overflow-hidden rounded-full bg-black lg:flex!">
+            <Image
+              src="/Assets/image1.svg"
+              alt=""
+              aria-hidden
+              width={324}
+              height={258}
+              unoptimized
+              className="w-[78%] max-w-none"
+            />
+          </span>
         </span>
         e
       </p>
