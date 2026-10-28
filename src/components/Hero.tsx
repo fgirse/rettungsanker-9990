@@ -33,11 +33,8 @@ function Hero({ sprache }: { sprache: SprachCode }) {
         <source src="/Assets/Img/hans_flying_music.mp4" type="video/mp4" />
       </video>
       {/* Handy: Logo und Schriftzug gemeinsam nach unten, damit sie mittig zwischen Kopfzeile und Bierdeckel
-          stehen (gemessen 360–430 px Breite, jeweils rund 74 px). Die vh-Versätze darin bleiben unberührt.
-          Desktop: Schriftzug nach unten, damit das Schild „Rettungsanker – Dein Treff“ im Video frei bleibt
-          (Video wächst mit der Breite, daher vw). Die zweite Grenze hält „kiezkneipe“ in niedrigen Fenstern
-          über dem unteren Bildschirmrand (gemessen 1024–2560 px Breite). */}
-      <div className="relative z-10 flex flex-col items-center translate-y-16.5 md:translate-y-0 lg:translate-y-[min(6.14vw+36px,46.9vh-11.4vw-96px)] flach:translate-y-0!">
+          stehen (gemessen 360–430 px Breite, jeweils rund 74 px). Die vh-Versätze darin bleiben unberührt. */}
+      <div className="relative z-10 flex flex-col items-center translate-y-16.5 md:translate-y-0 flach:translate-y-0!">
         <div className="relative top-[-26vh] w-[74vw] md:w-[70vw] lg:hidden flach:top-0! flach:w-[60svh]!">
           <Image src={LogoNeu} alt={START[sprache].hero.logoAlt} className="mt-3 flach:mt-0" />
         </div>
