@@ -8,11 +8,11 @@ import Filmkamera from '../../public/Assets/Svg/filmkamera.svg'
 import { useSprache } from '@/i18n/SprachProvider'
 import { START } from '@/i18n/inhalte/start'
 
-// Hero zeigt den Rettungsanker-Film, die Geschichte-Seite weiterhin den Weltraumflug mit Layla
+// Hero zeigt den Rettungsanker-Trailer, die Geschichte-Seite weiterhin den Weltraumflug mit Layla
 const FILME = {
   hero: {
-    video: '/media/rettungsanker-film.mp4',
-    poster: '/media/rettungsanker-film-poster.jpg',
+    video: '/media/rettungsanker-trailer.mp4',
+    poster: '/media/rettungsanker-trailer-poster.jpg',
     titel: 'filmTitel',
   },
   weltraumflug: {

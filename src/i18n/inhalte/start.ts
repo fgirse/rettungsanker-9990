@@ -6,7 +6,7 @@ const de = {
   hero: {
     logoAlt: 'Rettungsanker Logo',
     filmAb: 'film ab!',
-    filmTitel: 'Rettungsanker – der Film',
+    filmTitel: 'Rettungsanker – der Trailer',
     filmTitelWeltraumflug: 'Rettungsanker – Weltraumflug mit Layla',
     filmAbspielen: 'Film abspielen',
     filmSchliessen: 'Film schließen',
@@ -132,7 +132,7 @@ export const START: Record<SprachCode, StartTexte> = {
     hero: {
       logoAlt: 'Rettungsanker logo',
       filmAb: 'roll film!',
-      filmTitel: 'Rettungsanker – the film',
+      filmTitel: 'Rettungsanker – the trailer',
       filmTitelWeltraumflug: 'Rettungsanker – space flight with Layla',
       filmAbspielen: 'Play film',
       filmSchliessen: 'Close film',
@@ -250,7 +250,7 @@ export const START: Record<SprachCode, StartTexte> = {
     hero: {
       logoAlt: 'Logo du Rettungsanker',
       filmAb: 'moteur !',
-      filmTitel: 'Rettungsanker – le film',
+      filmTitel: 'Rettungsanker – la bande-annonce',
       filmTitelWeltraumflug: 'Rettungsanker – vol spatial avec Layla',
       filmAbspielen: 'Lancer le film',
       filmSchliessen: 'Fermer le film',
@@ -368,7 +368,7 @@ export const START: Record<SprachCode, StartTexte> = {
     hero: {
       logoAlt: 'Logo del Rettungsanker',
       filmAb: 'si gira!',
-      filmTitel: 'Rettungsanker – il film',
+      filmTitel: 'Rettungsanker – il trailer',
       filmTitelWeltraumflug: 'Rettungsanker – volo spaziale con Layla',
       filmAbspielen: 'Avvia il film',
       filmSchliessen: 'Chiudi il film',
@@ -486,7 +486,7 @@ export const START: Record<SprachCode, StartTexte> = {
     hero: {
       logoAlt: 'Логотип Rettungsanker',
       filmAb: 'мотор!',
-      filmTitel: 'Rettungsanker – фильм',
+      filmTitel: 'Rettungsanker – трейлер',
       filmTitelWeltraumflug: 'Rettungsanker – космический полёт с Лайлой',
       filmAbspielen: 'Смотреть фильм',
       filmSchliessen: 'Закрыть фильм',
