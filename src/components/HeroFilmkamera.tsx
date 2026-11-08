@@ -8,18 +8,31 @@ import Filmkamera from '../../public/Assets/Svg/filmkamera.svg'
 import { useSprache } from '@/i18n/SprachProvider'
 import { START } from '@/i18n/inhalte/start'
 
-const VIDEO_SRC = '/media/rettungsanker-weltraumflug-layla.mp4'
-const POSTER_SRC = '/media/rettungsanker-weltraumflug-layla-poster.jpg'
+// Hero zeigt den Rettungsanker-Film, die Geschichte-Seite weiterhin den Weltraumflug mit Layla
+const FILME = {
+  hero: {
+    video: '/media/rettungsanker-film.mp4',
+    poster: '/media/rettungsanker-film-poster.jpg',
+    titel: 'filmTitel',
+  },
+  weltraumflug: {
+    video: '/media/rettungsanker-weltraumflug-layla.mp4',
+    poster: '/media/rettungsanker-weltraumflug-layla-poster.jpg',
+    titel: 'filmTitelWeltraumflug',
+  },
+} as const
 
-// Filmkamera (Hero und Geschichte-Seite): Klick spielt den Weltraumflug-Film sofort im Vollbild ab.
+// Filmkamera (Hero und Geschichte-Seite): Klick spielt den gewählten Film sofort im Vollbild ab.
 // Nach dem Ende (oder bei Esc/Schließen) geht es zurück an die vorherige Scrollposition.
-export default function HeroFilmkamera() {
+export default function HeroFilmkamera({ film = 'hero' }: { film?: keyof typeof FILME }) {
+  const { video: VIDEO_SRC, poster: POSTER_SRC, titel: titelKey } = FILME[film]
   const overlayRef = useRef<HTMLDivElement>(null)
   const videoHostRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const scrollYRef = useRef(0)
   const [open, setOpen] = useState(false)
   const t = START[useSprache().sprache].hero
+  const filmTitel = t[titelKey]
   // Portal erst nach dem Mounten, auf dem Server gibt es kein document
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
@@ -91,7 +104,7 @@ export default function HeroFilmkamera() {
       <button
         type="button"
         onClick={start}
-        aria-label={`${t.filmAbspielen}: ${t.filmTitel}`}
+        aria-label={`${t.filmAbspielen}: ${filmTitel}`}
         className="group flex cursor-pointer flex-col items-center gap-2 focus-visible:outline-2 focus-visible:outline-yellow-500"
       >
         <Image
@@ -118,7 +131,7 @@ export default function HeroFilmkamera() {
             role="dialog"
             aria-modal="true"
             aria-hidden={!open}
-            aria-label={t.filmTitel}
+            aria-label={filmTitel}
           >
             {/* Platzhalter, in den start() das Video einsetzt */}
             <div ref={videoHostRef} className="contents" />

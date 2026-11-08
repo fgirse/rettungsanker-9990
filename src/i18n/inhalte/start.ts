@@ -6,7 +6,8 @@ const de = {
   hero: {
     logoAlt: 'Rettungsanker Logo',
     filmAb: 'film ab!',
-    filmTitel: 'Rettungsanker – Weltraumflug mit Layla',
+    filmTitel: 'Rettungsanker – der Film',
+    filmTitelWeltraumflug: 'Rettungsanker – Weltraumflug mit Layla',
     filmAbspielen: 'Film abspielen',
     filmSchliessen: 'Film schließen',
     schliessen: 'Schließen',
@@ -131,7 +132,8 @@ export const START: Record<SprachCode, StartTexte> = {
     hero: {
       logoAlt: 'Rettungsanker logo',
       filmAb: 'roll film!',
-      filmTitel: 'Rettungsanker – space flight with Layla',
+      filmTitel: 'Rettungsanker – the film',
+      filmTitelWeltraumflug: 'Rettungsanker – space flight with Layla',
       filmAbspielen: 'Play film',
       filmSchliessen: 'Close film',
       schliessen: 'Close',
@@ -248,7 +250,8 @@ export const START: Record<SprachCode, StartTexte> = {
     hero: {
       logoAlt: 'Logo du Rettungsanker',
       filmAb: 'moteur !',
-      filmTitel: 'Rettungsanker – vol spatial avec Layla',
+      filmTitel: 'Rettungsanker – le film',
+      filmTitelWeltraumflug: 'Rettungsanker – vol spatial avec Layla',
       filmAbspielen: 'Lancer le film',
       filmSchliessen: 'Fermer le film',
       schliessen: 'Fermer',
@@ -365,7 +368,8 @@ export const START: Record<SprachCode, StartTexte> = {
     hero: {
       logoAlt: 'Logo del Rettungsanker',
       filmAb: 'si gira!',
-      filmTitel: 'Rettungsanker – volo spaziale con Layla',
+      filmTitel: 'Rettungsanker – il film',
+      filmTitelWeltraumflug: 'Rettungsanker – volo spaziale con Layla',
       filmAbspielen: 'Avvia il film',
       filmSchliessen: 'Chiudi il film',
       schliessen: 'Chiudi',
@@ -482,7 +486,8 @@ export const START: Record<SprachCode, StartTexte> = {
     hero: {
       logoAlt: 'Логотип Rettungsanker',
       filmAb: 'мотор!',
-      filmTitel: 'Rettungsanker – космический полёт с Лайлой',
+      filmTitel: 'Rettungsanker – фильм',
+      filmTitelWeltraumflug: 'Rettungsanker – космический полёт с Лайлой',
       filmAbspielen: 'Смотреть фильм',
       filmSchliessen: 'Закрыть фильм',
       schliessen: 'Закрыть',

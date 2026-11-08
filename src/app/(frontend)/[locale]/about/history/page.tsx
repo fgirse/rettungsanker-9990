@@ -9,7 +9,7 @@ const page = async ({ params }: { params: SprachParams }) => {
   return (
     <section className="bg-slate-800 min-h-screen">
       <div className="mx-auto flex min-h-[70vh] max-w-6xl flex-col items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-        <HeroFilmkamera />
+        <HeroFilmkamera film="weltraumflug" />
         {/* Schriftgröße wächst mit der Fensterbreite, bleibt aber zwischen 1.5rem und 2.25rem.
             text-yellow-500 ist das Überschriften-Gelb wie bei „Galerie“; Bowlby One SC hat nur einen Schnitt, daher font-normal.
             Das "!" ist nötig, weil die globale h1-Regel in styles.css sonst Größe, Stärke und Abstände überschreibt. */}
