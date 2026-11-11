@@ -4,6 +4,7 @@ import type { SprachCode } from './sprachen'
 // Menüpunkte selbst kommen übersetzt aus dem Navigations-Global in Payload.
 const TEXTE = {
   de: {
+    blogLesen: 'Blog lesen!',
     blog: 'Blog',
     kontakt: 'Kontakt',
     spracheWaehlen: 'Sprache wählen, aktuell',
@@ -12,6 +13,7 @@ const TEXTE = {
     mobileNavigation: 'Navigation',
   },
   en: {
+    blogLesen: 'Read the blog!',
     blog: 'Blog',
     kontakt: 'Contact',
     spracheWaehlen: 'Choose language, current',
@@ -20,6 +22,7 @@ const TEXTE = {
     mobileNavigation: 'Navigation',
   },
   fr: {
+    blogLesen: 'Lire le blog !',
     blog: 'Blog',
     kontakt: 'Contact',
     spracheWaehlen: 'Choisir la langue, actuelle',
@@ -28,6 +31,7 @@ const TEXTE = {
     mobileNavigation: 'Navigation',
   },
   it: {
+    blogLesen: 'Leggi il blog!',
     blog: 'Blog',
     kontakt: 'Contatti',
     spracheWaehlen: 'Scegli la lingua, attuale',
@@ -36,6 +40,7 @@ const TEXTE = {
     mobileNavigation: 'Navigazione',
   },
   ru: {
+    blogLesen: 'Читать блог!',
     blog: 'Блог',
     kontakt: 'Контакты',
     spracheWaehlen: 'Выбрать язык, текущий',
