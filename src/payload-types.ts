@@ -64,6 +64,7 @@ export type SupportedTimezones =
 export interface Config {
   auth: {
     users: UserAuthOperations;
+    mitglieder: MitgliederAuthOperations;
   };
   blocks: {};
   collections: {
@@ -74,6 +75,11 @@ export interface Config {
     about: About;
     bentogrid: Bentogrid;
     getraenkekarte: Getraenkekarte;
+    mitglieder: Mitglieder;
+    'blog-themen': BlogThema;
+    'blog-beitraege': BlogBeitraege;
+    'blog-bilder': BlogBilder;
+    'blog-kommentare': BlogKommentare;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +94,11 @@ export interface Config {
     about: AboutSelect<false> | AboutSelect<true>;
     bentogrid: BentogridSelect<false> | BentogridSelect<true>;
     getraenkekarte: GetraenkekarteSelect<false> | GetraenkekarteSelect<true>;
+    mitglieder: MitgliederSelect<false> | MitgliederSelect<true>;
+    'blog-themen': BlogThemenSelect<false> | BlogThemenSelect<true>;
+    'blog-beitraege': BlogBeitraegeSelect<false> | BlogBeitraegeSelect<true>;
+    'blog-bilder': BlogBilderSelect<false> | BlogBilderSelect<true>;
+    'blog-kommentare': BlogKommentareSelect<false> | BlogKommentareSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -115,13 +126,31 @@ export interface Config {
     partners: PartnersSelect<false> | PartnersSelect<true>;
   };
   locale: 'de' | 'en' | 'fr' | 'it' | 'ru';
-  user: User;
+  user: User | Mitglieder;
   jobs: {
     tasks: unknown;
     workflows: unknown;
   };
 }
 export interface UserAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
+export interface MitgliederAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -407,6 +436,133 @@ export interface Getraenkekarte {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mitglieder".
+ */
+export interface Mitglieder {
+  id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  _verified?: boolean | null;
+  _verificationToken?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'mitglieder';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-themen".
+ */
+export interface BlogThema {
+  id: string;
+  titel: string;
+  /**
+   * Kurzname für die Adresse, z. B. sc-freiburg
+   */
+  slug: string;
+  beschreibung?: string | null;
+  /**
+   * Kleinere Zahl = weiter vorn im Filter
+   */
+  reihenfolge?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-beitraege".
+ */
+export interface BlogBeitraege {
+  id: string;
+  titel: string;
+  slug?: string | null;
+  thema: string | BlogThema;
+  /**
+   * Kurzer Anreißer, erscheint auch in der Übersicht
+   */
+  einleitung: string;
+  titelbild?: (string | null) | BlogBilder;
+  /**
+   * Leerzeile = neuer Absatz
+   */
+  inhalt: string;
+  galerie?: (string | BlogBilder)[] | null;
+  schlagwoerter?: string[] | null;
+  lesezeit?: number | null;
+  status: 'sichtbar' | 'ausgeblendet';
+  autor?: (string | null) | Mitglieder;
+  autorName?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-bilder".
+ */
+export interface BlogBilder {
+  id: string;
+  alt?: string | null;
+  hochgeladenVon?: (string | null) | Mitglieder;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    karte?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    gross?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-kommentare".
+ */
+export interface BlogKommentare {
+  id: string;
+  beitrag: string | BlogBeitraege;
+  text: string;
+  status: 'sichtbar' | 'ausgeblendet';
+  autor?: (string | null) | Mitglieder;
+  autorName?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -456,12 +612,37 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'getraenkekarte';
         value: string | Getraenkekarte;
+      } | null)
+    | ({
+        relationTo: 'mitglieder';
+        value: string | Mitglieder;
+      } | null)
+    | ({
+        relationTo: 'blog-themen';
+        value: string | BlogThema;
+      } | null)
+    | ({
+        relationTo: 'blog-beitraege';
+        value: string | BlogBeitraege;
+      } | null)
+    | ({
+        relationTo: 'blog-bilder';
+        value: string | BlogBilder;
+      } | null)
+    | ({
+        relationTo: 'blog-kommentare';
+        value: string | BlogKommentare;
       } | null);
   globalSlug?: string | null;
-  user: {
-    relationTo: 'users';
-    value: string | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: string | User;
+      }
+    | {
+        relationTo: 'mitglieder';
+        value: string | Mitglieder;
+      };
   updatedAt: string;
   createdAt: string;
 }
@@ -471,10 +652,15 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: string;
-  user: {
-    relationTo: 'users';
-    value: string | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: string | User;
+      }
+    | {
+        relationTo: 'mitglieder';
+        value: string | Mitglieder;
+      };
   key?: string | null;
   value?:
     | {
@@ -628,6 +814,120 @@ export interface GetraenkekarteSelect<T extends boolean = true> {
   volumen?: T;
   preis?: T;
   sortierung?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mitglieder_select".
+ */
+export interface MitgliederSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  _verified?: T;
+  _verificationToken?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-themen_select".
+ */
+export interface BlogThemenSelect<T extends boolean = true> {
+  titel?: T;
+  slug?: T;
+  beschreibung?: T;
+  reihenfolge?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-beitraege_select".
+ */
+export interface BlogBeitraegeSelect<T extends boolean = true> {
+  titel?: T;
+  slug?: T;
+  thema?: T;
+  einleitung?: T;
+  titelbild?: T;
+  inhalt?: T;
+  galerie?: T;
+  schlagwoerter?: T;
+  lesezeit?: T;
+  status?: T;
+  autor?: T;
+  autorName?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-bilder_select".
+ */
+export interface BlogBilderSelect<T extends boolean = true> {
+  alt?: T;
+  hochgeladenVon?: T;
+  prefix?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        karte?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        gross?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-kommentare_select".
+ */
+export interface BlogKommentareSelect<T extends boolean = true> {
+  beitrag?: T;
+  text?: T;
+  status?: T;
+  autor?: T;
+  autorName?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -42,10 +42,15 @@ export function generateStaticParams() {
 
 // Interne Links zeigen auf die gleiche Seite in der aktuellen Sprache ("/impressum" → "/fr/impressum")
 function mapGlobalToMenuItems(navigation: NavigationType | null, sprache: SprachCode) {
-  const kontakt = { title: texte(sprache).kontakt, url: lokalisierterPfad('/#section-contact', sprache) }
+  const kontakt = {
+    title: texte(sprache).kontakt,
+    url: lokalisierterPfad('/#section-contact', sprache),
+  }
+  // Blog immer im Menü (vor Kontakt), auch wenn er im Navigations-Global noch nicht eingetragen ist
+  const blog = { title: texte(sprache).blog, url: lokalisierterPfad('/blog', sprache) }
 
   if (!navigation?.menuItems || navigation.menuItems.length === 0) {
-    return [kontakt]
+    return [blog, kontakt]
   }
 
   const mappedItems = navigation.menuItems.map((item) => {
@@ -66,6 +71,14 @@ function mapGlobalToMenuItems(navigation: NavigationType | null, sprache: Sprach
       url: lokalisierterPfad(item.URL, sprache),
     }
   })
+
+  const hasBlogLink = mappedItems.some(
+    (item) => item.url === blog.url || item.title.toLowerCase() === blog.title.toLowerCase(),
+  )
+
+  if (!hasBlogLink) {
+    mappedItems.push(blog)
+  }
 
   const hasContactLink = mappedItems.some(
     (item) => item.url === kontakt.url || item.title.toLowerCase() === kontakt.title.toLowerCase(),

@@ -24,6 +24,7 @@ export const Users: CollectionConfig = {
     },
   ],
   access: {
-    admin: ({ req: { user } }) => user?.role === 'admin',
+    // Nur Team-Konten mit Rolle admin; Blog-Mitglieder (eigene Sammlung) nie
+    admin: ({ req: { user } }) => user?.collection === 'users' && user.role === 'admin',
   },
 }

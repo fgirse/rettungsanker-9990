@@ -14,6 +14,12 @@ import { Marquee } from './collections/Marquee'
 import { About } from './collections/About'
 import { BentoGrid } from './collections/BentoGrid'
 import { Getraenkekarte } from './collections/Getraenkekarte'
+import { Mitglieder } from './collections/blog/Mitglieder'
+import { BlogThemen } from './collections/blog/BlogThemen'
+import { BlogBeitraege } from './collections/blog/BlogBeitraege'
+import { BlogBilder } from './collections/blog/BlogBilder'
+import { BlogKommentare } from './collections/blog/BlogKommentare'
+import { teamStandard, teamStandardGlobal } from './collections/blog/zugriff'
 
 import { GeneralSettings } from '@/globals/general-settings/config'
 import { Navigation } from '@/globals/navigation/config'
@@ -36,8 +42,17 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pages, Marquee, About, BentoGrid, Getraenkekarte],
-  globals: [GeneralSettings, Navigation, ProductOfTheMonth, Partners],
+  collections: [
+    // Website-Inhalte: alles ohne eigene Regel darf nur das Team (nicht Blog-Mitglieder)
+    ...[Users, Media, Pages, Marquee, About, BentoGrid, Getraenkekarte].map(teamStandard),
+    // Blog: Mitglieder melden sich selbst an und schreiben Beiträge (siehe src/collections/blog)
+    Mitglieder,
+    BlogThemen,
+    BlogBeitraege,
+    BlogBilder,
+    BlogKommentare,
+  ],
+  globals: [GeneralSettings, Navigation, ProductOfTheMonth, Partners].map(teamStandardGlobal),
   // Inhalte je Sprache pflegbar: nur Felder mit `localized: true` bekommen pro Sprache einen eigenen Wert.
   // fallback: fehlt eine Übersetzung, wird der deutsche Text angezeigt.
   localization: {
@@ -81,7 +96,8 @@ export default buildConfig({
     // clientUploads: der Browser lädt direkt hoch, sonst scheitern Dateien über 4,5 MB am Funktionslimit.
     // Ohne Token (z. B. lokal ohne .env-Eintrag) schaltet sich das Plugin ab und es gilt wieder media/.
     vercelBlobStorage({
-      collections: { media: true },
+      // Blog-Bilder laufen über Payload (nicht direkt aus dem Blob), damit nur Angemeldete sie sehen
+      collections: { media: true, 'blog-bilder': { prefix: 'blog' } },
       token: process.env.BLOB_READ_WRITE_TOKEN,
       clientUploads: true,
     }),
