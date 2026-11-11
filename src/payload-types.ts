@@ -502,6 +502,7 @@ export interface BlogBeitraege {
   galerie?: (string | BlogBilder)[] | null;
   schlagwoerter?: string[] | null;
   lesezeit?: number | null;
+  bearbeitetAm?: string | null;
   status: 'sichtbar' | 'ausgeblendet';
   autor?: (string | null) | Mitglieder;
   autorName?: string | null;
@@ -868,6 +869,7 @@ export interface BlogBeitraegeSelect<T extends boolean = true> {
   galerie?: T;
   schlagwoerter?: T;
   lesezeit?: T;
+  bearbeitetAm?: T;
   status?: T;
   autor?: T;
   autorName?: T;

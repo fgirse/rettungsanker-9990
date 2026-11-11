@@ -4,6 +4,7 @@ import {
   anlegenAngemeldet,
   autorUndStatusSichern,
   lesenSichtbarOderEigen,
+  istMitglied,
   nurEigeneOderTeam,
 } from './zugriff'
 
@@ -57,6 +58,12 @@ export const BlogBeitraege: CollectionConfig = {
     beforeChange: [
       ({ data, operation, originalDoc, req }) => {
         autorUndStatusSichern({ data, operation, originalDoc, req })
+        // „bearbeitet am“ nur, wenn der Autor selbst ändert – nicht wenn das Team ausblendet
+        if (operation === 'update') {
+          data.bearbeitetAm = istMitglied(req)
+            ? new Date().toISOString()
+            : originalDoc?.bearbeitetAm
+        }
         // Adresse einmalig aus dem Titel bilden; der Zufallsteil verhindert doppelte Adressen
         if (operation === 'create') {
           const basis = slugify(String(data.titel || 'beitrag'), {
@@ -68,7 +75,10 @@ export const BlogBeitraege: CollectionConfig = {
           data.slug = originalDoc.slug
         }
         // Lesezeit: rund 200 Wörter pro Minute
-        const woerter = `${data.einleitung || ''} ${data.inhalt || ''}`.trim().split(/\s+/).length
+        // Fehlt ein Feld in der Anfrage (z. B. Team ändert nur den Status), den gespeicherten Text nehmen
+        const einleitung = data.einleitung ?? originalDoc?.einleitung ?? ''
+        const inhalt = data.inhalt ?? originalDoc?.inhalt ?? ''
+        const woerter = `${einleitung} ${inhalt}`.trim().split(/\s+/).length
         data.lesezeit = Math.max(1, Math.round(woerter / 200))
         return data
       },
@@ -132,6 +142,12 @@ export const BlogBeitraege: CollectionConfig = {
       name: 'lesezeit',
       label: 'Lesezeit (Min.)',
       type: 'number',
+      admin: { readOnly: true, position: 'sidebar' },
+    },
+    {
+      name: 'bearbeitetAm',
+      label: 'Zuletzt vom Autor bearbeitet',
+      type: 'date',
       admin: { readOnly: true, position: 'sidebar' },
     },
     statusFeld,

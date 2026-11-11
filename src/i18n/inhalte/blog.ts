@@ -36,6 +36,8 @@ const de = {
     galerie: 'Bilder',
     schlagwoerter: 'Schlagwörter',
     loeschen: 'Beitrag löschen',
+    bearbeiten: 'Bearbeiten',
+    bearbeitet: 'bearbeitet am {datum}',
     loeschenFrage: 'Diesen Beitrag wirklich löschen? Das lässt sich nicht rückgängig machen.',
     ausgeblendet: 'Dieser Beitrag wurde vom Team ausgeblendet und ist nur für dich sichtbar.',
     bildOeffnen: 'Bild in voller Größe öffnen',
@@ -50,6 +52,8 @@ const de = {
   },
   formular: {
     titel: 'Neuer Beitrag',
+    titelBearbeiten: 'Beitrag bearbeiten',
+    speichern: 'Änderungen speichern',
     einfuehrung:
       'Erzähl uns deine Geschichte oder sag deine Meinung. Bitte bleib fair, und lade nur Fotos hoch, die du selbst gemacht hast und auf denen alle Personen einverstanden sind.',
     feldTitel: 'Titel',
@@ -175,6 +179,8 @@ const en: BlogTexte = {
     galerie: 'Pictures',
     schlagwoerter: 'Tags',
     loeschen: 'Delete post',
+    bearbeiten: 'Edit',
+    bearbeitet: 'edited on {datum}',
     loeschenFrage: 'Really delete this post? This cannot be undone.',
     ausgeblendet: 'This post was hidden by the team and is only visible to you.',
     bildOeffnen: 'Open picture in full size',
@@ -189,6 +195,8 @@ const en: BlogTexte = {
   },
   formular: {
     titel: 'New post',
+    titelBearbeiten: 'Edit post',
+    speichern: 'Save changes',
     einfuehrung:
       'Tell us your story or share your opinion. Please stay fair, and only upload photos you took yourself and that everyone pictured has agreed to.',
     feldTitel: 'Title',
@@ -315,6 +323,8 @@ const fr: BlogTexte = {
     galerie: 'Photos',
     schlagwoerter: 'Mots-clés',
     loeschen: "Supprimer l'article",
+    bearbeiten: 'Modifier',
+    bearbeitet: 'modifié le {datum}',
     loeschenFrage: 'Vraiment supprimer cet article ? Impossible de revenir en arrière.',
     ausgeblendet: "Cet article a été masqué par l'équipe et n'est visible que pour vous.",
     bildOeffnen: "Ouvrir l'image en taille réelle",
@@ -329,6 +339,8 @@ const fr: BlogTexte = {
   },
   formular: {
     titel: 'Nouvel article',
+    titelBearbeiten: "Modifier l'article",
+    speichern: 'Enregistrer les modifications',
     einfuehrung:
       "Racontez-nous votre histoire ou donnez votre avis. Restez correct, et ne publiez que vos propres photos, avec l'accord de toutes les personnes visibles.",
     feldTitel: 'Titre',
@@ -452,6 +464,8 @@ const it: BlogTexte = {
     galerie: 'Foto',
     schlagwoerter: 'Parole chiave',
     loeschen: 'Elimina articolo',
+    bearbeiten: 'Modifica',
+    bearbeitet: 'modificato il {datum}',
     loeschenFrage: 'Eliminare davvero questo articolo? Non si può annullare.',
     ausgeblendet: 'Questo articolo è stato nascosto dal team ed è visibile solo a te.',
     bildOeffnen: "Apri l'immagine a grandezza piena",
@@ -466,6 +480,8 @@ const it: BlogTexte = {
   },
   formular: {
     titel: 'Nuovo articolo',
+    titelBearbeiten: 'Modifica articolo',
+    speichern: 'Salva modifiche',
     einfuehrung:
       'Raccontaci la tua storia o dicci la tua opinione. Resta corretto e carica solo foto scattate da te, con il consenso di tutte le persone ritratte.',
     feldTitel: 'Titolo',
@@ -587,6 +603,8 @@ const ru: BlogTexte = {
     galerie: 'Фотографии',
     schlagwoerter: 'Ключевые слова',
     loeschen: 'Удалить запись',
+    bearbeiten: 'Редактировать',
+    bearbeitet: 'изменено {datum}',
     loeschenFrage: 'Действительно удалить эту запись? Отменить нельзя.',
     ausgeblendet: 'Эта запись скрыта командой и видна только вам.',
     bildOeffnen: 'Открыть изображение в полном размере',
@@ -601,6 +619,8 @@ const ru: BlogTexte = {
   },
   formular: {
     titel: 'Новая запись',
+    titelBearbeiten: 'Редактировать запись',
+    speichern: 'Сохранить изменения',
     einfuehrung:
       'Расскажите свою историю или поделитесь мнением. Пожалуйста, будьте корректны и загружайте только свои фото, на публикацию которых согласны все изображённые люди.',
     feldTitel: 'Заголовок',

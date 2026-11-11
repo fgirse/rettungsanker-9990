@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
-import { ArrowLeft, EyeOff } from 'lucide-react'
+import { ArrowLeft, EyeOff, Pencil } from 'lucide-react'
 import { BlogRahmen } from '@/components/blog/BlogRahmen'
 import { BeitragLoeschen, Kommentare } from '@/components/blog/Kommentare'
 import { BLOG, fuelle } from '@/i18n/inhalte/blog'
@@ -109,6 +109,15 @@ export default async function BlogBeitrag({ params }: { params: Params }) {
             <span className="text-zinc-100">{beitrag.autorName}</span> ·{' '}
             {datum.format(new Date(beitrag.createdAt))} ·{' '}
             {fuelle(t.uebersicht.minuten, { n: beitrag.lesezeit ?? 1 })}
+            {beitrag.bearbeitetAm && (
+              <>
+                {' '}
+                ·{' '}
+                {fuelle(t.beitrag.bearbeitet, {
+                  datum: datum.format(new Date(beitrag.bearbeitetAm)),
+                })}
+              </>
+            )}
           </p>
 
           {beitrag.status === 'ausgeblendet' && (
@@ -171,7 +180,14 @@ export default async function BlogBeitrag({ params }: { params: Params }) {
           )}
 
           {(istEigen || istTeam) && (
-            <div className="mt-8">
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href={pfad(`/blog/${beitrag.slug}/bearbeiten`)}
+                className="inline-flex items-center gap-2 rounded-lg border border-zinc-600 px-4 py-1.5 font-sans text-sm text-zinc-200 hover:border-yellow-500 hover:text-yellow-400"
+              >
+                <Pencil className="size-4" aria-hidden />
+                {t.beitrag.bearbeiten}
+              </Link>
               <BeitragLoeschen beitragId={beitrag.id} />
             </div>
           )}

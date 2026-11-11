@@ -12,7 +12,26 @@ import { Meldung } from './KontoFormulare'
 const ANNEHMEN = '.jpg,.jpeg,.png,.svg,image/jpeg,image/png,image/svg+xml'
 const MAX_GALERIE = 12
 
-type Vorschau = { datei: File; url: string }
+// Ein Bild im Formular: entweder schon gespeichert (id) oder neu gewählt (datei)
+type Vorschau = { id?: string; datei?: File; url: string }
+
+// Daten eines vorhandenen Beitrags, wenn das Formular zum Bearbeiten geöffnet wird
+export type BeitragVorlage = {
+  id: string
+  slug: string
+  titel: string
+  thema: string
+  einleitung: string
+  inhalt: string
+  schlagwoerter: string[]
+  titelbild: { id: string; url: string } | null
+  galerie: { id: string; url: string }[]
+}
+
+// Nur selbst erzeugte Vorschau-Adressen freigeben, nicht die der gespeicherten Bilder
+const freigeben = (b: Vorschau) => {
+  if (b.datei) URL.revokeObjectURL(b.url)
+}
 
 const feldKlasse =
   'w-full rounded-lg border border-zinc-600 bg-zinc-950/60 px-3 py-2 font-sans text-base text-zinc-100 outline-none transition focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/30'
@@ -35,26 +54,32 @@ function Beschriftung({
   )
 }
 
-// Formular für einen neuen Blogbeitrag. Bilder werden zuerst einzeln hochgeladen
-// (und dabei verkleinert), danach wird der Beitrag mit ihren IDs angelegt.
-export function BeitragFormular({ themen }: { themen: { id: string; titel: string }[] }) {
+// Formular für neue und zu bearbeitende Blogbeiträge. Neue Bilder werden zuerst einzeln
+// hochgeladen (und dabei verkleinert), danach wird der Beitrag mit ihren IDs gespeichert.
+export function BeitragFormular({
+  themen,
+  vorlage,
+}: {
+  themen: { id: string; titel: string }[]
+  vorlage?: BeitragVorlage
+}) {
   const { sprache } = useSprache()
   const t = BLOG[sprache]
-  const [titel, setTitel] = useState('')
-  const [thema, setThema] = useState('')
-  const [einleitung, setEinleitung] = useState('')
-  const [inhalt, setInhalt] = useState('')
-  const [schlagwoerter, setSchlagwoerter] = useState('')
-  const [titelbild, setTitelbild] = useState<Vorschau | null>(null)
-  const [galerie, setGalerie] = useState<Vorschau[]>([])
+  const [titel, setTitel] = useState(vorlage?.titel ?? '')
+  const [thema, setThema] = useState(vorlage?.thema ?? '')
+  const [einleitung, setEinleitung] = useState(vorlage?.einleitung ?? '')
+  const [inhalt, setInhalt] = useState(vorlage?.inhalt ?? '')
+  const [schlagwoerter, setSchlagwoerter] = useState(vorlage?.schlagwoerter.join(', ') ?? '')
+  const [titelbild, setTitelbild] = useState<Vorschau | null>(vorlage?.titelbild ?? null)
+  const [galerie, setGalerie] = useState<Vorschau[]>(vorlage?.galerie ?? [])
   const [stand, setStand] = useState<'bereit' | 'bilder' | 'speichert'>('bereit')
   const [fehler, setFehler] = useState('')
 
   // Vorschau-Adressen im Browser wieder freigeben, wenn das Formular verschwindet
   useEffect(
     () => () => {
-      if (titelbild) URL.revokeObjectURL(titelbild.url)
-      galerie.forEach((g) => URL.revokeObjectURL(g.url))
+      if (titelbild) freigeben(titelbild)
+      galerie.forEach(freigeben)
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
@@ -83,15 +108,20 @@ export function BeitragFormular({ themen }: { themen: { id: string; titel: strin
     }
     setFehler('')
 
+    // Nur neu gewählte Bilder hochladen; gespeicherte behalten ihre ID
     const hochgeladen: string[] = []
-    let titelbildId: string | undefined
+    const bildId = async (b: Vorschau) => {
+      if (b.id) return b.id
+      const id = await hochladen(b.datei!)
+      hochgeladen.push(id)
+      return id
+    }
+    let titelbildId: string | null = null
+    const galerieIds: string[] = []
     try {
       setStand('bilder')
-      if (titelbild) {
-        titelbildId = await hochladen(titelbild.datei)
-        hochgeladen.push(titelbildId)
-      }
-      for (const g of galerie) hochgeladen.push(await hochladen(g.datei))
+      if (titelbild) titelbildId = await bildId(titelbild)
+      for (const g of galerie) galerieIds.push(await bildId(g))
     } catch (err) {
       setStand('bereit')
       await aufraeumen(hochgeladen)
@@ -106,23 +136,32 @@ export function BeitragFormular({ themen }: { themen: { id: string; titel: strin
     }
 
     setStand('speichert')
-    const res = await api<{ doc?: { slug: string } }>('/api/blog-beitraege', {
-      method: 'POST',
-      body: JSON.stringify({
-        titel: titel.trim(),
-        thema,
-        einleitung: einleitung.trim(),
-        inhalt: inhalt.trim(),
-        titelbild: titelbildId,
-        galerie: titelbildId ? hochgeladen.slice(1) : hochgeladen,
-        schlagwoerter: schlagwoerter
-          .split(',')
-          .map((s) => s.trim().replace(/^#/, ''))
-          .filter(Boolean)
-          .slice(0, 8),
-      }),
-    })
+    const res = await api<{ doc?: { slug: string } }>(
+      vorlage ? `/api/blog-beitraege/${vorlage.id}` : '/api/blog-beitraege',
+      {
+        method: vorlage ? 'PATCH' : 'POST',
+        body: JSON.stringify({
+          titel: titel.trim(),
+          thema,
+          einleitung: einleitung.trim(),
+          inhalt: inhalt.trim(),
+          titelbild: titelbildId,
+          galerie: galerieIds,
+          schlagwoerter: schlagwoerter
+            .split(',')
+            .map((s) => s.trim().replace(/^#/, ''))
+            .filter(Boolean)
+            .slice(0, 8),
+        }),
+      },
+    )
     if (res.ok && res.daten?.doc?.slug) {
+      // Beim Bearbeiten entfernte Bilder erst jetzt löschen, wenn das Speichern geklappt hat
+      if (vorlage) {
+        const behalten = new Set([titelbildId, ...galerieIds])
+        const alt = [vorlage.titelbild, ...vorlage.galerie].flatMap((b) => (b ? [b.id] : []))
+        await aufraeumen(alt.filter((id) => !behalten.has(id)))
+      }
       window.location.assign(lokalisierterPfad(`/blog/${res.daten.doc.slug}`, sprache)!)
       return
     }
@@ -149,8 +188,10 @@ export function BeitragFormular({ themen }: { themen: { id: string; titel: strin
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 md:px-8">
-      <h1 className="headingB m-0 text-3xl text-yellow-400 md:text-4xl">{t.formular.titel}</h1>
-      <p className="mt-3 font-sans text-sm text-zinc-400">{t.formular.einfuehrung}</p>
+      <h1 className="headingB m-0 text-3xl text-yellow-400 md:text-4xl">
+        {vorlage ? t.formular.titelBearbeiten : t.formular.titel}
+      </h1>
+      {!vorlage && <p className="mt-3 font-sans text-sm text-zinc-400">{t.formular.einfuehrung}</p>}
 
       <form onSubmit={absenden} className="mt-8 space-y-6">
         <Beschriftung text={t.formular.feldTitel}>
@@ -203,7 +244,7 @@ export function BeitragFormular({ themen }: { themen: { id: string; titel: strin
               <EntfernenKnopf
                 text={t.formular.bildEntfernen}
                 onClick={() => {
-                  URL.revokeObjectURL(titelbild.url)
+                  freigeben(titelbild)
                   setTitelbild(null)
                 }}
               />
@@ -247,7 +288,7 @@ export function BeitragFormular({ themen }: { themen: { id: string; titel: strin
                 <EntfernenKnopf
                   text={t.formular.bildEntfernen}
                   onClick={() => {
-                    URL.revokeObjectURL(g.url)
+                    freigeben(g)
                     setGalerie((alt) => alt.filter((_, j) => j !== i))
                   }}
                 />
@@ -287,10 +328,12 @@ export function BeitragFormular({ themen }: { themen: { id: string; titel: strin
               ? t.formular.laedtBilder
               : stand === 'speichert'
                 ? t.formular.speichert
-                : t.formular.veroeffentlichen}
+                : vorlage
+                  ? t.formular.speichern
+                  : t.formular.veroeffentlichen}
           </button>
           <Link
-            href={lokalisierterPfad('/blog', sprache)!}
+            href={lokalisierterPfad(vorlage ? `/blog/${vorlage.slug}` : '/blog', sprache)!}
             className="font-sans text-sm text-zinc-400 hover:text-yellow-400"
           >
             {t.formular.abbrechen}
