@@ -39,8 +39,8 @@ export function sicheresZiel(ziel: string | null | undefined, ersatz: string) {
   return ziel && ziel.startsWith('/') && !ziel.startsWith('//') ? ziel : ersatz
 }
 
-// Fotos vor dem Hochladen verkleinern: Handyfotos haben oft 5–10 MB, Vercel nimmt aber
-// höchstens 4,5 MB pro Anfrage an. SVGs bleiben unverändert.
+// Fotos vor dem Hochladen verkleinern und von Kameradaten befreien: Handyfotos haben oft
+// 5–10 MB, Vercel nimmt aber höchstens 4,5 MB pro Anfrage an. SVGs bleiben unverändert.
 const ERLAUBT = ['image/jpeg', 'image/png', 'image/svg+xml']
 const MAX_KANTE = 2400
 const ZIEL_BYTES = 3.5 * 1024 * 1024
@@ -63,11 +63,8 @@ export async function bildVorbereiten(datei: File): Promise<File> {
 
   const bitmap = await createImageBitmap(datei)
   const faktor = Math.min(1, MAX_KANTE / Math.max(bitmap.width, bitmap.height))
-  if (faktor === 1 && datei.size <= ZIEL_BYTES) {
-    bitmap.close()
-    return datei
-  }
-
+  // Jedes Foto wird neu gezeichnet und gespeichert, auch kleine. Dabei fallen die eingebetteten
+  // Kameradaten (EXIF, oft mit Aufnahmeort) weg – so steht es auch in der Datenschutzerklärung.
   const canvas = document.createElement('canvas')
   canvas.width = Math.round(bitmap.width * faktor)
   canvas.height = Math.round(bitmap.height * faktor)

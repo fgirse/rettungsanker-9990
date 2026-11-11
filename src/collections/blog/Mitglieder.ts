@@ -34,6 +34,20 @@ export const Mitglieder: CollectionConfig = {
     delete: ({ req }) => istTeam(req),
   },
   hooks: {
+    // Wird ein Konto gelöscht, verschwinden auch alle Inhalte des Mitglieds.
+    // Beiträge zuerst: deren eigener Hook entfernt dabei Kommentare und Bilder am Beitrag.
+    afterDelete: [
+      async ({ doc, req }) => {
+        const vonIhm = { autor: { equals: doc.id } }
+        await req.payload.delete({ collection: 'blog-beitraege', where: vonIhm, req })
+        await req.payload.delete({ collection: 'blog-kommentare', where: vonIhm, req })
+        await req.payload.delete({
+          collection: 'blog-bilder',
+          where: { hochgeladenVon: { equals: doc.id } },
+          req,
+        })
+      },
+    ],
     beforeValidate: [
       ({ data, operation }) => {
         // Mindestlänge auch serverseitig prüfen, das Formular allein reicht nicht

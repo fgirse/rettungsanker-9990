@@ -17,6 +17,7 @@ const sections = [
       { id: 'kontaktformular', label: '2.2 Kontaktformular' },
       { id: 'cookies', label: '2.3 Cookies' },
       { id: 'spam-schutz', label: '2.4 Spam-Schutz' },
+      { id: 'blog', label: '2.5 Blog und Mitgliederkonto' },
     ],
   },
   { id: 'ihre-rechte', label: '3. Ihre Rechte' },
@@ -76,9 +77,7 @@ const rights = [
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="headingB text-xl md:text-2xl text-yellow-400 mb-4 tracking-wide">
-      {children}
-    </h2>
+    <h2 className="headingB text-xl md:text-2xl text-yellow-400 mb-4 tracking-wide">{children}</h2>
   )
 }
 
@@ -90,13 +89,7 @@ function SubHeading({ children }: { children: React.ReactNode }) {
   )
 }
 
-function SectionCard({
-  id,
-  children,
-}: {
-  id: string
-  children: React.ReactNode
-}) {
+function SectionCard({ id, children }: { id: string; children: React.ReactNode }) {
   return (
     <section
       id={id}
@@ -119,9 +112,7 @@ function SidebarNav() {
   return (
     <aside className="hidden lg:block">
       <div className="sticky top-24 bg-zinc-900/60 backdrop-blur-sm border border-zinc-700/50 rounded-xl p-5">
-        <p className="text-xs uppercase tracking-widest text-zinc-500 mb-4 font-mono">
-          Inhalt
-        </p>
+        <p className="text-xs uppercase tracking-widest text-zinc-500 mb-4 font-mono">Inhalt</p>
         <nav>
           <ul className="space-y-0.5">
             {sections.map((section) => (
@@ -200,8 +191,7 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
           </h1>
           <div className="mt-4 w-16 h-1 bg-yellow-400 rounded-full" />
           <p className="mt-5 text-zinc-400 text-sm font-mono">
-            Informationen zur Verarbeitung Ihrer personenbezogenen Daten gemäß
-            DSGVO
+            Informationen zur Verarbeitung Ihrer personenbezogenen Daten gemäß DSGVO
           </p>
         </div>
       </header>
@@ -220,10 +210,9 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
             {/* Intro */}
             <div className="text-zinc-400 text-sm leading-relaxed px-1">
               <p>
-                Wir freuen uns über Ihr Interesse an unserem Unternehmen. Der
-                Schutz Ihrer personenbezogenen Daten ist uns ein wichtiges
-                Anliegen. Im Folgenden informieren wir Sie ausführlich über den
-                Umgang mit Ihren Daten.
+                Wir freuen uns über Ihr Interesse an unserem Unternehmen. Der Schutz Ihrer
+                personenbezogenen Daten ist uns ein wichtiges Anliegen. Im Folgenden informieren wir
+                Sie ausführlich über den Umgang mit Ihren Daten.
               </p>
             </div>
 
@@ -231,21 +220,13 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
             <SectionCard id="verantwortliche">
               <SectionHeading>1. Verantwortliche Stelle</SectionHeading>
               <div className="text-zinc-300 space-y-4 text-sm">
-                <p>
-                  Verantwortlich für die Datenverarbeitung auf dieser Website
-                  ist:
-                </p>
+                <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist:</p>
                 <InfoBox>
-                  <p className="font-semibold text-white">
-                    Rettungsanker Freiburg GbR
-                  </p>
+                  <p className="font-semibold text-white">Rettungsanker Freiburg GbR</p>
                   <p className="text-zinc-400">Michael Schreck</p>
                   <p className="text-zinc-400">Adelhauserstraße 16</p>
                   <p className="text-zinc-400">79098 Freiburg im Breisgau</p>
-                  <Separator.Root
-                    decorative
-                    className="my-3 h-px bg-zinc-700/60"
-                  />
+                  <Separator.Root decorative className="my-3 h-px bg-zinc-700/60" />
                   <p>
                     <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 mr-2">
                       Tel
@@ -270,9 +251,9 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
                   </p>
                 </InfoBox>
                 <p>
-                  Der Verantwortliche entscheidet allein oder gemeinsam mit
-                  anderen über die Zwecke und Mittel der Verarbeitung von
-                  personenbezogenen Daten (z.B. Namen, Kontaktdaten o. Ä.).
+                  Der Verantwortliche entscheidet allein oder gemeinsam mit anderen über die Zwecke
+                  und Mittel der Verarbeitung von personenbezogenen Daten (z.B. Namen, Kontaktdaten
+                  o. Ä.).
                 </p>
               </div>
             </SectionCard>
@@ -286,9 +267,9 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
                 <SubHeading>2.1 Server-Log-Dateien</SubHeading>
                 <div className="text-zinc-300 space-y-3 text-sm leading-relaxed">
                   <p>
-                    Der Provider der Seiten erhebt und speichert automatisch
-                    Informationen in so genannten Server-Log-Dateien, die Ihr
-                    Browser automatisch an uns übermittelt. Dies sind:
+                    Der Provider der Seiten erhebt und speichert automatisch Informationen in so
+                    genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt.
+                    Dies sind:
                   </p>
                   <ul className="space-y-1.5 pl-4">
                     {[
@@ -306,13 +287,11 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
                     ))}
                   </ul>
                   <p>
-                    Eine Zusammenführung dieser Daten mit anderen Datenquellen
-                    wird nicht vorgenommen. Die Erfassung dieser Daten erfolgt
-                    auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der
-                    Websitebetreiber hat ein berechtigtes Interesse an der
-                    technisch fehlerfreien Darstellung und der Optimierung
-                    seiner Website – hierzu müssen die Server-Log-Files erfasst
-                    werden.
+                    Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht
+                    vorgenommen. Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1
+                    lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der
+                    technisch fehlerfreien Darstellung und der Optimierung seiner Website – hierzu
+                    müssen die Server-Log-Files erfasst werden.
                   </p>
                 </div>
               </div>
@@ -324,30 +303,25 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
                 <SubHeading>2.2 Kontaktformular und E-Mail-Kontakt</SubHeading>
                 <div className="text-zinc-300 space-y-3 text-sm leading-relaxed">
                   <p>
-                    Wenn Sie uns per Kontaktformular oder E-Mail Anfragen
-                    zukommen lassen, werden Ihre Angaben aus dem
-                    Anfrageformular inklusive der von Ihnen dort angegebenen
-                    Kontaktdaten zwecks Bearbeitung der Anfrage und für den
-                    Fall von Anschlussfragen bei uns gespeichert.
+                    Wenn Sie uns per Kontaktformular oder E-Mail Anfragen zukommen lassen, werden
+                    Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen
+                    Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen
+                    bei uns gespeichert.
                   </p>
                   <p>
-                    Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
-                    Die Verarbeitung dieser Daten erfolgt auf Grundlage von
-                    Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der
-                    Erfüllung eines Vertrags zusammenhängt oder zur
-                    Durchführung vorvertraglicher Maßnahmen erforderlich ist.
-                    In allen übrigen Fällen beruht die Verarbeitung auf unserem
-                    berechtigten Interesse an der effektiven Bearbeitung der an
-                    uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder
-                    auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).
+                    Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. Die Verarbeitung
+                    dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre
+                    Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung
+                    vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die
+                    Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung
+                    der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer
+                    Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).
                   </p>
                   <p>
-                    Die von Ihnen im Kontaktformular eingegebenen Daten
-                    verbleiben bei uns, bis Sie uns zur Löschung auffordern,
-                    Ihre Einwilligung zur Speicherung widerrufen oder der Zweck
-                    für die Datenspeicherung entfällt. Zwingende gesetzliche
-                    Bestimmungen – insbesondere Aufbewahrungsfristen – bleiben
-                    unberührt.
+                    Die von Ihnen im Kontaktformular eingegebenen Daten verbleiben bei uns, bis Sie
+                    uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder
+                    der Zweck für die Datenspeicherung entfällt. Zwingende gesetzliche Bestimmungen
+                    – insbesondere Aufbewahrungsfristen – bleiben unberührt.
                   </p>
                 </div>
               </div>
@@ -359,24 +333,21 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
                 <SubHeading>2.3 Cookies</SubHeading>
                 <div className="text-zinc-300 space-y-3 text-sm leading-relaxed">
                   <p>
-                    Unsere Website verwendet Cookies. Bei Cookies handelt es
-                    sich um kleine Textdateien, die auf Ihrem Endgerät (Laptop,
-                    Tablet, Smartphone o.ä.) gespeichert werden, wenn Sie
-                    unsere Webseite besuchen.
+                    Unsere Website verwendet Cookies. Bei Cookies handelt es sich um kleine
+                    Textdateien, die auf Ihrem Endgerät (Laptop, Tablet, Smartphone o.ä.)
+                    gespeichert werden, wenn Sie unsere Webseite besuchen.
                   </p>
                   <p>
-                    Sie können Ihren Browser so einstellen, dass Sie über das
-                    Setzen von Cookies informiert werden und einzeln über deren
-                    Annahme entscheiden oder die Annahme von Cookies für
-                    bestimmte Fälle oder generell ausschließen können. Bei der
-                    Nichtannahme von Cookies kann die Funktionalität unserer
-                    Website eingeschränkt sein.
+                    Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies
+                    informiert werden und einzeln über deren Annahme entscheiden oder die Annahme
+                    von Cookies für bestimmte Fälle oder generell ausschließen können. Bei der
+                    Nichtannahme von Cookies kann die Funktionalität unserer Website eingeschränkt
+                    sein.
                   </p>
                   <p>
-                    Cookies, die zur Durchführung des elektronischen
-                    Kommunikationsvorgangs oder zur Bereitstellung bestimmter,
-                    von Ihnen erwünschter Funktionen erforderlich sind, werden
-                    auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO gespeichert.
+                    Cookies, die zur Durchführung des elektronischen Kommunikationsvorgangs oder zur
+                    Bereitstellung bestimmter, von Ihnen erwünschter Funktionen erforderlich sind,
+                    werden auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO gespeichert.
                   </p>
                 </div>
               </div>
@@ -384,25 +355,113 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
               <Separator.Root decorative className="h-px bg-zinc-800 mb-8" />
 
               {/* 2.4 Spam-Schutz */}
-              <div id="spam-schutz" className="scroll-mt-24">
+              <div id="spam-schutz" className="scroll-mt-24 mb-8">
                 <SubHeading>2.4 Spam-Schutz (Cloudflare Turnstile und Upstash)</SubHeading>
                 <div className="text-zinc-300 space-y-3 text-sm leading-relaxed">
                   <p>
-                    Zum Schutz unseres Kontaktformulars vor automatisierten
-                    Eingaben setzen wir Cloudflare Turnstile ein. Hierbei kann
-                    es zur Verarbeitung technischer Daten wie IP-Adresse,
-                    Browser-Informationen und Interaktionsmerkmalen kommen.
+                    Zum Schutz unseres Kontaktformulars vor automatisierten Eingaben setzen wir
+                    Cloudflare Turnstile ein. Hierbei kann es zur Verarbeitung technischer Daten wie
+                    IP-Adresse, Browser-Informationen und Interaktionsmerkmalen kommen.
                   </p>
                   <p>
-                    Zur Begrenzung missbräuchlicher Mehrfachanfragen nutzen wir
-                    zusätzlich ein serverseitiges Rate-Limiting mit Upstash
-                    Redis. Dabei werden Anfragen pro IP-Adresse innerhalb eines
-                    kurzen Zeitfensters gezählt.
+                    Zur Begrenzung missbräuchlicher Mehrfachanfragen nutzen wir zusätzlich ein
+                    serverseitiges Rate-Limiting mit Upstash Redis. Dabei werden Anfragen pro
+                    IP-Adresse innerhalb eines kurzen Zeitfensters gezählt.
                   </p>
                   <p>
-                    Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1
-                    lit. f DSGVO (berechtigtes Interesse an der Sicherheit und
-                    Stabilität unserer Website).
+                    Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO
+                    (berechtigtes Interesse an der Sicherheit und Stabilität unserer Website).
+                  </p>
+                </div>
+              </div>
+
+              <Separator.Root decorative className="h-px bg-zinc-800 mb-8" />
+
+              {/* 2.5 Blog: Registrierung, Inhalte, Bilder, Anmelde-Cookie */}
+              <div id="blog" className="scroll-mt-24">
+                <SubHeading>2.5 Blog und Mitgliederkonto</SubHeading>
+                <div className="text-zinc-300 space-y-3 text-sm leading-relaxed">
+                  <p>
+                    In unserem Blog können registrierte Mitglieder Beiträge, Kommentare und Bilder
+                    veröffentlichen. Damit keine anonymen Beiträge erscheinen, ist der Blog nur nach
+                    Registrierung und Anmeldung erreichbar.
+                  </p>
+                  <p className="font-semibold text-white">Welche Daten wir verarbeiten</p>
+                  <ul className="space-y-1.5 pl-4">
+                    {[
+                      'bei der Registrierung: E-Mail-Adresse, Anzeigename und Passwort (das Passwort speichern wir nur als nicht umkehrbaren Hashwert, niemals im Klartext)',
+                      'zur Kontoverwaltung: Zeitpunkt der Registrierung, Bestätigungsstatus der E-Mail-Adresse, Anzahl fehlgeschlagener Anmeldeversuche (für eine vorübergehende Sperre nach fünf Fehlversuchen)',
+                      'Ihre Inhalte: Beiträge, Kommentare und hochgeladene Bilder samt Zeitpunkt der Veröffentlichung bzw. Bearbeitung',
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-yellow-500/50 shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="font-semibold text-white">Wer Ihre Daten sieht</p>
+                  <p>
+                    Ihr Anzeigename und Ihre Inhalte sind für alle angemeldeten Mitglieder sichtbar.
+                    Ihre E-Mail-Adresse sehen andere Mitglieder nicht; sie ist nur für uns als
+                    Betreiber einsehbar. Beiträge und Bilder sind ohne Anmeldung nicht abrufbar und
+                    werden nicht für Suchmaschinen freigegeben.
+                  </p>
+                  <p className="font-semibold text-white">Bilder</p>
+                  <p>
+                    Fotos (JPG, PNG) werden vor dem Hochladen in Ihrem Browser neu gespeichert und
+                    gegebenenfalls verkleinert. Dabei werden eingebettete Kameradaten (EXIF-Daten,
+                    etwa Aufnahmeort und Gerät) entfernt. Bitte laden Sie nur Bilder hoch, an denen
+                    Sie die Rechte haben und mit deren Veröffentlichung alle abgebildeten Personen
+                    einverstanden sind.
+                  </p>
+                  <p className="font-semibold text-white">Bestätigungs-E-Mails</p>
+                  <p>
+                    Zur Bestätigung Ihrer E-Mail-Adresse und zum Zurücksetzen des Passworts senden
+                    wir Ihnen E-Mails über den Versanddienst Resend (Resend, Inc., USA). Dabei
+                    werden Ihre E-Mail-Adresse, Ihr Anzeigename und der Inhalt der E-Mail an Resend
+                    übermittelt.
+                  </p>
+                  <p className="font-semibold text-white">Speicherung und Hosting</p>
+                  <p>
+                    Die Website wird bei Vercel (Vercel Inc., USA) betrieben. Kontodaten und Inhalte
+                    speichern wir in einer Datenbank bei MongoDB Atlas (MongoDB, Inc., USA),
+                    hochgeladene Bilder im Speicherdienst Vercel Blob. Soweit dabei Daten in die USA
+                    übermittelt werden, erfolgt dies auf Grundlage des EU-US Data Privacy Framework
+                    bzw. der EU-Standardvertragsklauseln (Art. 45, 46 DSGVO).
+                  </p>
+                  <p className="font-semibold text-white">Anmelde-Cookie</p>
+                  <p>
+                    Nach der Anmeldung setzen wir ein technisch notwendiges Cookie (
+                    <code className="font-sans text-yellow-300/80">payload-token</code>), damit Sie angemeldet
+                    bleiben. Es ist für Skripte nicht auslesbar und läuft nach 14 Tagen ab oder wird
+                    beim Abmelden gelöscht.
+                  </p>
+                  <p className="font-semibold text-white">Rechtsgrundlage</p>
+                  <p>
+                    Die Verarbeitung erfolgt zur Bereitstellung des Blogs, den Sie mit der
+                    Registrierung nutzen möchten (Art. 6 Abs. 1 lit. b DSGVO). Die Sperre nach
+                    Fehlversuchen und die Möglichkeit, regelwidrige Inhalte auszublenden, beruhen
+                    auf unserem berechtigten Interesse an einem sicheren und respektvollen Blog
+                    (Art. 6 Abs. 1 lit. f DSGVO).
+                  </p>
+                  <p className="font-semibold text-white">Speicherdauer und Löschung</p>
+                  <p>
+                    Ihre Daten speichern wir, solange Ihr Konto besteht. Eigene Beiträge, Kommentare
+                    und Bilder können Sie jederzeit selbst löschen. Wenn Sie Ihr Konto löschen
+                    lassen möchten, genügt eine E-Mail an{' '}
+                    <a
+                      href="mailto:info@rettungsanker-freiburg.de"
+                      className="text-yellow-400 hover:text-yellow-300 transition-colors duration-200"
+                    >
+                      info@rettungsanker-freiburg.de
+                    </a>
+                    ; wir löschen dann das Konto zusammen mit allen Ihren Beiträgen, Kommentaren und
+                    Bildern.
+                  </p>
+                  <p className="font-semibold text-white">Kinder und Jugendliche</p>
+                  <p>
+                    Der Blog steht Gästen jeden Alters offen. Personen unter 16 Jahren dürfen sich
+                    nur mit Zustimmung ihrer Erziehungsberechtigten registrieren.
                   </p>
                 </div>
               </div>
@@ -435,20 +494,15 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
 
               {/* Aufsichtsbehörde */}
               <div className="mt-6 pt-6 border-t border-zinc-800">
-                <p className="text-sm text-zinc-400 mb-3">
-                  Zuständige Aufsichtsbehörde:
-                </p>
+                <p className="text-sm text-zinc-400 mb-3">Zuständige Aufsichtsbehörde:</p>
                 <InfoBox>
                   <p className="font-semibold text-white text-sm">
-                    Der Landesbeauftragte für den Datenschutz und die
-                    Informationsfreiheit Baden-Württemberg
+                    Der Landesbeauftragte für den Datenschutz und die Informationsfreiheit
+                    Baden-Württemberg
                   </p>
                   <p className="text-zinc-400 text-sm">Postfach 10 29 32</p>
                   <p className="text-zinc-400 text-sm">70025 Stuttgart</p>
-                  <Separator.Root
-                    decorative
-                    className="my-3 h-px bg-zinc-700/60"
-                  />
+                  <Separator.Root decorative className="my-3 h-px bg-zinc-700/60" />
                   <a
                     href="https://www.baden-wuerttemberg.datenschutz.de"
                     target="_blank"
@@ -480,17 +534,14 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
               <SectionHeading>4. Speicherdauer</SectionHeading>
               <div className="text-zinc-300 text-sm leading-relaxed">
                 <p>
-                  Soweit innerhalb dieser Datenschutzerklärung keine
-                  speziellere Speicherdauer genannt wurde, verbleiben Ihre
-                  personenbezogenen Daten bei uns, bis der Zweck für die
-                  Datenverarbeitung entfällt. Wenn Sie ein berechtigtes
-                  Löschersuchen geltend machen oder eine Einwilligung zur
-                  Datenverarbeitung widerrufen, werden Ihre Daten gelöscht,
-                  sofern wir keine anderen rechtlich zulässigen Gründe für die
-                  Speicherung Ihrer personenbezogenen Daten haben (z.B. steuer-
-                  oder handelsrechtliche Aufbewahrungsfristen); im
-                  letztgenannten Fall erfolgt die Löschung nach Fortfall dieser
-                  Gründe.
+                  Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer
+                  genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für
+                  die Datenverarbeitung entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend
+                  machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten
+                  gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung
+                  Ihrer personenbezogenen Daten haben (z.B. steuer- oder handelsrechtliche
+                  Aufbewahrungsfristen); im letztgenannten Fall erfolgt die Löschung nach Fortfall
+                  dieser Gründe.
                 </p>
               </div>
             </SectionCard>
@@ -500,18 +551,16 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
               <SectionHeading>5. SSL- bzw. TLS-Verschlüsselung</SectionHeading>
               <div className="text-zinc-300 space-y-3 text-sm leading-relaxed">
                 <p>
-                  Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der
-                  Übertragung vertraulicher Inhalte, wie zum Beispiel Anfragen,
-                  die Sie an uns als Seitenbetreiber senden, eine SSL- bzw.
-                  TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen
-                  Sie daran, dass die Adresszeile des Browsers von
-                  &quot;http://&quot; auf &quot;https://&quot; wechselt und an
-                  dem Schloss-Symbol in Ihrer Browserzeile.
+                  Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung
+                  vertraulicher Inhalte, wie zum Beispiel Anfragen, die Sie an uns als
+                  Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte
+                  Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von
+                  &quot;http://&quot; auf &quot;https://&quot; wechselt und an dem Schloss-Symbol in
+                  Ihrer Browserzeile.
                 </p>
                 <p>
-                  Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können
-                  die Daten, die Sie an uns übermitteln, nicht von Dritten
-                  mitgelesen werden.
+                  Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können die Daten, die Sie an
+                  uns übermitteln, nicht von Dritten mitgelesen werden.
                 </p>
               </div>
             </SectionCard>
@@ -521,10 +570,9 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
               <SectionHeading>6. Weitergabe von Daten an Dritte</SectionHeading>
               <div className="text-zinc-300 space-y-4 text-sm leading-relaxed">
                 <p>
-                  Eine Übermittlung Ihrer persönlichen Daten an Dritte zu
-                  anderen als den im Folgenden aufgeführten Zwecken findet
-                  nicht statt. Wir geben Ihre persönlichen Daten nur an Dritte
-                  weiter, wenn:
+                  Eine Übermittlung Ihrer persönlichen Daten an Dritte zu anderen als den im
+                  Folgenden aufgeführten Zwecken findet nicht statt. Wir geben Ihre persönlichen
+                  Daten nur an Dritte weiter, wenn:
                 </p>
                 <ul className="space-y-2.5 pl-2">
                   {[
@@ -546,25 +594,22 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
               <SectionHeading>7. Online-Präsenzen in sozialen Medien</SectionHeading>
               <div className="text-zinc-300 space-y-3 text-sm leading-relaxed">
                 <p>
-                  Wir unterhalten Online-Präsenzen innerhalb sozialer
-                  Netzwerke, um mit den dort aktiven Kunden, Interessenten und
-                  Nutzern zu kommunizieren und sie dort über unsere Leistungen
-                  zu informieren.
+                  Wir unterhalten Online-Präsenzen innerhalb sozialer Netzwerke, um mit den dort
+                  aktiven Kunden, Interessenten und Nutzern zu kommunizieren und sie dort über
+                  unsere Leistungen zu informieren.
                 </p>
                 <p>
-                  Wir weisen darauf hin, dass dabei Nutzerdaten außerhalb des
-                  Raumes der Europäischen Union verarbeitet werden können.
-                  Hierdurch können sich Risiken für die Nutzer ergeben, weil so
-                  z.B. die Durchsetzung der Rechte der Nutzer erschwert werden
-                  könnte.
+                  Wir weisen darauf hin, dass dabei Nutzerdaten außerhalb des Raumes der
+                  Europäischen Union verarbeitet werden können. Hierdurch können sich Risiken für
+                  die Nutzer ergeben, weil so z.B. die Durchsetzung der Rechte der Nutzer erschwert
+                  werden könnte.
                 </p>
                 <p>
-                  Ferner werden die Daten der Nutzer innerhalb sozialer
-                  Netzwerke im Regelfall für Marktforschungs- und Werbezwecke
-                  verarbeitet. Die Verarbeitung der personenbezogenen Daten der
-                  Nutzer erfolgt auf Grundlage unserer berechtigten Interessen
-                  an einer effektiven Information der Nutzer und Kommunikation
-                  mit den Nutzern gem. Art. 6 Abs. 1 lit. f DSGVO.
+                  Ferner werden die Daten der Nutzer innerhalb sozialer Netzwerke im Regelfall für
+                  Marktforschungs- und Werbezwecke verarbeitet. Die Verarbeitung der
+                  personenbezogenen Daten der Nutzer erfolgt auf Grundlage unserer berechtigten
+                  Interessen an einer effektiven Information der Nutzer und Kommunikation mit den
+                  Nutzern gem. Art. 6 Abs. 1 lit. f DSGVO.
                 </p>
               </div>
             </SectionCard>
@@ -574,12 +619,10 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
               <SectionHeading>8. Änderung der Datenschutzerklärung</SectionHeading>
               <div className="text-zinc-300 text-sm leading-relaxed">
                 <p>
-                  Wir behalten uns vor, diese Datenschutzerklärung anzupassen,
-                  damit sie stets den aktuellen rechtlichen Anforderungen
-                  entspricht oder um Änderungen unserer Leistungen in der
-                  Datenschutzerklärung umzusetzen, z.B. bei der Einführung
-                  neuer Services. Für Ihren erneuten Besuch gilt dann die neue
-                  Datenschutzerklärung.
+                  Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den
+                  aktuellen rechtlichen Anforderungen entspricht oder um Änderungen unserer
+                  Leistungen in der Datenschutzerklärung umzusetzen, z.B. bei der Einführung neuer
+                  Services. Für Ihren erneuten Besuch gilt dann die neue Datenschutzerklärung.
                 </p>
               </div>
             </SectionCard>
