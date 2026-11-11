@@ -10,7 +10,7 @@ export const Mitglieder: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     group: 'Blog',
-    defaultColumns: ['name', 'email', '_verified', 'createdAt'],
+    defaultColumns: ['name', 'email', 'altersangabe', '_verified', 'createdAt'],
   },
   auth: {
     // Login erst nach Klick auf den Bestätigungslink – so gibt es keine Konten mit Fantasie-Adressen
@@ -50,6 +50,15 @@ export const Mitglieder: CollectionConfig = {
     ],
     beforeValidate: [
       ({ data, operation }) => {
+        // Altersangabe ist bei neuen Registrierungen Pflicht (ältere Konten haben noch keine)
+        if (operation === 'create' && !['ab16', 'unter16'].includes(String(data?.altersangabe))) {
+          throw new APIError(
+            'Altersangabe fehlt',
+            400,
+            [{ path: 'altersangabe', message: 'Pflichtfeld' }],
+            true,
+          )
+        }
         // Mindestlänge auch serverseitig prüfen, das Formular allein reicht nicht
         if (
           operation === 'create' &&
@@ -75,6 +84,16 @@ export const Mitglieder: CollectionConfig = {
       required: true,
       minLength: 2,
       maxLength: 60,
+    },
+    {
+      name: 'altersangabe',
+      label: 'Altersangabe bei der Registrierung',
+      type: 'select',
+      options: [
+        { label: '16 Jahre oder älter', value: 'ab16' },
+        { label: 'Unter 16, mit Einverständnis der Erziehungsberechtigten', value: 'unter16' },
+      ],
+      admin: { position: 'sidebar' },
     },
   ],
 }

@@ -389,7 +389,7 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
                   <p className="font-semibold text-white">Welche Daten wir verarbeiten</p>
                   <ul className="space-y-1.5 pl-4">
                     {[
-                      'bei der Registrierung: E-Mail-Adresse, Anzeigename und Passwort (das Passwort speichern wir nur als nicht umkehrbaren Hashwert, niemals im Klartext)',
+                      'bei der Registrierung: E-Mail-Adresse, Anzeigename, Passwort (das Passwort speichern wir nur als nicht umkehrbaren Hashwert, niemals im Klartext) sowie Ihre Angabe, ob Sie 16 Jahre oder älter sind',
                       'zur Kontoverwaltung: Zeitpunkt der Registrierung, Bestätigungsstatus der E-Mail-Adresse, Anzahl fehlgeschlagener Anmeldeversuche (für eine vorübergehende Sperre nach fünf Fehlversuchen)',
                       'Ihre Inhalte: Beiträge, Kommentare und hochgeladene Bilder samt Zeitpunkt der Veröffentlichung bzw. Bearbeitung',
                     ].map((item) => (
@@ -432,9 +432,9 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
                   <p className="font-semibold text-white">Anmelde-Cookie</p>
                   <p>
                     Nach der Anmeldung setzen wir ein technisch notwendiges Cookie (
-                    <code className="font-sans text-yellow-300/80">payload-token</code>), damit Sie angemeldet
-                    bleiben. Es ist für Skripte nicht auslesbar und läuft nach 14 Tagen ab oder wird
-                    beim Abmelden gelöscht.
+                    <code className="font-sans text-yellow-300/80">payload-token</code>), damit Sie
+                    angemeldet bleiben. Es ist für Skripte nicht auslesbar und läuft nach 14 Tagen
+                    ab oder wird beim Abmelden gelöscht.
                   </p>
                   <p className="font-semibold text-white">Rechtsgrundlage</p>
                   <p>
@@ -460,8 +460,10 @@ const Datenschutz = async ({ params }: { params: SprachParams }) => {
                   </p>
                   <p className="font-semibold text-white">Kinder und Jugendliche</p>
                   <p>
-                    Der Blog steht Gästen jeden Alters offen. Personen unter 16 Jahren dürfen sich
-                    nur mit Zustimmung ihrer Erziehungsberechtigten registrieren.
+                    Der Blog steht Gästen jeden Alters offen. Bei der Registrierung fragen wir, ob
+                    Sie 16 Jahre oder älter sind. Personen unter 16 Jahren dürfen sich nur mit
+                    Zustimmung ihrer Erziehungsberechtigten registrieren und bestätigen dies bei der
+                    Registrierung.
                   </p>
                 </div>
               </div>

@@ -81,6 +81,10 @@ const de = {
     name: 'Anzeigename',
     hinweisName: 'So erscheinst du unter deinen Beiträgen, z. B. „Anna aus der Wiehre“.',
     hinweisPasswort: 'Mindestens 8 Zeichen.',
+    alterTitel: 'Dein Alter',
+    alterAb16: 'Ich bin 16 Jahre oder älter.',
+    alterUnter16:
+      'Ich bin unter 16 Jahre alt, und meine Eltern bzw. Erziehungsberechtigten sind mit meiner Anmeldung einverstanden.',
     regelnTitel: 'Blog-Regeln',
     regeln: [
       'Respektvoll bleiben: keine Beleidigungen, keine Hetze, keine Werbung.',
@@ -128,6 +132,7 @@ const de = {
     passwortKurz: 'Das Passwort braucht mindestens 8 Zeichen.',
     passwortUngleich: 'Die beiden Passwörter sind nicht gleich.',
     regeln: 'Bitte bestätige die Blog-Regeln.',
+    alter: 'Bitte gib an, ob du 16 Jahre oder älter bist.',
     pflichtfelder: 'Bitte fülle Titel, Thema, Einleitung und Text aus.',
     bildTyp: 'Nur JPG, PNG oder SVG sind erlaubt.',
     bildGross: 'Das Bild „{datei}“ ist zu groß (höchstens 4 MB).',
@@ -225,6 +230,9 @@ const en: BlogTexte = {
     name: 'Display name',
     hinweisName: 'This is how you appear under your posts, e.g. “Anna from Wiehre”.',
     hinweisPasswort: 'At least 8 characters.',
+    alterTitel: 'Your age',
+    alterAb16: 'I am 16 years or older.',
+    alterUnter16: 'I am under 16, and my parents or legal guardians agree to my registration.',
     regelnTitel: 'Blog rules',
     regeln: [
       'Be respectful: no insults, no hate, no advertising.',
@@ -270,6 +278,7 @@ const en: BlogTexte = {
     passwortKurz: 'The password needs at least 8 characters.',
     passwortUngleich: 'The two passwords do not match.',
     regeln: 'Please accept the blog rules.',
+    alter: 'Please state whether you are 16 or older.',
     pflichtfelder: 'Please fill in title, topic, introduction and text.',
     bildTyp: 'Only JPG, PNG or SVG are allowed.',
     bildGross: 'The picture “{datei}” is too large (max. 4 MB).',
@@ -368,6 +377,10 @@ const fr: BlogTexte = {
     name: "Nom d'affichage",
     hinweisName: 'Il apparaît sous vos articles, p. ex. « Anna de la Wiehre ».',
     hinweisPasswort: 'Au moins 8 caractères.',
+    alterTitel: 'Ton âge',
+    alterAb16: "J'ai 16 ans ou plus.",
+    alterUnter16:
+      "J'ai moins de 16 ans, et mes parents ou représentants légaux sont d'accord avec mon inscription.",
     regelnTitel: 'Règles du blog',
     regeln: [
       'Restez respectueux : pas d’insultes, pas de haine, pas de publicité.',
@@ -415,6 +428,7 @@ const fr: BlogTexte = {
     passwortKurz: 'Le mot de passe doit contenir au moins 8 caractères.',
     passwortUngleich: 'Les deux mots de passe ne correspondent pas.',
     regeln: 'Veuillez accepter les règles du blog.',
+    alter: "Merci d'indiquer si tu as 16 ans ou plus.",
     pflichtfelder: "Veuillez remplir le titre, le thème, l'introduction et le texte.",
     bildTyp: 'Seuls JPG, PNG ou SVG sont autorisés.',
     bildGross: "L'image « {datei} » est trop grande (4 Mo max.).",
@@ -509,6 +523,10 @@ const it: BlogTexte = {
     name: 'Nome visualizzato',
     hinweisName: 'Così appari sotto i tuoi articoli, ad es. «Anna della Wiehre».',
     hinweisPasswort: 'Almeno 8 caratteri.',
+    alterTitel: 'La tua età',
+    alterAb16: 'Ho 16 anni o più.',
+    alterUnter16:
+      "Ho meno di 16 anni e i miei genitori o tutori legali sono d'accordo con la mia registrazione.",
     regelnTitel: 'Regole del blog',
     regeln: [
       'Resta rispettoso: niente insulti, niente odio, niente pubblicità.',
@@ -554,6 +572,7 @@ const it: BlogTexte = {
     passwortKurz: 'La password deve avere almeno 8 caratteri.',
     passwortUngleich: 'Le due password non coincidono.',
     regeln: 'Accetta le regole del blog.',
+    alter: 'Indica se hai 16 anni o più.',
     pflichtfelder: 'Compila titolo, tema, introduzione e testo.',
     bildTyp: 'Sono ammessi solo JPG, PNG o SVG.',
     bildGross: "L'immagine «{datei}» è troppo grande (max. 4 MB).",
@@ -648,6 +667,10 @@ const ru: BlogTexte = {
     name: 'Отображаемое имя',
     hinweisName: 'Так вы будете подписаны под записями, например «Анна из Вире».',
     hinweisPasswort: 'Не менее 8 символов.',
+    alterTitel: 'Ваш возраст',
+    alterAb16: 'Мне 16 лет или больше.',
+    alterUnter16:
+      'Мне меньше 16 лет, и мои родители или законные представители согласны с моей регистрацией.',
     regelnTitel: 'Правила блога',
     regeln: [
       'Будьте уважительны: без оскорблений, ненависти и рекламы.',
@@ -692,6 +715,7 @@ const ru: BlogTexte = {
     passwortKurz: 'Пароль должен содержать не менее 8 символов.',
     passwortUngleich: 'Пароли не совпадают.',
     regeln: 'Пожалуйста, подтвердите правила блога.',
+    alter: 'Пожалуйста, укажите, исполнилось ли вам 16 лет.',
     pflichtfelder: 'Заполните заголовок, тему, вступление и текст.',
     bildTyp: 'Разрешены только JPG, PNG или SVG.',
     bildGross: 'Изображение «{datei}» слишком большое (не более 4 МБ).',

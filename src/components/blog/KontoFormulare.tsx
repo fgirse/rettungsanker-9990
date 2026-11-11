@@ -172,6 +172,7 @@ export function RegistrierenFormular() {
   const [passwort, setPasswort] = useState('')
   const [passwort2, setPasswort2] = useState('')
   const [regeln, setRegeln] = useState(false)
+  const [alter, setAlter] = useState<'' | 'ab16' | 'unter16'>('')
   const [fehler, setFehler] = useState('')
   const [laeuft, setLaeuft] = useState(false)
   const [fertig, setFertig] = useState(false)
@@ -180,23 +181,31 @@ export function RegistrierenFormular() {
     e.preventDefault()
     if (passwort.length < 8) return setFehler(t.fehler.passwortKurz)
     if (passwort !== passwort2) return setFehler(t.fehler.passwortUngleich)
+    if (!alter) return setFehler(t.fehler.alter)
     if (!regeln) return setFehler(t.fehler.regeln)
     setLaeuft(true)
     setFehler('')
     // ?locale= bestimmt die Sprache der Bestätigungsmail
     const res = await api(`/api/mitglieder?locale=${sprache}`, {
       method: 'POST',
-      body: JSON.stringify({ name: name.trim(), email: email.trim(), password: passwort }),
+      body: JSON.stringify({
+        name: name.trim(),
+        email: email.trim(),
+        password: passwort,
+        altersangabe: alter,
+      }),
     })
     setLaeuft(false)
     if (res.ok) return setFertig(true)
     const { pfade } = fehlerDetails(res.daten)
     setFehler(
-      pfade.includes('email')
-        ? t.fehler.emailVergeben
-        : pfade.includes('password')
-          ? t.fehler.passwortKurz
-          : t.fehler.allgemein,
+      pfade.includes('altersangabe')
+        ? t.fehler.alter
+        : pfade.includes('email')
+          ? t.fehler.emailVergeben
+          : pfade.includes('password')
+            ? t.fehler.passwortKurz
+            : t.fehler.allgemein,
     )
   }
 
@@ -256,6 +265,34 @@ export function RegistrierenFormular() {
           value={passwort2}
           onChange={(e) => setPasswort2(e.target.value)}
         />
+
+        {/* Altersangabe: unter 16 nur mit Einverständnis der Eltern (siehe Datenschutzerklärung) */}
+        <fieldset className="rounded-lg border border-zinc-700/60 bg-zinc-950/40 p-4">
+          <legend className="px-1 font-sans text-sm font-semibold text-zinc-200">
+            {t.konto.alterTitel}
+          </legend>
+          {(
+            [
+              ['ab16', t.konto.alterAb16],
+              ['unter16', t.konto.alterUnter16],
+            ] as const
+          ).map(([wert, text]) => (
+            <label
+              key={wert}
+              className="mt-2 flex items-start gap-2 font-sans text-sm text-zinc-300"
+            >
+              <input
+                type="radio"
+                name="alter"
+                value={wert}
+                checked={alter === wert}
+                onChange={() => setAlter(wert)}
+                className="mt-1.5 size-4 shrink-0 accent-yellow-500"
+              />
+              <span>{text}</span>
+            </label>
+          ))}
+        </fieldset>
 
         <div className="rounded-lg border border-zinc-700/60 bg-zinc-950/40 p-4">
           <p className="m-0 font-sans text-sm font-semibold text-zinc-200">{t.konto.regelnTitel}</p>

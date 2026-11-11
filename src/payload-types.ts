@@ -441,6 +441,7 @@ export interface Getraenkekarte {
 export interface Mitglieder {
   id: string;
   name: string;
+  altersangabe?: ('ab16' | 'unter16') | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -824,6 +825,7 @@ export interface GetraenkekarteSelect<T extends boolean = true> {
  */
 export interface MitgliederSelect<T extends boolean = true> {
   name?: T;
+  altersangabe?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
