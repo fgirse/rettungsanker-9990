@@ -38,7 +38,7 @@ import {
 } from '@/components/ui/navigation-menu'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
 import { SprachWahl } from '@/components/SprachWahl'
-import { Flaschenpost } from '@/components/Flaschenpost'
+import { Rettungsring } from '@/components/Rettungsring'
 import { useSprache } from '@/i18n/SprachProvider'
 import { lokalisierterPfad, pfadOhneSprache } from '@/i18n/sprachen'
 import { texte } from '@/i18n/texte'
@@ -91,6 +91,8 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
   const [open, setOpen] = useState<boolean>(false)
   const { sprache } = useSprache()
   const t = texte(sprache)
+  // Blog-Adresse aus dem Menü übernehmen, sonst die Standardadresse in der aktuellen Sprache
+  const blogUrl = navigation.find(istBlog)?.url ?? lokalisierterPfad('/blog', sprache)!
 
   useEffect(() => {
     const handleResize = () => {
@@ -142,11 +144,12 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
             </a>
             <NavigationMenu className="hidden lg:flex">
               <NavigationMenuList className="font-mono">
-                {navigation.map((item, index) => (
-                  <Fragment key={`desktop-link-${index}`}>
-                    {/* Bullaugen wachsen stufenweise mit, damit die Leiste zwischen Logo und Buttons passt */}
-                    {/* Vor der Flaschenpost kein Bullauge: sie ist selbst maritim, und sonst wird die Leiste zu breit */}
-                    {!istBlog(item) && (
+                {/* Der Blog steht nicht im Menü, sondern als Rettungsring rechts vor dem Mast */}
+                {navigation
+                  .filter((item) => !istBlog(item))
+                  .map((item, index) => (
+                    <Fragment key={`desktop-link-${index}`}>
+                      {/* Bullaugen wachsen stufenweise mit, damit die Leiste zwischen Logo und Buttons passt */}
                       <Image
                         src={Bulleye}
                         alt=""
@@ -154,14 +157,22 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
                         height={80}
                         className="w-4 xl:w-12 2xl:w-18"
                       />
-                    )}
-                    <DesktopMenuItem item={item} index={index} />
-                  </Fragment>
-                ))}
+                      <DesktopMenuItem item={item} index={index} />
+                    </Fragment>
+                  ))}
               </NavigationMenuList>
             </NavigationMenu>
             {/* mr-5 spiegelt das ml-5 des Logos, sonst klebt der Button am rechten Rand */}
             <div className="mr-5 flex items-center gap-2 md:gap-4">
+              {/* Rettungsring zum Blog: auch auf dem Handy sichtbar, wo das Menü eingeklappt ist */}
+              <a
+                href={blogUrl}
+                aria-label={t.blog}
+                title={t.blogLesen}
+                className="rettungsring rounded-full outline-none focus-visible:ring-2 focus-visible:ring-yellow-400"
+              >
+                <Rettungsring />
+              </a>
               {/* Matrose am Mast: Klick öffnet die Sprachwahl, danach hisst er die passende Flagge */}
               <SprachWahl />
               <Button
@@ -196,24 +207,10 @@ const Navbar9 = ({ className, navigation }: Navbar9Props) => {
   )
 }
 
-// Der Blog-Menüpunkt bekommt statt Text die Flaschenpost (Link „/blog“ in jeder Sprache)
+// Blog-Link erkennen (Link „/blog“ in jeder Sprache)
 const istBlog = (item: MenuItem) => !!item.url && pfadOhneSprache(item.url) === '/blog'
 
 const DesktopMenuItem = ({ item, index }: DesktopMenuItemProps) => {
-  const { sprache } = useSprache()
-  if (istBlog(item)) {
-    return (
-      <NavigationMenuItem key={`desktop-menu-item-${index}`} value={`${index}`}>
-        <NavigationMenuLink
-          href={item.url}
-          aria-label={item.title}
-          className="flaschenpost block rounded-md py-1 outline-none focus-visible:ring-2 focus-visible:ring-yellow-400"
-        >
-          <Flaschenpost zettel={texte(sprache).blogLesen} />
-        </NavigationMenuLink>
-      </NavigationMenuItem>
-    )
-  }
   if (item.links) {
     return (
       <NavigationMenuItem key={`desktop-menu-item-${index}`} value={`${index}`}>
@@ -329,8 +326,8 @@ const renderMobileMenuItem = (item: MenuItem, index: number) => {
       className="flex ml-3 h-15 items-center gap-3 border-b p-0 text-left text-2xl leading-[3.75] font-mono text-muted-foreground ring-ring/10 outline-ring/50 transition-all focus-visible:ring-4 focus-visible:outline-1 nth-last-1:border-0"
     >
       {item.title}
-      {/* Im Handy-Menü schaukelt die Flasche klein neben dem Wort „Blog“ */}
-      {istBlog(item) && <Flaschenpost klein />}
+      {/* Im Handy-Menü steht der kleine Ring neben dem Wort „Blog“, passend zum Knopf oben */}
+      {istBlog(item) && <Rettungsring klein />}
     </a>
   )
 }

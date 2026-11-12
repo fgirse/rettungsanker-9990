@@ -466,105 +466,56 @@ body {
   }
 }
 
-/* ─── Flaschenpost: Blog-Knopf in der Navigation (Bauteil src/components/Flaschenpost.tsx) ─── */
-.flaschenpost-buehne {
-  position: relative;
-  display: inline-block;
-  /* Die Seite rechnet mit 18 px pro rem; zwischen 1024 und 1536 px Breite ist die Leiste eng */
-  width: 3.5rem;
-  padding-bottom: 0.35rem;
-}
-@media (min-width: 96rem) {
-  .flaschenpost-buehne:not(.flaschenpost-klein) {
-    width: 5.25rem;
-  }
-}
-.flaschenpost-klein {
-  width: 3.5rem;
-}
-.flaschenpost-flasche {
+/* ─── Rettungsring: Blog-Knopf in der Kopfzeile (Bauteil src/components/Rettungsring.tsx) ─── */
+.rettungsring-bild {
   display: block;
-  width: 100%;
+  /* Die Seite rechnet mit 18 px pro rem; der Ring bleibt etwas kleiner als der Mast daneben */
+  width: 2.75rem;
   height: auto;
   overflow: visible;
-  transform-origin: 50% 70%;
-  animation: flaschenpost-schaukeln 3.2s ease-in-out infinite;
 }
-@keyframes flaschenpost-schaukeln {
-  0%,
+@media (min-width: 64rem) {
+  .rettungsring-bild:not(.rettungsring-klein) {
+    width: 3.25rem;
+  }
+}
+@media (min-width: 96rem) {
+  .rettungsring-bild:not(.rettungsring-klein) {
+    width: 4rem;
+  }
+}
+.rettungsring-klein {
+  width: 1.75rem;
+}
+/* Drehpunkt ist der Haken oben in der Mitte (32/0 im SVG), daher view-box als Bezug */
+.rettungsring-schwinger {
+  transform-box: view-box;
+  transform-origin: 32px 0;
+}
+.rettungsring:hover .rettungsring-schwinger,
+.rettungsring:focus-visible .rettungsring-schwinger {
+  animation: rettungsring-pendeln 1.4s ease-in-out;
+}
+@keyframes rettungsring-pendeln {
+  0% {
+    transform: translate(0, 6px) rotate(0);
+  }
+  20% {
+    transform: translate(0, 6px) rotate(14deg);
+  }
+  45% {
+    transform: translate(0, 6px) rotate(-10deg);
+  }
+  70% {
+    transform: translate(0, 6px) rotate(5deg);
+  }
   100% {
-    transform: rotate(-4deg) translateY(0);
+    transform: translate(0, 6px) rotate(0);
   }
-  50% {
-    transform: rotate(3deg) translateY(-3px);
-  }
-}
-.flaschenpost-korken {
-  transform-box: fill-box;
-  transform-origin: center;
-  transition: transform 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
-}
-/* Kleine Wellen unter der Flasche */
-.flaschenpost-welle {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 0.5rem;
-  opacity: 0.55;
-  background: radial-gradient(circle at 8px -3px, transparent 7px, #3d8bb5 8px) 0 0 / 16px 8px
-    repeat-x;
-  animation: flaschenpost-wellen 2.4s linear infinite;
-}
-@keyframes flaschenpost-wellen {
-  to {
-    background-position: 16px 0;
-  }
-}
-/* Der Zettel rollt nach unten aus dem Flaschenhals, damit er rechts nichts überdeckt */
-.flaschenpost-zettel {
-  position: absolute;
-  top: 85%;
-  left: 55%;
-  z-index: 60;
-  padding: 0.35rem 0.8rem 0.5rem;
-  white-space: nowrap;
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.2;
-  text-transform: none;
-  color: #5a3716;
-  background: linear-gradient(180deg, #d9c39a, #f1e3c2 25%, #f6ead0);
-  border-radius: 2px 2px 8px 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
-  transform: rotate(-4deg) scaleY(0);
-  transform-origin: top center;
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    transform 0.5s 0.15s cubic-bezier(0.2, 1.3, 0.4, 1),
-    opacity 0.2s 0.15s;
-}
-.flaschenpost:hover .flaschenpost-korken,
-.flaschenpost:focus-visible .flaschenpost-korken {
-  transform: translate(16px, -10px) rotate(70deg);
-}
-.flaschenpost:hover .flaschenpost-zettel,
-.flaschenpost:focus-visible .flaschenpost-zettel {
-  transform: rotate(-4deg) scaleY(1);
-  opacity: 1;
-}
-.flaschenpost:hover .flaschenpost-flasche,
-.flaschenpost:focus-visible .flaschenpost-flasche {
-  animation-play-state: paused;
 }
 @media (prefers-reduced-motion: reduce) {
-  .flaschenpost-flasche,
-  .flaschenpost-welle {
+  .rettungsring:hover .rettungsring-schwinger,
+  .rettungsring:focus-visible .rettungsring-schwinger {
     animation: none;
-  }
-  .flaschenpost-korken,
-  .flaschenpost-zettel {
-    transition: none;
   }
 }
