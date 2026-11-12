@@ -21,8 +21,9 @@ export function BlogRahmen({
   const t = BLOG[sprache]
   return (
     <div className="min-h-screen bg-[#0d1117] text-zinc-200">
+      {/* Keine harte Kante: Der Kopf läuft nach unten sanft in den dunklen Seitengrund aus */}
       {!kompakt && (
-        <header className="border-b border-zinc-800 bg-[#1a252d]/80">
+        <header className="bg-linear-to-b from-[#1a252d] via-[#1a252d]/60 to-transparent">
           <div className="mx-auto max-w-6xl px-4 py-12 md:px-8 md:py-16">
             <p className="font-sans text-xs uppercase tracking-[0.35em] text-yellow-500/80">
               {t.kopf.oberzeile}

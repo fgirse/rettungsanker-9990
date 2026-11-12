@@ -9,7 +9,7 @@ const de = {
   },
   kopf: {
     oberzeile: 'Stimmen vom Tresen',
-    titel: 'Rettungsanker-Blog',
+    titel: 'rettungsanker-blog',
     untertitel:
       'Hier schreiben Gäste, Stammgäste und Fans jeden Alters: eure Meinung, eure Geschichte, euer besonderer Moment.',
   },
@@ -161,7 +161,7 @@ const en: BlogTexte = {
   },
   kopf: {
     oberzeile: 'Voices from the bar',
-    titel: 'Rettungsanker Blog',
+    titel: 'rettungsanker blog',
     untertitel:
       'Guests, regulars and fans of all ages write here: your opinion, your story, your special moment.',
   },
@@ -305,7 +305,7 @@ const fr: BlogTexte = {
   },
   kopf: {
     oberzeile: 'Voix du comptoir',
-    titel: 'Le blog du Rettungsanker',
+    titel: 'le blog du rettungsanker',
     untertitel:
       'Ici écrivent les clients, les habitués et les fans de tout âge : votre avis, votre histoire, votre moment particulier.',
   },
@@ -455,7 +455,7 @@ const it: BlogTexte = {
   },
   kopf: {
     oberzeile: 'Voci dal bancone',
-    titel: 'Il blog del Rettungsanker',
+    titel: 'il blog del rettungsanker',
     untertitel:
       'Qui scrivono ospiti, clienti abituali e tifosi di ogni età: la tua opinione, la tua storia, il tuo momento speciale.',
   },
@@ -599,7 +599,7 @@ const ru: BlogTexte = {
   },
   kopf: {
     oberzeile: 'Голоса у стойки',
-    titel: 'Блог Rettungsanker',
+    titel: 'блог rettungsanker',
     untertitel:
       'Здесь пишут гости, завсегдатаи и болельщики любого возраста: ваше мнение, ваша история, ваш особенный момент.',
   },
